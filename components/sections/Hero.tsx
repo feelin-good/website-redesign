@@ -1,7 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import { ArrowRight, Play, CheckCircle, ChevronDown } from 'lucide-react'
+import { ArrowRight, CheckCircle, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { COMPANY } from '@/lib/data/company'
 

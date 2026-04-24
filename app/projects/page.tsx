@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowUpRight, MapPin, Calendar } from 'lucide-react'
-import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { CTABanner } from '@/components/sections/CTABanner'
 import { PROJECTS, PROJECT_CATEGORIES } from '@/lib/data/projects'

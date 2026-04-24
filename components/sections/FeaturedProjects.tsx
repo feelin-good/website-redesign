@@ -14,12 +14,6 @@ const CATEGORY_COLORS: Record<string, string> = {
   Commercial:      'bg-slate-50 text-slate-700 border-slate-200',
 }
 
-const PROJECT_GRADIENTS = [
-  'from-purple-900 to-navy-950',
-  'from-blue-900 to-navy-950',
-  'from-cyan-900 to-navy-950',
-  'from-emerald-900 to-navy-950',
-]
 
 export function FeaturedProjects() {
   const projects = getFeaturedProjects()

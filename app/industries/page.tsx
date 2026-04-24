@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CheckCircle, ArrowRight } from 'lucide-react'
-import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { Icon } from '@/components/ui/Icon'
 import { CTABanner } from '@/components/sections/CTABanner'

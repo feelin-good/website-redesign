@@ -127,7 +127,7 @@ export default function AboutPage() {
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b
                                 from-orange-500 via-orange-200 to-transparent" />
                 <div className="space-y-7">
-                  {MILESTONES.map((m, i) => (
+                  {MILESTONES.map((m) => (
                     <div key={m.year} className="relative">
                       <div className="absolute -left-6 top-1 w-3 h-3 rounded-full
                                       bg-orange-500 border-2 border-white shadow-md" />
