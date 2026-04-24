@@ -1,0 +1,4 @@
+OG image should be created at: public/og-image.png
+Dimensions: 1200x630px
+Design: Navy background (#0B1D35) with Lepton Projects logo,
+tagline "Engineering Excellence. Delivered.", and orange accent.
