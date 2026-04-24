@@ -14,15 +14,12 @@ interface SharedProps {
   children: ReactNode
 }
 
-interface ButtonAsLink extends SharedProps {
+type ButtonAsLink = SharedProps & {
   href: string
   external?: boolean
-  disabled?: never
-  onClick?: never
-  type?: never
 }
 
-interface ButtonAsButton extends SharedProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+type ButtonAsButton = SharedProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> & {
   href?: never
   external?: never
 }
@@ -30,18 +27,12 @@ interface ButtonAsButton extends SharedProps, Omit<ButtonHTMLAttributes<HTMLButt
 type ButtonProps = ButtonAsLink | ButtonAsButton
 
 const variantStyles: Record<Variant, string> = {
-  'primary':
-    'bg-orange-500 text-white hover:bg-orange-600 shadow-md hover:shadow-lg focus-visible:ring-orange-500',
-  'primary-lg':
-    'bg-orange-500 text-white hover:bg-orange-600 shadow-lg hover:shadow-xl focus-visible:ring-orange-500',
-  'secondary':
-    'bg-white text-navy-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 focus-visible:ring-navy-500',
-  'ghost-white':
-    'text-white border border-white/30 hover:bg-white/10 focus-visible:ring-white',
-  'ghost-navy':
-    'text-navy-700 hover:bg-navy-50 hover:text-navy-900 focus-visible:ring-navy-500',
-  'outline-orange':
-    'text-orange-500 border border-orange-400 hover:bg-orange-50 focus-visible:ring-orange-500',
+  'primary':        'bg-orange-500 text-white hover:bg-orange-600 shadow-md hover:shadow-lg focus-visible:ring-orange-500',
+  'primary-lg':     'bg-orange-500 text-white hover:bg-orange-600 shadow-lg hover:shadow-xl focus-visible:ring-orange-500',
+  'secondary':      'bg-white text-navy-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 focus-visible:ring-navy-500',
+  'ghost-white':    'text-white border border-white/30 hover:bg-white/10 focus-visible:ring-white',
+  'ghost-navy':     'text-navy-700 hover:bg-navy-50 hover:text-navy-900 focus-visible:ring-navy-500',
+  'outline-orange': 'text-orange-500 border border-orange-400 hover:bg-orange-50 focus-visible:ring-orange-500',
 }
 
 const sizeStyles: Record<Size, string> = {
@@ -57,23 +48,18 @@ const baseStyles =
   'disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]'
 
 export function Button(props: ButtonProps) {
-  const {
-    variant = 'primary',
-    size = 'md',
-    icon,
-    iconPosition = 'right',
-    className,
-    children,
-  } = props
+  const { variant = 'primary', size = 'md', icon, iconPosition = 'right', className, children } = props
 
-  const isLg = variant === 'primary-lg'
-  const sizeClass = isLg ? 'px-10 py-4 text-lg gap-2' : sizeStyles[size]
-
-  const classes = cn(baseStyles, variantStyles[variant], sizeClass, className)
+  const classes = cn(
+    baseStyles,
+    variantStyles[variant],
+    variant === 'primary-lg' ? 'px-10 py-4 text-lg gap-2' : sizeStyles[size],
+    className
+  )
 
   const content = (
     <>
-      {icon && iconPosition === 'left' && <span className="shrink-0">{icon}</span>}
+      {icon && iconPosition === 'left'  && <span className="shrink-0">{icon}</span>}
       <span>{children}</span>
       {icon && iconPosition === 'right' && <span className="shrink-0">{icon}</span>}
     </>
@@ -82,29 +68,16 @@ export function Button(props: ButtonProps) {
   if (props.href) {
     const { href, external } = props as ButtonAsLink
     if (external) {
-      return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
-          {content}
-        </a>
-      )
+      return <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>{content}</a>
     }
-    return (
-      <Link href={href} className={classes}>
-        {content}
-      </Link>
-    )
+    return <Link href={href} className={classes}>{content}</Link>
   }
 
-  // Native button — extract only HTML button attributes
   const {
-    variant: _v, size: _s, icon: _i, iconPosition: _ip,
-    className: _c, children: _ch, href: _href, external: _ext,
-    ...htmlButtonProps
-  } = props as ButtonAsButton & ButtonAsLink
+    variant: _variant, size: _size, icon: _icon, iconPosition: _pos,
+    className: _cls, children: _ch, href: _href, external: _ext,
+    ...nativeProps
+  } = props as ButtonAsButton & { href?: never; external?: never }
 
-  return (
-    <button className={classes} {...htmlButtonProps}>
-      {content}
-    </button>
-  )
+  return <button className={classes} {...nativeProps}>{content}</button>
 }
