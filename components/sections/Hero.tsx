@@ -1,8 +1,16 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { ArrowRight, CheckCircle, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { COMPANY } from '@/lib/data/company'
+import { loadAnime } from '@/lib/hooks/useAnime'
+
+const BAR_DATA = [
+  { label: 'Pharma',        pct: 82 },
+  { label: 'Data Centers',  pct: 67 },
+  { label: 'Manufacturing', pct: 91 },
+]
 
 const TRUST_BADGES = [
   'ISO 9001:2015 Certified',
@@ -12,6 +20,23 @@ const TRUST_BADGES = [
 ]
 
 export function Hero() {
+  const barRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const bars = barRefs.current.filter((el): el is HTMLDivElement => el !== null)
+    if (!bars.length) return
+    loadAnime().then(({ animate }) => {
+      bars.forEach((bar, i) => {
+        animate(bar, {
+          width: `${BAR_DATA[i].pct}%`,
+          duration: 1100,
+          ease: 'outQuart',
+          delay: 500 + i * 180,
+        })
+      })
+    })
+  }, [])
+
   return (
     <section
       className="relative min-h-screen flex items-center overflow-hidden bg-navy-950"
@@ -155,11 +180,7 @@ export function Hero() {
 
                 {/* Progress bars */}
                 <div className="space-y-3">
-                  {[
-                    { label: 'Pharma',          pct: 82 },
-                    { label: 'Data Centers',    pct: 67 },
-                    { label: 'Manufacturing',   pct: 91 },
-                  ].map(({ label, pct }) => (
+                  {BAR_DATA.map(({ label, pct }, index) => (
                     <div key={label}>
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-slate-300">{label}</span>
@@ -167,8 +188,9 @@ export function Hero() {
                       </div>
                       <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                         <div
+                          ref={el => { barRefs.current[index] = el }}
                           className="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full"
-                          style={{ width: `${pct}%` }}
+                          style={{ width: '0%' }}
                         />
                       </div>
                     </div>

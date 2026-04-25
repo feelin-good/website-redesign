@@ -1,5 +1,6 @@
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
+import { ProcessTimeline } from './ProcessTimeline'
 
 const STEPS = [
   {
@@ -53,9 +54,8 @@ export function Process() {
         />
 
         <div className="relative">
-          {/* Connecting line (desktop) */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px
-                          bg-gradient-to-b from-transparent via-orange-200 to-transparent" />
+          {/* Connecting line (desktop) — animated draw on scroll */}
+          <ProcessTimeline />
 
           <div className="grid gap-6 lg:gap-0">
             {STEPS.map((step, i) => {

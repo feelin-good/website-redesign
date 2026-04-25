@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { TESTIMONIALS } from '@/lib/data/testimonials'
 import { cn } from '@/lib/utils'
+import { loadAnime } from '@/lib/hooks/useAnime'
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -23,9 +24,71 @@ function StarRating({ rating }: { rating: number }) {
 
 export function Testimonials() {
   const [active, setActive] = useState(0)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const isAnimating = useRef(false)
+  const pendingIn = useRef(false)
+  const didMount = useRef(false)
 
-  const prev = () => setActive(a => (a - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
-  const next = () => setActive(a => (a + 1) % TESTIMONIALS.length)
+  // Phase 2: animate in after React re-renders with new content
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true
+      return
+    }
+    if (!pendingIn.current) return
+    pendingIn.current = false
+
+    const el = contentRef.current
+    if (!el) { isAnimating.current = false; return }
+
+    loadAnime().then(({ animate }) => {
+      animate(el, {
+        opacity: [0, 1],
+        translateY: [14, 0],
+        duration: 280,
+        ease: 'outCubic',
+        onComplete: () => { isAnimating.current = false },
+      })
+    })
+  }, [active])
+
+  // Phase 1: animate out, then swap state
+  const navigateTo = useCallback(async (newIndex: number) => {
+    if (isAnimating.current || newIndex === active) return
+    isAnimating.current = true
+
+    const el = contentRef.current
+    if (!el) {
+      setActive(newIndex)
+      isAnimating.current = false
+      return
+    }
+
+    const { animate } = await loadAnime()
+
+    await new Promise<void>(resolve => {
+      animate(el, {
+        opacity: 0,
+        translateY: -14,
+        duration: 190,
+        ease: 'inCubic',
+        onComplete: () => resolve(),
+      })
+    })
+
+    pendingIn.current = true
+    setActive(newIndex)
+    // useEffect watching [active] will fire after commit and run animate-in
+  }, [active])
+
+  const prev = useCallback(
+    () => navigateTo((active - 1 + TESTIMONIALS.length) % TESTIMONIALS.length),
+    [active, navigateTo]
+  )
+  const next = useCallback(
+    () => navigateTo((active + 1) % TESTIMONIALS.length),
+    [active, navigateTo]
+  )
 
   const current = TESTIMONIALS[active]
 
@@ -51,30 +114,32 @@ export function Testimonials() {
                 <Quote size={24} className="text-orange-400" />
               </div>
 
-              <StarRating rating={current.rating} />
+              {/* Animated content wrapper */}
+              <div ref={contentRef}>
+                <StarRating rating={current.rating} />
 
-              <blockquote className="text-xl lg:text-2xl font-medium text-white
-                                     leading-relaxed mt-5 mb-8 pr-16">
-                "{current.quote}"
-              </blockquote>
+                <blockquote className="text-xl lg:text-2xl font-medium text-white
+                                       leading-relaxed mt-5 mb-8 pr-16">
+                  "{current.quote}"
+                </blockquote>
 
-              <div className="flex items-center gap-4">
-                {/* Avatar initial */}
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600
-                                flex items-center justify-center text-white font-bold text-lg shrink-0">
-                  {current.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="font-semibold text-white">{current.name}</p>
-                  <p className="text-sm text-slate-400">{current.title}</p>
-                  <p className="text-sm font-medium text-orange-400">{current.company}</p>
-                </div>
-                <div className="ml-auto">
-                  <span className="text-xs font-semibold uppercase tracking-widest
-                                   text-slate-400 bg-white/5 border border-white/10
-                                   px-3 py-1 rounded-full">
-                    {current.industry}
-                  </span>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600
+                                  flex items-center justify-center text-white font-bold text-lg shrink-0">
+                    {current.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">{current.name}</p>
+                    <p className="text-sm text-slate-400">{current.title}</p>
+                    <p className="text-sm font-medium text-orange-400">{current.company}</p>
+                  </div>
+                  <div className="ml-auto">
+                    <span className="text-xs font-semibold uppercase tracking-widest
+                                     text-slate-400 bg-white/5 border border-white/10
+                                     px-3 py-1 rounded-full">
+                      {current.industry}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -86,7 +151,7 @@ export function Testimonials() {
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setActive(i)}
+                  onClick={() => navigateTo(i)}
                   className={cn(
                     'transition-all duration-200 rounded-full',
                     i === active
@@ -125,7 +190,7 @@ export function Testimonials() {
             {TESTIMONIALS.slice(0, 3).map((t, i) => (
               <button
                 key={t.id}
-                onClick={() => setActive(i)}
+                onClick={() => navigateTo(i)}
                 className={cn(
                   'text-left p-4 rounded-2xl border transition-all duration-200',
                   i === active

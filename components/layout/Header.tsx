@@ -12,6 +12,30 @@ import {
 } from 'lucide-react'
 import { SERVICES } from '@/lib/data/services'
 import { INDUSTRIES } from '@/lib/data/industries'
+import { loadAnime } from '@/lib/hooks/useAnime'
+
+function DropdownItems({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const items = Array.from(el.querySelectorAll<HTMLElement>('[data-dd-item]'))
+    if (!items.length) return
+    items.forEach(item => { item.style.opacity = '0' })
+    loadAnime().then(({ animate, stagger }) => {
+      animate(items, {
+        opacity: [0, 1],
+        translateY: [-6, 0],
+        duration: 170,
+        ease: 'outQuad',
+        delay: stagger(45),
+      })
+    })
+  }, [])
+
+  return <div ref={ref}>{children}</div>
+}
 
 const SERVICE_ICONS: Record<string, ReactElement> = {
   'mep-engineering':       <Zap size={16} />,
@@ -177,7 +201,7 @@ export function Header() {
                   >
                     <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 min-w-[340px]">
                       {item.type === 'services' && (
-                        <>
+                        <DropdownItems>
                           <p className="text-2xs text-slate-400 uppercase tracking-widest font-semibold mb-3 px-2">
                             Our Services
                           </p>
@@ -186,6 +210,7 @@ export function Header() {
                               <Link
                                 key={service.slug}
                                 href={`/services/${service.slug}`}
+                                data-dd-item
                                 className="flex items-start gap-3 px-3 py-2.5 rounded-xl
                                            hover:bg-orange-50 group/item transition-colors"
                               >
@@ -206,16 +231,17 @@ export function Header() {
                           <div className="mt-3 pt-3 border-t border-slate-100">
                             <Link
                               href="/services"
+                              data-dd-item
                               className="flex items-center justify-center gap-2 text-sm font-semibold
                                          text-orange-500 hover:text-orange-600 transition-colors py-1"
                             >
                               View all services <ArrowRight size={14} />
                             </Link>
                           </div>
-                        </>
+                        </DropdownItems>
                       )}
                       {item.type === 'industries' && (
-                        <>
+                        <DropdownItems>
                           <p className="text-2xs text-slate-400 uppercase tracking-widest font-semibold mb-3 px-2">
                             Industries We Serve
                           </p>
@@ -224,6 +250,7 @@ export function Header() {
                               <Link
                                 key={ind.slug}
                                 href={`/industries#${ind.slug}`}
+                                data-dd-item
                                 className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl
                                            hover:bg-orange-50 group/item transition-colors"
                               >
@@ -236,7 +263,7 @@ export function Header() {
                               </Link>
                             ))}
                           </div>
-                        </>
+                        </DropdownItems>
                       )}
                     </div>
                   </div>
