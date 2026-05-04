@@ -53,21 +53,20 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-navy-950/80" />
+      <section className="bg-canvas pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-lab-grid opacity-70" />
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
-                             uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-electric
+                             uppercase tracking-[0.22em] mb-4 font-label">
+              <span className="w-6 h-0.5 bg-electric rounded-full" />
               About Lepton Projects
             </span>
-            <h1 className="font-display font-extrabold text-white mb-6"
+            <h1 className="font-display font-semibold text-obsidian mb-6"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               Two Decades of Engineering Excellence in India
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl">
+            <p className="text-xl text-granite leading-relaxed mb-8 max-w-2xl">
               Founded in {COMPANY.founded}, Lepton Projects has grown from a small civil engineering
               consultancy into one of India's most respected multi-discipline engineering firms —
               trusted by leading corporations, healthcare groups, and government agencies.
@@ -75,10 +74,10 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {COMPANY.stats.map(stat => (
                 <div key={stat.label} className="text-center">
-                  <p className="font-display font-extrabold text-3xl text-white">
+                  <p className="font-display font-semibold text-3xl text-obsidian">
                     <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="text-sm text-slate-400 mt-1">{stat.label}</p>
+                  <p className="text-sm text-granite mt-1">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -87,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <AnimateOnScroll animation="slide-right">
@@ -125,16 +124,16 @@ export default function AboutPage() {
             <AnimateOnScroll animation="slide-left">
               <div className="relative pl-6">
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b
-                                from-orange-500 via-orange-200 to-transparent" />
+                                from-electric via-electric/30 to-transparent" />
                 <div className="space-y-7">
-                  {MILESTONES.map((m, i) => (
+                  {MILESTONES.map((m) => (
                     <div key={m.year} className="relative">
                       <div className="absolute -left-6 top-1 w-3 h-3 rounded-full
-                                      bg-orange-500 border-2 border-white shadow-md" />
-                      <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
+                                      bg-electric border-2 border-canvas shadow-lab" />
+                      <span className="text-xs font-bold text-electric uppercase tracking-[0.22em] font-label">
                         {m.year}
                       </span>
-                      <p className="text-sm text-slate-600 mt-0.5 leading-relaxed">{m.event}</p>
+                      <p className="text-sm text-granite mt-0.5 leading-relaxed">{m.event}</p>
                     </div>
                   ))}
                 </div>
@@ -145,7 +144,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission / Vision */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-alabaster">
         <div className="container-main">
           <SectionHeader
             tag="Our Purpose"
@@ -155,29 +154,29 @@ export default function AboutPage() {
           />
           <div className="grid lg:grid-cols-3 gap-6 mb-14">
             {[
-              {
-                label: 'Mission',
-                text: 'To deliver engineering services of the highest technical standard, enabling our clients to build safer, smarter, and more efficient facilities — on time and within budget.',
-                color: 'border-t-orange-500',
-              },
-              {
-                label: 'Vision',
-                text: 'To be India\'s most trusted multi-discipline engineering partner — recognised for technical excellence, delivery integrity, and long-term client relationships.',
-                color: 'border-t-navy-500',
-              },
-              {
-                label: 'Purpose',
-                text: 'To contribute to India\'s infrastructure and manufacturing growth story by raising the bar for engineering quality, sustainability, and professional practice.',
-                color: 'border-t-gold-500',
-              },
+          {
+            label: 'Mission',
+            text: 'To deliver engineering services of the highest technical standard, enabling our clients to build safer, smarter, and more efficient facilities — on time and within budget.',
+            color: 'border-t-electric',
+          },
+          {
+            label: 'Vision',
+            text: 'To be India\'s most trusted multi-discipline engineering partner — recognised for technical excellence, delivery integrity, and long-term client relationships.',
+            color: 'border-t-ink',
+          },
+          {
+            label: 'Purpose',
+            text: 'To contribute to India\'s infrastructure and manufacturing growth story by raising the bar for engineering quality, sustainability, and professional practice.',
+            color: 'border-t-obsidian',
+          },
             ].map((item, i) => (
               <AnimateOnScroll key={item.label} animation="fade-up" delay={i * 100}>
-                <div className={`bg-white rounded-2xl border border-slate-100 border-t-2 ${item.color}
-                                 p-8 shadow-card h-full`}>
-                  <h3 className="font-display font-bold text-xl text-navy-900 mb-4">
+                <div className={`bg-canvas rounded-card border border-alabaster border-t-2 ${item.color}
+                                 p-8 shadow-lab h-full`}>
+                  <h3 className="font-display font-semibold text-xl text-obsidian mb-4">
                     {item.label}
                   </h3>
-                  <p className="text-slate-500 leading-relaxed">{item.text}</p>
+                  <p className="text-granite leading-relaxed">{item.text}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -188,12 +187,12 @@ export default function AboutPage() {
             {VALUES.map((value, i) => (
               <AnimateOnScroll key={value.title} animation="fade-up" delay={i * 80}>
                 <div className="text-center p-6">
-                  <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center
-                                  text-orange-500 mx-auto mb-4">
+                  <div className="w-12 h-12 rounded-control bg-ghost flex items-center justify-center
+                                  text-electric mx-auto mb-4">
                     {value.icon}
                   </div>
-                  <h3 className="font-semibold text-navy-900 mb-2">{value.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{value.description}</p>
+                  <h3 className="font-semibold text-obsidian mb-2">{value.title}</h3>
+                  <p className="text-sm text-granite leading-relaxed">{value.description}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -202,7 +201,7 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <SectionHeader
             tag="Our People"
@@ -216,27 +215,26 @@ export default function AboutPage() {
               <AnimateOnScroll key={member.id} animation="fade-up" delay={i * 80}>
                 <div className="group">
                   {/* Avatar */}
-                  <div className="aspect-square rounded-2xl bg-gradient-to-br from-navy-800 to-navy-900
+                  <div className="aspect-square rounded-image bg-ghost
                                   flex items-center justify-center mb-5
-                                  group-hover:from-navy-700 group-hover:to-navy-800
-                                  transition-all duration-300 overflow-hidden">
-                    <div className="text-5xl font-display font-extrabold text-white/20
-                                    group-hover:text-white/30 transition-colors">
+                                  group-hover:bg-alabaster transition-all duration-300 overflow-hidden">
+                    <div className="text-5xl font-display font-semibold text-obsidian/20
+                                    group-hover:text-obsidian/40 transition-colors">
                       {member.name.charAt(0)}
                     </div>
                   </div>
-                  <h3 className="font-display font-bold text-navy-900">{member.name}</h3>
-                  <p className="text-orange-500 text-sm font-medium mb-1">{member.title}</p>
+                  <h3 className="font-display font-semibold text-obsidian">{member.name}</h3>
+                  <p className="text-electric text-sm font-medium mb-1">{member.title}</p>
                   <div className="flex flex-wrap gap-1 mb-3">
                     {member.qualifications.slice(0, 2).map(q => (
                       <span key={q}
-                            className="text-2xs text-slate-400 bg-slate-50 border border-slate-100
-                                       px-2 py-0.5 rounded-md">
+                            className="text-2xs text-granite bg-ghost border border-alabaster
+                                       px-2 py-0.5 rounded-control">
                         {q.split(',')[0].split('(')[0].trim()}
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">
+                  <p className="text-sm text-granite leading-relaxed line-clamp-3">
                     {member.bio}
                   </p>
                 </div>

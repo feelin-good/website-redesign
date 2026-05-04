@@ -42,20 +42,20 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-16 lg:pt-40 lg:pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
+      <section className="bg-canvas pt-32 pb-16 lg:pt-40 lg:pb-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-lab-grid opacity-70" />
         <div className="container-main relative z-10">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
-                             uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-electric
+                             uppercase tracking-[0.22em] mb-4 font-label">
+              <span className="w-6 h-0.5 bg-electric rounded-full" />
               Contact Us
             </span>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-obsidian mb-5"
                 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', lineHeight: 1.1 }}>
               Let's Start the Engineering Conversation
             </h1>
-            <p className="text-lg text-slate-300 leading-relaxed">
+            <p className="text-lg text-granite leading-relaxed">
               Our engineering team typically responds within one business day.
               Share your project details and we'll get the right specialist in touch with you.
             </p>
@@ -64,61 +64,61 @@ export default function ContactPage() {
       </section>
 
       {/* Main contact section */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-alabaster">
         <div className="container-main">
           <div className="grid lg:grid-cols-12 gap-12">
 
             {/* Contact info */}
             <div className="lg:col-span-4 space-y-6">
               <AnimateOnScroll animation="slide-right">
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-7">
-                  <h2 className="font-display font-bold text-lg text-navy-900 mb-5">
+                <div className="bg-canvas rounded-card shadow-lab p-7">
+                  <h2 className="font-display font-semibold text-lg text-obsidian mb-5">
                     Get in Touch
                   </h2>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 bg-orange-50 rounded-xl flex items-center justify-center shrink-0">
-                        <Phone size={16} className="text-orange-500" />
+                      <div className="w-9 h-9 bg-ghost rounded-control flex items-center justify-center shrink-0">
+                        <Phone size={16} className="text-electric" />
                       </div>
                       <div>
-                        <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">Phone</p>
+                        <p className="text-xs text-granite uppercase tracking-[0.22em] mb-0.5 font-label">Phone</p>
                         <a href={`tel:${COMPANY.phone}`}
-                           className="text-navy-900 font-medium hover:text-orange-500 transition-colors">
+                           className="text-obsidian font-medium hover:text-electric transition-colors">
                           {COMPANY.phone}
                         </a>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 bg-orange-50 rounded-xl flex items-center justify-center shrink-0">
-                        <Mail size={16} className="text-orange-500" />
+                      <div className="w-9 h-9 bg-ghost rounded-control flex items-center justify-center shrink-0">
+                        <Mail size={16} className="text-electric" />
                       </div>
                       <div>
-                        <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">Email</p>
+                        <p className="text-xs text-granite uppercase tracking-[0.22em] mb-0.5 font-label">Email</p>
                         <a href={`mailto:${COMPANY.email}`}
-                           className="text-navy-900 font-medium hover:text-orange-500 transition-colors">
+                           className="text-obsidian font-medium hover:text-electric transition-colors">
                           {COMPANY.email}
                         </a>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 bg-orange-50 rounded-xl flex items-center justify-center shrink-0">
-                        <MapPin size={16} className="text-orange-500" />
+                      <div className="w-9 h-9 bg-ghost rounded-control flex items-center justify-center shrink-0">
+                        <MapPin size={16} className="text-electric" />
                       </div>
                       <div>
-                        <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">Head Office</p>
-                        <p className="text-navy-900 font-medium text-sm leading-snug">
+                        <p className="text-xs text-granite uppercase tracking-[0.22em] mb-0.5 font-label">Head Office</p>
+                        <p className="text-obsidian font-medium text-sm leading-snug">
                           {COMPANY.address.street},<br />
                           {COMPANY.address.city} — {COMPANY.address.pin}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 bg-orange-50 rounded-xl flex items-center justify-center shrink-0">
-                        <Clock size={16} className="text-orange-500" />
+                      <div className="w-9 h-9 bg-ghost rounded-control flex items-center justify-center shrink-0">
+                        <Clock size={16} className="text-electric" />
                       </div>
                       <div>
-                        <p className="text-xs text-slate-400 uppercase tracking-wider mb-0.5">Business Hours</p>
-                        <p className="text-navy-900 font-medium text-sm">
+                        <p className="text-xs text-granite uppercase tracking-[0.22em] mb-0.5 font-label">Business Hours</p>
+                        <p className="text-obsidian font-medium text-sm">
                           Mon–Fri, 9:00 AM – 6:00 PM IST
                         </p>
                       </div>
@@ -126,8 +126,8 @@ export default function ContactPage() {
                   </div>
 
                   {/* Socials */}
-                  <div className="mt-6 pt-6 border-t border-slate-100">
-                    <p className="text-xs text-slate-400 uppercase tracking-wider mb-3">Follow Us</p>
+                  <div className="mt-6 pt-6 border-t border-alabaster">
+                    <p className="text-xs text-granite uppercase tracking-[0.22em] mb-3 font-label">Follow Us</p>
                     <div className="flex gap-2">
                       {[
                         { href: COMPANY.social.linkedin, icon: <Linkedin size={15} />, label: 'LinkedIn' },
@@ -136,9 +136,9 @@ export default function ContactPage() {
                       ].map(({ href, icon, label }) => (
                         <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                            aria-label={label}
-                           className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-200
-                                      flex items-center justify-center text-slate-500
-                                      hover:bg-orange-500 hover:border-orange-500 hover:text-white
+                           className="w-9 h-9 rounded-control bg-ghost border border-alabaster
+                                      flex items-center justify-center text-granite
+                                      hover:bg-ink hover:border-ink hover:text-canvas
                                       transition-all duration-200">
                           {icon}
                         </a>
@@ -150,15 +150,15 @@ export default function ContactPage() {
 
               {/* Response promise */}
               <AnimateOnScroll animation="slide-right" delay={100}>
-                <div className="bg-navy-900 rounded-2xl p-6 border border-navy-800">
+                <div className="bg-ink rounded-card p-6 shadow-lab">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest">
+                    <div className="w-2 h-2 bg-electric rounded-full animate-pulse" />
+                    <span className="text-xs font-semibold text-electric uppercase tracking-[0.22em] font-label">
                       Response Guarantee
                     </span>
                   </div>
-                  <p className="text-white font-semibold mb-2">Within 24 Business Hours</p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-canvas font-semibold mb-2">Within 24 Business Hours</p>
+                  <p className="text-sm text-canvas/70">
                     Every enquiry is reviewed by a senior engineer who will reach out to
                     understand your requirements before proposing next steps.
                   </p>
@@ -169,7 +169,7 @@ export default function ContactPage() {
             {/* Contact form */}
             <div className="lg:col-span-8">
               <AnimateOnScroll animation="slide-left">
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-8 lg:p-10">
+                <div className="bg-canvas rounded-card shadow-lab p-8 lg:p-10">
                   <SectionHeader
                     tag="Send a Message"
                     title="Tell Us About Your Project"
@@ -185,7 +185,7 @@ export default function ContactPage() {
       </section>
 
       {/* Offices */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <SectionHeader
             tag="Our Offices"
@@ -197,29 +197,29 @@ export default function ContactPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {OFFICES.map((office, i) => (
               <AnimateOnScroll key={office.city} animation="fade-up" delay={i * 80}>
-                <div className="bg-slate-50 rounded-2xl border border-slate-100 p-6 h-full
-                                hover:border-orange-200 hover:shadow-md transition-all duration-200">
+                <div className="bg-ghost rounded-card p-6 h-full shadow-lab
+                                hover:-translate-y-0.5 transition-all duration-200">
                   {/* City header */}
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-orange-500" />
-                    <h3 className="font-display font-bold text-navy-900">{office.city}</h3>
+                    <div className="w-2 h-2 rounded-full bg-electric" />
+                    <h3 className="font-display font-semibold text-obsidian">{office.city}</h3>
                   </div>
                   <div className="space-y-2.5">
                     <div className="flex items-start gap-2">
-                      <MapPin size={13} className="text-orange-400 mt-0.5 shrink-0" />
-                      <p className="text-xs text-slate-500 leading-snug">{office.address}</p>
+                      <MapPin size={13} className="text-electric mt-0.5 shrink-0" />
+                      <p className="text-xs text-granite leading-snug">{office.address}</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Phone size={13} className="text-orange-400 shrink-0" />
+                      <Phone size={13} className="text-electric shrink-0" />
                       <a href={`tel:${office.phone}`}
-                         className="text-xs text-slate-600 hover:text-orange-500 transition-colors">
+                         className="text-xs text-granite hover:text-obsidian transition-colors">
                         {office.phone}
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Mail size={13} className="text-orange-400 shrink-0" />
+                      <Mail size={13} className="text-electric shrink-0" />
                       <a href={`mailto:${office.email}`}
-                         className="text-xs text-slate-600 hover:text-orange-500 transition-colors">
+                         className="text-xs text-granite hover:text-obsidian transition-colors">
                         {office.email}
                       </a>
                     </div>

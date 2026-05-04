@@ -19,23 +19,23 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-navy-950 text-white">
+    <footer className="bg-ink text-canvas">
       {/* Newsletter / CTA strip */}
-      <div className="border-b border-navy-800 bg-navy-900">
+      <div className="border-b border-canvas/10 bg-ink">
         <div className="container-main py-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="font-display font-bold text-xl text-white mb-1">
+            <h3 className="font-display font-semibold text-canvas mb-1">
               Ready to start your next project?
             </h3>
-            <p className="text-slate-300 text-sm">
+            <p className="text-canvas/70 text-sm">
               Talk to our engineering team and get a tailored proposal within 48 hours.
             </p>
           </div>
           <Link
             href="/request-quote"
-            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600
-                       text-white font-semibold px-7 py-3.5 rounded-xl
-                       transition-all duration-200 hover:shadow-lg shrink-0"
+            className="inline-flex items-center gap-2 bg-canvas hover:bg-ghost
+                       text-ink font-semibold px-7 py-3.5 rounded-pill
+                       transition-all duration-200 shadow-lab shrink-0"
           >
             Request a Proposal
             <ArrowRight size={16} />
@@ -51,22 +51,22 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             {/* Logo */}
             <Link href="/" className="inline-flex items-center gap-3 mb-5 group">
-              <div className="w-9 h-9 bg-orange-500 rounded-lg flex items-center justify-center
-                              group-hover:bg-orange-600 transition-colors">
+              <div className="w-9 h-9 bg-canvas rounded-control flex items-center justify-center
+                              group-hover:bg-ghost transition-colors">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M3 15L10 3L17 15H3Z" fill="white" fillOpacity="0.9" />
-                  <path d="M7 15L10 9L13 15H7Z" fill="white" fillOpacity="0.4" />
+                  <path d="M3 15L10 3L17 15H3Z" fill="#000000" fillOpacity="0.9" />
+                  <path d="M7 15L10 9L13 15H7Z" fill="#000000" fillOpacity="0.4" />
                 </svg>
               </div>
               <div>
-                <span className="block font-display font-bold text-lg text-white leading-tight">
+                <span className="block font-display font-semibold text-canvas leading-tight">
                   Lepton Projects
                 </span>
-                <span className="block text-2xs text-white/50 uppercase tracking-widest">Pvt. Ltd.</span>
+                <span className="block text-2xs text-canvas/60 uppercase tracking-widest">Pvt. Ltd.</span>
               </div>
             </Link>
 
-            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+            <p className="text-canvas/70 text-sm leading-relaxed mb-6">
               Engineering excellence since {COMPANY.founded}. Delivering complex industrial and
               infrastructure projects across India with precision and accountability.
             </p>
@@ -74,17 +74,17 @@ export function Footer() {
             {/* Contact */}
             <div className="space-y-2.5">
               <a href={`tel:${COMPANY.phone}`}
-                 className="flex items-center gap-2.5 text-sm text-slate-300 hover:text-white transition-colors">
-                <Phone size={14} className="text-orange-400 shrink-0" />
+                 className="flex items-center gap-2.5 text-sm text-canvas/70 hover:text-canvas transition-colors">
+                <Phone size={14} className="text-electric shrink-0" />
                 {COMPANY.phone}
               </a>
               <a href={`mailto:${COMPANY.email}`}
-                 className="flex items-center gap-2.5 text-sm text-slate-300 hover:text-white transition-colors">
-                <Mail size={14} className="text-orange-400 shrink-0" />
+                 className="flex items-center gap-2.5 text-sm text-canvas/70 hover:text-canvas transition-colors">
+                <Mail size={14} className="text-electric shrink-0" />
                 {COMPANY.email}
               </a>
-              <div className="flex items-start gap-2.5 text-sm text-slate-300">
-                <MapPin size={14} className="text-orange-400 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 text-sm text-canvas/70">
+                <MapPin size={14} className="text-electric shrink-0 mt-0.5" />
                 <span>
                   {COMPANY.address.street},{' '}
                   {COMPANY.address.city} — {COMPANY.address.pin}
@@ -105,9 +105,9 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-navy-800 hover:bg-orange-500
+                  className="w-9 h-9 rounded-control bg-canvas/10 hover:bg-electric
                              flex items-center justify-center
-                             text-slate-400 hover:text-white
+                             text-canvas/60 hover:text-canvas
                              transition-all duration-200"
                 >
                   {icon}
@@ -118,7 +118,7 @@ export function Footer() {
 
           {/* Services column */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">
+            <h4 className="text-sm font-semibold text-canvas uppercase tracking-[0.22em] mb-4 font-label">
               Services
             </h4>
             <ul className="space-y-2.5">
@@ -126,10 +126,10 @@ export function Footer() {
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="flex items-center gap-1.5 text-sm text-slate-400
-                               hover:text-white hover:gap-2 transition-all duration-200"
+                    className="flex items-center gap-1.5 text-sm text-canvas/60
+                               hover:text-canvas hover:gap-2 transition-all duration-200"
                   >
-                    <ChevronRight size={13} className="text-orange-500 shrink-0" />
+                    <ChevronRight size={13} className="text-electric shrink-0" />
                     {s.title}
                   </Link>
                 </li>
@@ -139,7 +139,7 @@ export function Footer() {
 
           {/* Industries column */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">
+            <h4 className="text-sm font-semibold text-canvas uppercase tracking-[0.22em] mb-4 font-label">
               Industries
             </h4>
             <ul className="space-y-2.5">
@@ -147,10 +147,10 @@ export function Footer() {
                 <li key={i.slug}>
                   <Link
                     href={`/industries#${i.slug}`}
-                    className="flex items-center gap-1.5 text-sm text-slate-400
-                               hover:text-white hover:gap-2 transition-all duration-200"
+                    className="flex items-center gap-1.5 text-sm text-canvas/60
+                               hover:text-canvas hover:gap-2 transition-all duration-200"
                   >
-                    <ChevronRight size={13} className="text-orange-500 shrink-0" />
+                    <ChevronRight size={13} className="text-electric shrink-0" />
                     {i.title.split(' &')[0]}
                   </Link>
                 </li>
@@ -160,7 +160,7 @@ export function Footer() {
 
           {/* Quick links + certifications */}
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-4">
+            <h4 className="text-sm font-semibold text-canvas uppercase tracking-[0.22em] mb-4 font-label">
               Quick Links
             </h4>
             <ul className="space-y-2.5 mb-8">
@@ -168,17 +168,17 @@ export function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="flex items-center gap-1.5 text-sm text-slate-400
-                               hover:text-white hover:gap-2 transition-all duration-200"
+                    className="flex items-center gap-1.5 text-sm text-canvas/60
+                               hover:text-canvas hover:gap-2 transition-all duration-200"
                   >
-                    <ChevronRight size={13} className="text-orange-500 shrink-0" />
+                    <ChevronRight size={13} className="text-electric shrink-0" />
                     {l.label}
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <h4 className="text-sm font-semibold text-white uppercase tracking-widest mb-3">
+            <h4 className="text-sm font-semibold text-canvas uppercase tracking-[0.22em] mb-3 font-label">
               Certifications
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -186,7 +186,7 @@ export function Footer() {
                 <span
                   key={cert}
                   className="px-2.5 py-1 text-2xs font-semibold uppercase tracking-wider
-                             bg-navy-800 text-slate-300 rounded-md border border-navy-700"
+                             bg-canvas/10 text-canvas/70 rounded-control border border-canvas/10"
                 >
                   {cert}
                 </span>
@@ -197,9 +197,9 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-navy-800">
+      <div className="border-t border-canvas/10">
         <div className="container-main py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-canvas/50">
             © {year} {COMPANY.legalName}. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
@@ -209,7 +209,7 @@ export function Footer() {
               { label: 'Sitemap',           href: '/sitemap.xml' },
             ].map(l => (
               <Link key={l.href} href={l.href}
-                    className="text-xs text-slate-500 hover:text-slate-300 transition-colors">
+                    className="text-xs text-canvas/50 hover:text-canvas transition-colors">
                 {l.label}
               </Link>
             ))}

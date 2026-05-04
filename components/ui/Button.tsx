@@ -27,12 +27,12 @@ type ButtonAsButton = SharedProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>
 type ButtonProps = ButtonAsLink | ButtonAsButton
 
 const variantStyles: Record<Variant, string> = {
-  'primary':        'bg-orange-500 text-white hover:bg-orange-600 shadow-md hover:shadow-lg focus-visible:ring-orange-500',
-  'primary-lg':     'bg-orange-500 text-white hover:bg-orange-600 shadow-lg hover:shadow-xl focus-visible:ring-orange-500',
-  'secondary':      'bg-white text-navy-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 focus-visible:ring-navy-500',
-  'ghost-white':    'text-white border border-white/30 hover:bg-white/10 focus-visible:ring-white',
-  'ghost-navy':     'text-navy-700 hover:bg-navy-50 hover:text-navy-900 focus-visible:ring-navy-500',
-  'outline-orange': 'text-orange-500 border border-orange-400 hover:bg-orange-50 focus-visible:ring-orange-500',
+  'primary':        'bg-ink text-canvas hover:bg-obsidian shadow-lab focus-visible:ring-ink',
+  'primary-lg':     'bg-ink text-canvas hover:bg-obsidian shadow-lab focus-visible:ring-ink',
+  'secondary':      'bg-canvas text-obsidian border border-alabaster hover:bg-ghost focus-visible:ring-obsidian',
+  'ghost-white':    'text-canvas border border-canvas/30 hover:bg-canvas/10 focus-visible:ring-canvas',
+  'ghost-navy':     'text-obsidian border border-alabaster hover:bg-ghost focus-visible:ring-obsidian',
+  'outline-orange': 'text-electric border border-electric/40 hover:bg-ghost focus-visible:ring-electric',
 }
 
 const sizeStyles: Record<Size, string> = {
@@ -42,7 +42,7 @@ const sizeStyles: Record<Size, string> = {
 }
 
 const baseStyles =
-  'inline-flex items-center justify-center font-semibold rounded-xl ' +
+  'inline-flex items-center justify-center font-semibold rounded-pill ' +
   'transition-all duration-200 cursor-pointer select-none ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ' +
   'disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]'

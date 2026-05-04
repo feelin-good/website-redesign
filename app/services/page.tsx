@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle } from 'lucide-react'
-import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { Icon } from '@/components/ui/Icon'
 import { CTABanner } from '@/components/sections/CTABanner'
@@ -17,20 +16,20 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
+      <section className="bg-canvas pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-lab-grid opacity-70" />
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
-                             uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-electric
+                             uppercase tracking-[0.22em] mb-4 font-label">
+              <span className="w-6 h-0.5 bg-electric rounded-full" />
               Our Services
             </span>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-obsidian mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               End-to-End Engineering, <br />One Trusted Team
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
+            <p className="text-xl text-granite leading-relaxed max-w-2xl">
               From concept and detailed design to EPC execution and commissioning — Lepton
               delivers seamlessly integrated engineering services across six core disciplines.
             </p>
@@ -39,18 +38,18 @@ export default function ServicesPage() {
       </section>
 
       {/* Services list */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-alabaster">
         <div className="container-main">
           <div className="space-y-8">
             {SERVICES.map((service, i) => (
               <AnimateOnScroll key={service.id} animation="fade-up" delay={i * 60}>
-                <div className="bg-white rounded-3xl border border-slate-100 shadow-card
-                                overflow-hidden hover:shadow-card-hover transition-all duration-300">
+                <div className="bg-canvas rounded-card shadow-lab
+                                overflow-hidden hover:-translate-y-0.5 transition-all duration-300">
                   <div className="grid lg:grid-cols-12 gap-0">
                     {/* Left accent + icon */}
-                    <div className="lg:col-span-1 bg-orange-500 flex items-center justify-center
+                    <div className="lg:col-span-1 bg-ink flex items-center justify-center
                                     py-6 lg:py-0 px-5">
-                      <div className="text-white">
+                      <div className="text-canvas">
                         <Icon name={service.icon} size={28} />
                       </div>
                     </div>
@@ -60,19 +59,19 @@ export default function ServicesPage() {
                       {/* Title + description */}
                       <div className="md:col-span-1">
                         <span className="text-2xs font-semibold uppercase tracking-widest
-                                         text-orange-500 mb-2 block">
+                                         text-electric mb-2 block font-label">
                           Service {String(i + 1).padStart(2, '0')}
                         </span>
-                        <h2 className="font-display font-bold text-xl text-navy-900 mb-3">
+                        <h2 className="font-display font-semibold text-xl text-obsidian mb-3">
                           {service.title}
                         </h2>
-                        <p className="text-slate-500 text-sm leading-relaxed mb-5">
+                        <p className="text-granite text-sm leading-relaxed mb-5">
                           {service.shortDescription}
                         </p>
                         <Link
                           href={`/services/${service.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-semibold
-                                     text-orange-500 hover:text-orange-600 transition-colors
+                                     text-electric hover:text-obsidian transition-colors
                                      hover:gap-3 duration-200"
                         >
                           Full details <ArrowRight size={14} />
@@ -82,13 +81,13 @@ export default function ServicesPage() {
                       {/* Features */}
                       <div className="md:col-span-1">
                         <p className="text-xs font-semibold uppercase tracking-widest
-                                       text-slate-400 mb-3">
+                                       text-granite mb-3 font-label">
                           Key Capabilities
                         </p>
                         <ul className="space-y-2">
                           {service.features.slice(0, 5).map(f => (
-                            <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
-                              <CheckCircle size={14} className="text-orange-400 mt-0.5 shrink-0" />
+                            <li key={f} className="flex items-start gap-2 text-sm text-granite">
+                              <CheckCircle size={14} className="text-electric mt-0.5 shrink-0" />
                               {f}
                             </li>
                           ))}
@@ -98,26 +97,26 @@ export default function ServicesPage() {
                       {/* Benefits + industries */}
                       <div className="md:col-span-1">
                         <p className="text-xs font-semibold uppercase tracking-widest
-                                       text-slate-400 mb-3">
+                                       text-granite mb-3 font-label">
                           Client Benefits
                         </p>
                         <ul className="space-y-2 mb-5">
                           {service.benefits.map(b => (
-                            <li key={b} className="flex items-start gap-2 text-sm text-slate-600">
-                              <span className="w-1.5 h-1.5 rounded-full bg-navy-400 mt-1.5 shrink-0" />
+                            <li key={b} className="flex items-start gap-2 text-sm text-granite">
+                              <span className="w-1.5 h-1.5 rounded-full bg-electric mt-1.5 shrink-0" />
                               {b}
                             </li>
                           ))}
                         </ul>
                         <p className="text-xs font-semibold uppercase tracking-widest
-                                       text-slate-400 mb-2">
+                                       text-granite mb-2 font-label">
                           Key Sectors
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {service.relatedIndustries.map(ind => (
                             <span key={ind}
-                                  className="text-2xs font-semibold px-2.5 py-1 rounded-full
-                                             bg-navy-50 text-navy-600 border border-navy-100
+                                   className="text-2xs font-semibold px-2.5 py-1 rounded-full
+                                             bg-ghost text-obsidian border border-alabaster
                                              capitalize">
                               {ind.replace('-', ' ')}
                             </span>

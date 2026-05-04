@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Manrope } from 'next/font/google'
+import { Bricolage_Grotesque, Geist, Geist_Mono, Inter } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -12,11 +12,35 @@ const inter = Inter({
   preload: true,
 })
 
-const manrope = Manrope({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-manrope',
-  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-bricolage',
+  weight: ['400', '500', '600', '700'],
+  preload: true,
+})
+
+const geist = Geist({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-geist',
+  weight: ['400', '500', '600', '700'],
+  preload: true,
+})
+
+const geistVariable = Geist({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-geist-variable',
+  weight: ['400', '500', '600'],
+  preload: true,
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-geist-mono',
+  weight: ['400', '500', '600'],
   preload: true,
 })
 
@@ -94,8 +118,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0B1D35' },
-    { media: '(prefers-color-scheme: dark)',  color: '#0B1D35' },
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)',  color: '#000000' },
   ],
 }
 
@@ -105,7 +129,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${manrope.variable}`}>
+    <html
+      lang="en-IN"
+      className={`${inter.variable} ${bricolage.variable} ${geist.variable} ${geistVariable.variable} ${geistMono.variable}`}
+    >
       <head>
         {/* Preconnect to font origins */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -152,7 +179,7 @@ export default function RootLayout({
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100]
-                     bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm"
+                     bg-ink text-canvas px-4 py-2 rounded-pill font-semibold text-sm"
         >
           Skip to main content
         </a>

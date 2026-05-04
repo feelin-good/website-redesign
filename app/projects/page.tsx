@@ -3,19 +3,18 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowUpRight, MapPin, Calendar } from 'lucide-react'
-import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { CTABanner } from '@/components/sections/CTABanner'
 import { PROJECTS, PROJECT_CATEGORIES } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Pharmaceuticals: 'bg-purple-50 text-purple-700 border-purple-100',
-  Manufacturing:   'bg-blue-50 text-blue-700 border-blue-100',
-  'Data Centers':  'bg-cyan-50 text-cyan-700 border-cyan-100',
-  Healthcare:      'bg-emerald-50 text-emerald-700 border-emerald-100',
-  Infrastructure:  'bg-amber-50 text-amber-700 border-amber-100',
-  Commercial:      'bg-slate-50 text-slate-700 border-slate-200',
+  Pharmaceuticals: 'bg-ghost text-obsidian border-alabaster',
+  Manufacturing:   'bg-ghost text-obsidian border-alabaster',
+  'Data Centers':  'bg-ghost text-obsidian border-alabaster',
+  Healthcare:      'bg-ghost text-obsidian border-alabaster',
+  Infrastructure:  'bg-ghost text-obsidian border-alabaster',
+  Commercial:      'bg-ghost text-obsidian border-alabaster',
 }
 
 export default function ProjectsPage() {
@@ -28,20 +27,20 @@ export default function ProjectsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
+      <section className="bg-canvas pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-lab-grid opacity-70" />
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
-                             uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-electric
+                             uppercase tracking-[0.22em] mb-4 font-label">
+              <span className="w-6 h-0.5 bg-electric rounded-full" />
               Project Portfolio
             </span>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-obsidian mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               500+ Projects. Every One Delivered.
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
+            <p className="text-xl text-granite leading-relaxed max-w-2xl">
               A portfolio built on technical precision, schedule discipline, and an unwavering
               commitment to client satisfaction across six major industry verticals.
             </p>
@@ -50,7 +49,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Projects */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-alabaster">
         <div className="container-main">
           {/* Filter tabs */}
           <div className="flex flex-wrap gap-2 mb-10">
@@ -61,8 +60,8 @@ export default function ProjectsPage() {
                 className={cn(
                   'px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200',
                   activeCategory === cat
-                    ? 'bg-orange-500 text-white shadow-md'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:border-orange-200 hover:text-orange-500'
+                    ? 'bg-ink text-canvas shadow-lab'
+                    : 'bg-canvas text-granite border border-alabaster hover:border-obsidian/20 hover:text-obsidian'
                 )}
               >
                 {cat}
@@ -76,16 +75,13 @@ export default function ProjectsPage() {
               <AnimateOnScroll key={project.id} animation="fade-up" delay={i * 60}>
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="group block h-full bg-white rounded-2xl border border-slate-100
-                             shadow-card hover:shadow-card-hover hover:-translate-y-1
+                  className="group block h-full bg-canvas rounded-card shadow-lab
+                             hover:-translate-y-1
                              overflow-hidden transition-all duration-300"
                 >
                   {/* Gradient image placeholder */}
-                  <div className="h-44 bg-gradient-to-br from-navy-800 to-navy-900 relative overflow-hidden">
-                    <div className="absolute inset-0"
-                         style={{
-                           backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(240,90,40,0.25) 0%, transparent 60%)',
-                         }} />
+                  <div className="h-44 bg-ghost relative overflow-hidden">
+                    <div className="absolute inset-0 bg-lab-dots opacity-70" />
                     {/* Category badge */}
                     <div className="absolute top-4 left-4">
                       <span className={cn(
@@ -96,42 +92,42 @@ export default function ProjectsPage() {
                       </span>
                     </div>
                     {/* Link icon */}
-                    <div className="absolute top-4 right-4 w-9 h-9 rounded-xl
-                                    bg-white/10 border border-white/20 flex items-center justify-center
-                                    group-hover:bg-orange-500 group-hover:border-orange-500 transition-all">
-                      <ArrowUpRight size={15} className="text-white" />
+                    <div className="absolute top-4 right-4 w-9 h-9 rounded-control
+                                    bg-canvas/80 border border-alabaster flex items-center justify-center
+                                    group-hover:bg-ink group-hover:border-ink transition-all">
+                      <ArrowUpRight size={15} className="text-obsidian group-hover:text-canvas" />
                     </div>
                     {/* Value */}
                     {project.value && (
-                      <div className="absolute bottom-4 right-4 text-sm font-bold text-white/80">
+                      <div className="absolute bottom-4 right-4 text-sm font-bold text-obsidian/80">
                         {project.value}
                       </div>
                     )}
                   </div>
 
                   <div className="p-6">
-                    <h2 className="font-display font-bold text-base text-navy-900 mb-2 leading-snug
-                                   group-hover:text-orange-600 transition-colors">
+                    <h2 className="font-display font-semibold text-base text-obsidian mb-2 leading-snug
+                                   group-hover:text-electric transition-colors">
                       {project.title}
                     </h2>
-                    <p className="text-sm text-navy-600 font-medium mb-3">{project.client}</p>
-                    <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-sm text-obsidian font-medium mb-3">{project.client}</p>
+                    <p className="text-sm text-granite leading-relaxed mb-4 line-clamp-2">
                       {project.description}
                     </p>
 
                     {/* Meta */}
-                    <div className="flex items-center gap-4 text-xs text-slate-400 pt-4
-                                    border-t border-slate-50">
+                    <div className="flex items-center gap-4 text-xs text-granite pt-4
+                                    border-t border-alabaster">
                       <span className="flex items-center gap-1.5">
-                        <MapPin size={11} className="text-orange-400" />
+                        <MapPin size={11} className="text-electric" />
                         {project.location.split(',')[0]}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <Calendar size={11} className="text-orange-400" />
+                        <Calendar size={11} className="text-electric" />
                         {project.year}
                       </span>
                       {project.area && (
-                        <span className="ml-auto font-medium text-navy-600">{project.area}</span>
+                        <span className="ml-auto font-medium text-obsidian">{project.area}</span>
                       )}
                     </div>
                   </div>

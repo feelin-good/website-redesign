@@ -36,15 +36,13 @@ export default function ProjectDetailPage({ params }: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
-        <div className="absolute inset-0 pointer-events-none"
-             style={{ background: 'radial-gradient(circle at 60% 40%, rgba(240,90,40,0.12) 0%, transparent 60%)' }} />
+      <section className="bg-canvas pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 bg-lab-grid opacity-70" />
         <div className="container-main relative z-10">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm text-slate-400
-                       hover:text-white transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-sm text-granite
+                       hover:text-obsidian transition-colors mb-8"
           >
             <ArrowLeft size={14} /> All Projects
           </Link>
@@ -53,49 +51,49 @@ export default function ProjectDetailPage({ params }: Props) {
             <div className="lg:col-span-8">
               {/* Category badge */}
               <span className="inline-block text-xs font-semibold uppercase tracking-widest
-                               text-orange-400 bg-orange-400/10 border border-orange-400/20
+                               text-electric bg-ghost border border-electric/20 font-label
                                px-3 py-1 rounded-full mb-4">
                 {project.category}
               </span>
-              <h1 className="font-display font-extrabold text-white mb-4"
+              <h1 className="font-display font-semibold text-obsidian mb-4"
                   style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', lineHeight: 1.1 }}>
                 {project.title}
               </h1>
-              <p className="text-lg text-slate-300 leading-relaxed mb-6">
+              <p className="text-lg text-granite leading-relaxed mb-6">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-5 text-sm text-slate-400">
+              <div className="flex flex-wrap gap-5 text-sm text-granite">
                 <span className="flex items-center gap-1.5">
-                  <Building2 size={14} className="text-orange-400" />
-                  <strong className="text-white">{project.client}</strong>
+                  <Building2 size={14} className="text-electric" />
+                  <strong className="text-obsidian">{project.client}</strong>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <MapPin size={14} className="text-orange-400" /> {project.location}
+                  <MapPin size={14} className="text-electric" /> {project.location}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Calendar size={14} className="text-orange-400" /> {project.year}
+                  <Calendar size={14} className="text-electric" /> {project.year}
                 </span>
               </div>
             </div>
 
             {/* Right: Project stats */}
             <div className="lg:col-span-4">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+              <div className="bg-ghost rounded-card p-6 space-y-4 shadow-lab">
                 {project.value && (
                   <div>
-                    <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Project Value</p>
-                    <p className="text-2xl font-display font-bold text-orange-400">{project.value}</p>
+                    <p className="text-xs text-granite uppercase tracking-[0.22em] mb-1 font-label">Project Value</p>
+                    <p className="text-2xl font-display font-semibold text-obsidian">{project.value}</p>
                   </div>
                 )}
                 {project.area && (
                   <div>
-                    <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Project Area</p>
-                    <p className="text-xl font-semibold text-white">{project.area}</p>
+                    <p className="text-xs text-granite uppercase tracking-[0.22em] mb-1 font-label">Project Area</p>
+                    <p className="text-xl font-semibold text-obsidian">{project.area}</p>
                   </div>
                 )}
                 <div>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest mb-1">Delivered</p>
-                  <p className="text-xl font-semibold text-white">{project.year}</p>
+                  <p className="text-xs text-granite uppercase tracking-[0.22em] mb-1 font-label">Delivered</p>
+                  <p className="text-xl font-semibold text-obsidian">{project.year}</p>
                 </div>
               </div>
             </div>
@@ -104,23 +102,22 @@ export default function ProjectDetailPage({ params }: Props) {
       </section>
 
       {/* Content */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-12">
               {/* Highlights */}
               <AnimateOnScroll animation="fade-up">
                 <div>
-                  <h2 className="font-display font-bold text-2xl text-navy-900 mb-6">
+                  <h2 className="font-display font-semibold text-2xl text-obsidian mb-6">
                     Project Highlights
                   </h2>
                   <div className="space-y-3">
                     {project.highlights.map(h => (
                       <div key={h}
-                           className="flex items-start gap-3 p-4 bg-slate-50 rounded-xl
-                                      border border-slate-100">
-                        <CheckCircle size={16} className="text-orange-500 mt-0.5 shrink-0" />
-                        <span className="text-slate-600 leading-relaxed">{h}</span>
+                           className="flex items-start gap-3 p-4 bg-ghost rounded-card shadow-lab">
+                        <CheckCircle size={16} className="text-electric mt-0.5 shrink-0" />
+                        <span className="text-granite leading-relaxed">{h}</span>
                       </div>
                     ))}
                   </div>
@@ -130,7 +127,7 @@ export default function ProjectDetailPage({ params }: Props) {
               {/* Services used */}
               <AnimateOnScroll animation="fade-up">
                 <div>
-                  <h2 className="font-display font-bold text-2xl text-navy-900 mb-6">
+                  <h2 className="font-display font-semibold text-2xl text-obsidian mb-6">
                     Services Deployed
                   </h2>
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -138,18 +135,18 @@ export default function ProjectDetailPage({ params }: Props) {
                       <Link
                         key={s.slug}
                         href={`/services/${s.slug}`}
-                        className="flex items-start gap-3 p-4 rounded-xl border border-slate-100
-                                   hover:border-orange-200 hover:bg-orange-50/30 transition-all group"
+                        className="flex items-start gap-3 p-4 rounded-card border border-alabaster
+                                   hover:bg-ghost transition-all group shadow-lab"
                       >
-                        <div className="w-9 h-9 bg-orange-50 rounded-lg flex items-center justify-center
-                                        group-hover:bg-orange-500 transition-colors shrink-0">
-                          <span className="text-orange-500 group-hover:text-white transition-colors">
+                        <div className="w-9 h-9 bg-ghost rounded-control flex items-center justify-center
+                                        group-hover:bg-ink transition-colors shrink-0">
+                          <span className="text-electric group-hover:text-canvas transition-colors">
                             <Icon name={s.icon} size={16} />
                           </span>
                         </div>
                         <div>
-                          <p className="font-semibold text-navy-900 text-sm">{s.title}</p>
-                          <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">
+                          <p className="font-semibold text-obsidian text-sm">{s.title}</p>
+                          <p className="text-xs text-granite mt-0.5 line-clamp-1">
                             {s.shortDescription}
                           </p>
                         </div>
@@ -163,16 +160,16 @@ export default function ProjectDetailPage({ params }: Props) {
             {/* Sidebar */}
             <div className="space-y-6">
               <AnimateOnScroll animation="slide-left">
-                <div className="bg-navy-900 rounded-2xl p-7">
-                  <h3 className="font-bold text-white mb-4">Similar Project Requirement?</h3>
-                  <p className="text-sm text-slate-300 mb-5">
+                <div className="bg-ink rounded-card p-7 shadow-lab">
+                  <h3 className="font-bold text-canvas mb-4">Similar Project Requirement?</h3>
+                  <p className="text-sm text-canvas/70 mb-5">
                     Get a proposal tailored to your project scope within 48 hours.
                   </p>
                   <Link
                     href="/request-quote"
                     className="w-full flex items-center justify-center gap-2
-                               bg-orange-500 hover:bg-orange-600 text-white font-semibold
-                               py-3.5 rounded-xl transition-colors"
+                               bg-canvas hover:bg-ghost text-ink font-semibold
+                               py-3.5 rounded-pill transition-colors shadow-lab"
                   >
                     Request Proposal <ArrowRight size={15} />
                   </Link>
@@ -181,19 +178,19 @@ export default function ProjectDetailPage({ params }: Props) {
 
               {relatedProjects.length > 0 && (
                 <AnimateOnScroll animation="slide-left" delay={100}>
-                  <div className="bg-slate-50 rounded-2xl p-6">
-                    <h3 className="font-semibold text-navy-900 mb-4 text-sm uppercase tracking-wider">
+                  <div className="bg-ghost rounded-card p-6 shadow-lab">
+                    <h3 className="font-semibold text-obsidian mb-4 text-sm uppercase tracking-[0.22em] font-label">
                       Related Projects
                     </h3>
                     <div className="space-y-4">
                       {relatedProjects.map(p => (
                         <Link key={p.slug} href={`/projects/${p.slug}`}
                               className="block group">
-                          <p className="text-sm font-semibold text-navy-800
-                                        group-hover:text-orange-500 transition-colors">
+                          <p className="text-sm font-semibold text-obsidian
+                                        group-hover:text-electric transition-colors">
                             {p.title}
                           </p>
-                          <p className="text-xs text-slate-400 mt-0.5">
+                          <p className="text-xs text-granite mt-0.5">
                             {p.location} · {p.year}
                           </p>
                         </Link>

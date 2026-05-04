@@ -5,7 +5,7 @@ import {
   CheckCircle, ArrowRight, ArrowUpRight, ChevronRight,
   ChevronDown, Menu, X, Phone, Mail, MapPin, Clock,
   Star, Quote, Play, Download, ExternalLink, Users,
-  Target, TrendingUp, Award as AwardIcon, Globe, Briefcase,
+  Target, TrendingUp, Globe, Briefcase,
   LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
