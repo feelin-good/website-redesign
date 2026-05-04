@@ -27,22 +27,22 @@ type ButtonAsButton = SharedProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>
 type ButtonProps = ButtonAsLink | ButtonAsButton
 
 const variantStyles: Record<Variant, string> = {
-  'primary':        'bg-orange-500 text-white hover:bg-orange-600 shadow-md hover:shadow-lg focus-visible:ring-orange-500',
-  'primary-lg':     'bg-orange-500 text-white hover:bg-orange-600 shadow-lg hover:shadow-xl focus-visible:ring-orange-500',
-  'secondary':      'bg-white text-navy-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 focus-visible:ring-navy-500',
-  'ghost-white':    'text-white border border-white/30 hover:bg-white/10 focus-visible:ring-white',
-  'ghost-navy':     'text-navy-700 hover:bg-navy-50 hover:text-navy-900 focus-visible:ring-navy-500',
-  'outline-orange': 'text-orange-500 border border-orange-400 hover:bg-orange-50 focus-visible:ring-orange-500',
+  'primary':        'bg-ink text-white hover:bg-obsidian focus-visible:ring-ink',
+  'primary-lg':     'bg-ink text-white hover:bg-obsidian focus-visible:ring-ink',
+  'secondary':      'bg-canvas text-ink border border-alabaster hover:bg-ghost-white focus-visible:ring-ink',
+  'ghost-white':    'text-white border border-white/15 hover:bg-white/10 focus-visible:ring-white',
+  'ghost-navy':     'text-ink border border-ink/15 hover:bg-ink/5 focus-visible:ring-ink',
+  'outline-orange': 'text-electric-orange border border-electric-orange/40 hover:bg-electric-orange/5 focus-visible:ring-electric-orange',
 }
 
 const sizeStyles: Record<Size, string> = {
-  sm: 'px-4 py-2 text-sm gap-1.5',
-  md: 'px-6 py-3 text-base gap-2',
-  lg: 'px-8 py-4 text-base gap-2',
+  sm: 'px-5 py-2 text-xs gap-2',
+  md: 'px-7 py-3.5 text-sm gap-2.5',
+  lg: 'px-10 py-4 text-base gap-2.5',
 }
 
 const baseStyles =
-  'inline-flex items-center justify-center font-semibold rounded-xl ' +
+  'inline-flex items-center justify-center font-medium rounded-full ' +
   'transition-all duration-200 cursor-pointer select-none ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ' +
   'disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]'
@@ -53,7 +53,7 @@ export function Button(props: ButtonProps) {
   const classes = cn(
     baseStyles,
     variantStyles[variant],
-    variant === 'primary-lg' ? 'px-10 py-4 text-lg gap-2' : sizeStyles[size],
+    variant === 'primary-lg' ? 'px-10 py-4 text-base gap-2.5' : sizeStyles[size],
     className
   )
 
