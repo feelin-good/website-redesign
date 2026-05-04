@@ -17,20 +17,19 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
+      <section className="bg-ghost-white pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-granite
                              uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+              <span className="w-6 h-0.5 bg-granite rounded-full" />
               Our Services
             </span>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               End-to-End Engineering, <br />One Trusted Team
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
+            <p className="text-xl text-granite leading-relaxed max-w-2xl">
               From concept and detailed design to EPC execution and commissioning — Lepton
               delivers seamlessly integrated engineering services across six core disciplines.
             </p>
@@ -39,16 +38,16 @@ export default function ServicesPage() {
       </section>
 
       {/* Services list */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-ghost-white">
         <div className="container-main">
           <div className="space-y-8">
             {SERVICES.map((service, i) => (
               <AnimateOnScroll key={service.id} animation="fade-up" delay={i * 60}>
-                <div className="bg-white rounded-3xl border border-slate-100 shadow-card
-                                overflow-hidden hover:shadow-card-hover transition-all duration-300">
+                <div className="bg-white rounded-[30px] border border-alabaster shadow-humble
+                                overflow-hidden hover:shadow-[0_40px_40px_-5px_rgba(0,0,0,0.05)] transition-all duration-300">
                   <div className="grid lg:grid-cols-12 gap-0">
                     {/* Left accent + icon */}
-                    <div className="lg:col-span-1 bg-orange-500 flex items-center justify-center
+                    <div className="lg:col-span-1 bg-ink flex items-center justify-center
                                     py-6 lg:py-0 px-5">
                       <div className="text-white">
                         <Icon name={service.icon} size={28} />
@@ -60,19 +59,19 @@ export default function ServicesPage() {
                       {/* Title + description */}
                       <div className="md:col-span-1">
                         <span className="text-2xs font-semibold uppercase tracking-widest
-                                         text-orange-500 mb-2 block">
+                                         text-ink mb-2 block">
                           Service {String(i + 1).padStart(2, '0')}
                         </span>
-                        <h2 className="font-display font-bold text-xl text-navy-900 mb-3">
+                        <h2 className="font-display font-semibold text-xl text-ink mb-3">
                           {service.title}
                         </h2>
-                        <p className="text-slate-500 text-sm leading-relaxed mb-5">
+                        <p className="text-granite text-sm leading-relaxed mb-5">
                           {service.shortDescription}
                         </p>
                         <Link
                           href={`/services/${service.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-semibold
-                                     text-orange-500 hover:text-orange-600 transition-colors
+                                     text-ink hover:text-granite transition-colors
                                      hover:gap-3 duration-200"
                         >
                           Full details <ArrowRight size={14} />
@@ -82,13 +81,13 @@ export default function ServicesPage() {
                       {/* Features */}
                       <div className="md:col-span-1">
                         <p className="text-xs font-semibold uppercase tracking-widest
-                                       text-slate-400 mb-3">
+                                       text-granite mb-3">
                           Key Capabilities
                         </p>
                         <ul className="space-y-2">
                           {service.features.slice(0, 5).map(f => (
-                            <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
-                              <CheckCircle size={14} className="text-orange-400 mt-0.5 shrink-0" />
+                            <li key={f} className="flex items-start gap-2 text-sm text-granite">
+                              <CheckCircle size={14} className="text-ink mt-0.5 shrink-0" />
                               {f}
                             </li>
                           ))}
@@ -103,8 +102,8 @@ export default function ServicesPage() {
                         </p>
                         <ul className="space-y-2 mb-5">
                           {service.benefits.map(b => (
-                            <li key={b} className="flex items-start gap-2 text-sm text-slate-600">
-                              <span className="w-1.5 h-1.5 rounded-full bg-navy-400 mt-1.5 shrink-0" />
+                            <li key={b} className="flex items-start gap-2 text-sm text-granite">
+                              <span className="w-1.5 h-1.5 rounded-full bg-granite mt-1.5 shrink-0" />
                               {b}
                             </li>
                           ))}
@@ -117,7 +116,7 @@ export default function ServicesPage() {
                           {service.relatedIndustries.map(ind => (
                             <span key={ind}
                                   className="text-2xs font-semibold px-2.5 py-1 rounded-full
-                                             bg-navy-50 text-navy-600 border border-navy-100
+                                             bg-ghost-white text-navy-600 border border-alabaster
                                              capitalize">
                               {ind.replace('-', ' ')}
                             </span>

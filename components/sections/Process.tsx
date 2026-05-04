@@ -42,7 +42,7 @@ const STEPS = [
 
 export function Process() {
   return (
-    <section className="section-py bg-slate-50">
+    <section className="section-py bg-canvas">
       <div className="container-main">
         <SectionHeader
           tag="How We Work"
@@ -54,8 +54,7 @@ export function Process() {
 
         <div className="relative">
           {/* Connecting line (desktop) */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px
-                          bg-gradient-to-b from-transparent via-orange-200 to-transparent" />
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-alabaster" />
 
           <div className="grid gap-6 lg:gap-0">
             {STEPS.map((step, i) => {
@@ -71,20 +70,20 @@ export function Process() {
 
                     {/* Content side */}
                     <div className={`p-7 ${isEven ? 'lg:text-right lg:pr-16' : 'lg:pl-16'}`}>
-                      <span className="inline-block text-5xl font-display font-extrabold
-                                       text-slate-100 leading-none mb-2">
+                      <span className="inline-block text-5xl font-display font-semibold
+                                       text-alabaster leading-none mb-2">
                         {step.number}
                       </span>
-                      <h3 className="font-display font-bold text-xl text-navy-900 mb-2.5">
+                      <h3 className="font-display font-semibold text-xl text-ink mb-2.5">
                         {step.title}
                       </h3>
-                      <p className="text-slate-500 text-sm leading-relaxed mb-3">
+                      <p className="text-granite text-sm leading-relaxed mb-3">
                         {step.description}
                       </p>
-                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold
-                                       text-orange-500 bg-orange-50 border border-orange-100
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium
+                                       text-granite bg-ghost-white border border-alabaster
                                        px-3 py-1 rounded-full">
-                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full" />
+                        <span className="w-1.5 h-1.5 bg-granite/60 rounded-full" />
                         Typical duration: {step.duration}
                       </span>
                     </div>
@@ -93,12 +92,10 @@ export function Process() {
                     <div className={`hidden lg:flex items-center
                                      ${isEven ? 'justify-start' : 'justify-end'}`}>
                       <div className="relative">
-                        <div className="w-12 h-12 rounded-full border-2 border-orange-500
-                                        bg-white flex items-center justify-center shadow-lg">
-                          <span className="text-sm font-bold text-orange-500">{step.number}</span>
+                        <div className="w-12 h-12 rounded-full border-2 border-alabaster
+                                        bg-canvas flex items-center justify-center shadow-humble">
+                          <span className="text-sm font-semibold text-granite">{step.number}</span>
                         </div>
-                        <div className="absolute inset-0 rounded-full border-2 border-orange-300
-                                        animate-ping opacity-20" />
                       </div>
                     </div>
                   </div>

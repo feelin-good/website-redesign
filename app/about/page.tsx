@@ -53,21 +53,19 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-navy-950/80" />
+      <section className="bg-ghost-white pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-granite
                              uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+              <span className="w-6 h-0.5 bg-granite rounded-full" />
               About Lepton Projects
             </span>
-            <h1 className="font-display font-extrabold text-white mb-6"
+            <h1 className="font-display font-semibold text-ink mb-6"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               Two Decades of Engineering Excellence in India
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed mb-8 max-w-2xl">
+            <p className="text-xl text-granite leading-relaxed mb-8 max-w-2xl">
               Founded in {COMPANY.founded}, Lepton Projects has grown from a small civil engineering
               consultancy into one of India's most respected multi-discipline engineering firms —
               trusted by leading corporations, healthcare groups, and government agencies.
@@ -75,10 +73,10 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {COMPANY.stats.map(stat => (
                 <div key={stat.label} className="text-center">
-                  <p className="font-display font-extrabold text-3xl text-white">
+                  <p className="font-display font-semibold text-3xl text-ink">
                     <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="text-sm text-slate-400 mt-1">{stat.label}</p>
+                  <p className="text-sm text-granite mt-1">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -87,7 +85,7 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <AnimateOnScroll animation="slide-right">
@@ -125,16 +123,16 @@ export default function AboutPage() {
             <AnimateOnScroll animation="slide-left">
               <div className="relative pl-6">
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b
-                                from-orange-500 via-orange-200 to-transparent" />
+                                from-ink via-granite/30 to-transparent" />
                 <div className="space-y-7">
                   {MILESTONES.map((m, i) => (
                     <div key={m.year} className="relative">
                       <div className="absolute -left-6 top-1 w-3 h-3 rounded-full
-                                      bg-orange-500 border-2 border-white shadow-md" />
-                      <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
+                                      bg-ink border-2 border-canvas shadow-md" />
+                      <span className="text-xs font-bold text-ink uppercase tracking-widest">
                         {m.year}
                       </span>
-                      <p className="text-sm text-slate-600 mt-0.5 leading-relaxed">{m.event}</p>
+                      <p className="text-sm text-granite mt-0.5 leading-relaxed">{m.event}</p>
                     </div>
                   ))}
                 </div>
@@ -145,7 +143,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission / Vision */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-ghost-white">
         <div className="container-main">
           <SectionHeader
             tag="Our Purpose"
@@ -172,12 +170,12 @@ export default function AboutPage() {
               },
             ].map((item, i) => (
               <AnimateOnScroll key={item.label} animation="fade-up" delay={i * 100}>
-                <div className={`bg-white rounded-2xl border border-slate-100 border-t-2 ${item.color}
+                <div className={`bg-white rounded-2xl border border-alabaster border-t-2 ${item.color}
                                  p-8 shadow-card h-full`}>
                   <h3 className="font-display font-bold text-xl text-navy-900 mb-4">
                     {item.label}
                   </h3>
-                  <p className="text-slate-500 leading-relaxed">{item.text}</p>
+                  <p className="text-granite leading-relaxed">{item.text}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -193,7 +191,7 @@ export default function AboutPage() {
                     {value.icon}
                   </div>
                   <h3 className="font-semibold text-navy-900 mb-2">{value.title}</h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">{value.description}</p>
+                  <p className="text-sm text-granite leading-relaxed">{value.description}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -230,13 +228,13 @@ export default function AboutPage() {
                   <div className="flex flex-wrap gap-1 mb-3">
                     {member.qualifications.slice(0, 2).map(q => (
                       <span key={q}
-                            className="text-2xs text-slate-400 bg-slate-50 border border-slate-100
+                            className="text-2xs text-slate-400 bg-ghost-white border border-alabaster
                                        px-2 py-0.5 rounded-md">
                         {q.split(',')[0].split('(')[0].trim()}
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm text-slate-500 leading-relaxed line-clamp-3">
+                  <p className="text-sm text-granite leading-relaxed line-clamp-3">
                     {member.bio}
                   </p>
                 </div>

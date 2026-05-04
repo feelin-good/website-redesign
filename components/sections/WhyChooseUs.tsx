@@ -49,7 +49,7 @@ const REASONS = [
 
 export function WhyChooseUs() {
   return (
-    <section className="section-py bg-white">
+    <section className="section-py bg-canvas">
       <div className="container-main">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
 
@@ -63,7 +63,7 @@ export function WhyChooseUs() {
 
             {/* Visual accent block */}
             <AnimateOnScroll animation="fade-up" delay={200} className="mt-10">
-              <div className="bg-navy-900 rounded-2xl p-7 border border-navy-800">
+              <div className="bg-ghost-white rounded-card p-7 border border-alabaster shadow-humble">
                 <div className="grid grid-cols-3 gap-6">
                   {[
                     { value: '92%', label: 'Client Retention Rate' },
@@ -71,19 +71,19 @@ export function WhyChooseUs() {
                     { value: '4.9★', label: 'Average Client Rating' },
                   ].map(item => (
                     <div key={item.label} className="text-center">
-                      <p className="text-2xl font-display font-extrabold text-orange-400 mb-1">
+                      <p className="text-2xl font-display font-semibold text-ink mb-1">
                         {item.value}
                       </p>
-                      <p className="text-xs text-slate-400 leading-snug">{item.label}</p>
+                      <p className="text-xs text-granite leading-snug">{item.label}</p>
                     </div>
                   ))}
                 </div>
-                <div className="mt-5 pt-5 border-t border-navy-800">
-                  <p className="text-sm text-slate-300 italic">
+                <div className="mt-5 pt-5 border-t border-alabaster">
+                  <p className="text-sm text-granite italic">
                     "We don't just complete projects — we build long-term partnerships built on
                     transparency, technical rigour, and shared success."
                   </p>
-                  <p className="text-sm font-semibold text-white mt-2">— Arvind Joshi, MD &amp; Founder</p>
+                  <p className="text-sm font-semibold text-ink mt-2">— Arvind Joshi, MD &amp; Founder</p>
                 </div>
               </div>
             </AnimateOnScroll>
@@ -93,17 +93,17 @@ export function WhyChooseUs() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {REASONS.map((reason, i) => (
               <AnimateOnScroll key={reason.title} animation="fade-up" delay={i * 60}>
-                <div className="group p-6 rounded-2xl border border-slate-100 hover:border-orange-100
-                                hover:bg-orange-50/50 transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl bg-orange-50 group-hover:bg-orange-100
+                <div className="group p-6 rounded-card border border-ghost-white hover:border-alabaster
+                                hover:bg-ghost-white transition-all duration-300">
+                  <div className="w-11 h-11 rounded-[6px] bg-ghost-white group-hover:bg-ink
                                   flex items-center justify-center mb-4
-                                  text-orange-500 transition-colors duration-300">
+                                  text-ink group-hover:text-white transition-colors duration-300">
                     {reason.icon}
                   </div>
-                  <h3 className="font-display font-bold text-base text-navy-900 mb-2">
+                  <h3 className="font-display font-semibold text-base text-ink mb-2">
                     {reason.title}
                   </h3>
-                  <p className="text-sm text-slate-500 leading-relaxed">
+                  <p className="text-sm text-granite leading-relaxed">
                     {reason.description}
                   </p>
                 </div>

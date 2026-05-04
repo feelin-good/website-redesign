@@ -18,20 +18,19 @@ export default function IndustriesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
+      <section className="bg-ghost-white pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-granite
                              uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+              <span className="w-6 h-0.5 bg-granite rounded-full" />
               Industries
             </span>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               Deep Domain Expertise Across Critical Sectors
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
+            <p className="text-xl text-granite leading-relaxed max-w-2xl">
               Every industry has its own standards, regulations, and engineering challenges.
               Lepton brings specialised expertise and a proven delivery track record to each.
             </p>
@@ -40,7 +39,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* Industries */}
-      <section className="section-py bg-slate-50">
+      <section className="section-py bg-ghost-white">
         <div className="container-main">
           <div className="space-y-24">
             {INDUSTRIES.map((industry, i) => {
@@ -59,24 +58,24 @@ export default function IndustriesPage() {
                       <div>
                         {/* Icon + badge */}
                         <div className="flex items-center gap-3 mb-5">
-                          <div className="w-13 h-13 bg-orange-500 rounded-xl
+                          <div className="w-13 h-13 bg-ink rounded-[6px]
                                           flex items-center justify-center p-3.5">
                             <span className="text-white">
                               <Icon name={industry.icon} size={22} />
                             </span>
                           </div>
                           <span className="text-xs font-bold uppercase tracking-widest
-                                           text-orange-500 bg-orange-50 border border-orange-100
+                                           text-ink bg-ghost-white border border-alabaster
                                            px-3 py-1 rounded-full">
                             Industry {String(i + 1).padStart(2, '0')}
                           </span>
                         </div>
 
-                        <h2 className="font-display font-bold text-navy-900 mb-3"
+                        <h2 className="font-display font-semibold text-ink mb-3"
                             style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)' }}>
                           {industry.title}
                         </h2>
-                        <p className="text-slate-500 leading-relaxed mb-6">
+                        <p className="text-granite leading-relaxed mb-6">
                           {industry.description}
                         </p>
 
@@ -84,8 +83,8 @@ export default function IndustriesPage() {
                         <div className="space-y-3 mb-8">
                           {industry.highlights.map(h => (
                             <div key={h} className="flex items-start gap-2.5">
-                              <CheckCircle size={16} className="text-orange-500 mt-0.5 shrink-0" />
-                              <span className="text-sm text-slate-600">{h}</span>
+                              <CheckCircle size={16} className="text-ink mt-0.5 shrink-0" />
+                              <span className="text-sm text-granite">{h}</span>
                             </div>
                           ))}
                         </div>
@@ -93,7 +92,7 @@ export default function IndustriesPage() {
                         {/* Related services */}
                         <div>
                           <p className="text-xs font-semibold uppercase tracking-widest
-                                         text-slate-400 mb-3">
+                                         text-granite mb-3">
                             Engineering Services for This Sector
                           </p>
                           <div className="flex flex-wrap gap-2">
@@ -102,7 +101,7 @@ export default function IndustriesPage() {
                                 key={s.slug}
                                 href={`/services/${s.slug}`}
                                 className="flex items-center gap-1.5 text-sm font-medium
-                                           text-navy-700 bg-white border border-slate-200
+                                           text-navy-700 bg-white border border-alabaster
                                            px-3.5 py-1.5 rounded-full
                                            hover:border-orange-300 hover:text-orange-600
                                            transition-all duration-200"
@@ -159,7 +158,7 @@ export default function IndustriesPage() {
 
                   {/* Divider */}
                   {i < INDUSTRIES.length - 1 && (
-                    <div className="mt-24 border-t border-slate-200" />
+                    <div className="mt-24 border-t border-alabaster" />
                   )}
                 </div>
               )

@@ -73,27 +73,26 @@ export default function CareersPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy-950 pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 hero-pattern" />
+      <section className="bg-ghost-white pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
         <div className="container-main relative z-10">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-granite
                              uppercase tracking-widest mb-4">
-              <span className="w-6 h-0.5 bg-orange-400 rounded-full" />
+              <span className="w-6 h-0.5 bg-granite rounded-full" />
               Careers
             </span>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
               Build Your Engineering Career at Lepton
             </h1>
-            <p className="text-xl text-slate-300 leading-relaxed max-w-2xl mb-8">
+            <p className="text-xl text-granite leading-relaxed max-w-2xl mb-8">
               Join 200+ engineers and professionals working on India's most complex and
               impactful engineering projects — in a culture that values technical rigour,
               growth, and collaboration.
             </p>
             <a href="#open-roles"
-               className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600
-                          text-white font-semibold px-7 py-3.5 rounded-xl transition-all">
+               className="inline-flex items-center gap-2 bg-ink hover:bg-obsidian
+                          text-white font-semibold px-7 py-3.5 rounded-full transition-all">
               View Open Roles <ArrowRight size={15} />
             </a>
           </div>
@@ -101,7 +100,7 @@ export default function CareersPage() {
       </section>
 
       {/* Benefits */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <SectionHeader
             tag="Why Join Us"
@@ -113,14 +112,14 @@ export default function CareersPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {BENEFITS.map((b, i) => (
               <AnimateOnScroll key={b.title} animation="fade-up" delay={i * 80}>
-                <div className="text-center p-6 rounded-2xl bg-slate-50 border border-slate-100
-                                hover:border-orange-100 hover:shadow-md transition-all duration-300">
-                  <div className="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center
-                                  text-orange-500 mx-auto mb-4">
+                <div className="text-center p-6 rounded-card bg-ghost-white border border-alabaster
+                                hover:border-granite/30 hover:shadow-humble transition-all duration-300">
+                  <div className="w-12 h-12 bg-ghost-white rounded-[6px] flex items-center justify-center
+                                  text-ink mx-auto mb-4">
                     {b.icon}
                   </div>
-                  <h3 className="font-semibold text-navy-900 mb-2">{b.title}</h3>
-                  <p className="text-sm text-slate-500">{b.desc}</p>
+                  <h3 className="font-semibold text-ink mb-2">{b.title}</h3>
+                  <p className="text-sm text-granite">{b.desc}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -128,20 +127,20 @@ export default function CareersPage() {
 
           {/* Culture statement */}
           <AnimateOnScroll animation="fade-up">
-            <div className="bg-navy-900 rounded-3xl p-8 lg:p-12 text-center max-w-3xl mx-auto">
+            <div className="bg-obsidian rounded-[30px] p-8 lg:p-12 text-center max-w-3xl mx-auto">
               <p className="text-xl text-white font-medium leading-relaxed mb-4">
                 "At Lepton, you don't just work on engineering drawings — you solve real problems
                 for India's most important industries. We give our engineers the autonomy, tools,
                 and support to do their best work."
               </p>
-              <p className="text-orange-400 font-semibold">— Kavita Iyer, Director — Projects</p>
+              <p className="text-electric-orange font-semibold">— Kavita Iyer, Director — Projects</p>
             </div>
           </AnimateOnScroll>
         </div>
       </section>
 
       {/* Open roles */}
-      <section id="open-roles" className="section-py bg-slate-50">
+      <section id="open-roles" className="section-py bg-ghost-white">
         <div className="container-main">
           <SectionHeader
             tag="Open Positions"
@@ -152,7 +151,7 @@ export default function CareersPage() {
           <div className="space-y-4">
             {OPEN_ROLES.map((role, i) => (
               <AnimateOnScroll key={role.title} animation="fade-up" delay={i * 60}>
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-card
+                <div className="bg-white rounded-2xl border border-alabaster shadow-card
                                 hover:shadow-card-hover hover:border-orange-100
                                 transition-all duration-300 overflow-hidden">
                   <div className="p-6 lg:p-7 flex flex-col sm:flex-row sm:items-center gap-5">
@@ -168,7 +167,7 @@ export default function CareersPage() {
                       <h3 className="font-display font-bold text-lg text-navy-900 mb-1">
                         {role.title}
                       </h3>
-                      <p className="text-sm text-slate-500 mb-3 line-clamp-2">{role.description}</p>
+                      <p className="text-sm text-granite mb-3 line-clamp-2">{role.description}</p>
                       <div className="flex flex-wrap gap-3 text-xs text-slate-400">
                         <span className="flex items-center gap-1.5">
                           <MapPin size={11} className="text-orange-400" /> {role.location}
@@ -180,7 +179,7 @@ export default function CareersPage() {
                     </div>
                     <Link
                       href={`/contact?role=${encodeURIComponent(role.title)}`}
-                      className="shrink-0 inline-flex items-center gap-2 bg-navy-900 hover:bg-orange-500
+                      className="shrink-0 inline-flex items-center gap-2 bg-navy-900 hover:bg-ink
                                  text-white font-semibold px-5 py-2.5 rounded-xl text-sm
                                  transition-all duration-200"
                     >
@@ -194,11 +193,11 @@ export default function CareersPage() {
 
           {/* Speculative application */}
           <AnimateOnScroll animation="fade-up" delay={200} className="mt-8">
-            <div className="bg-white rounded-2xl border border-dashed border-slate-200 p-7 text-center">
+            <div className="bg-white rounded-2xl border border-dashed border-alabaster p-7 text-center">
               <h3 className="font-semibold text-navy-900 mb-2">
                 Don't See the Right Role?
               </h3>
-              <p className="text-slate-500 text-sm mb-4 max-w-md mx-auto">
+              <p className="text-granite text-sm mb-4 max-w-md mx-auto">
                 We're always interested in exceptional engineering talent. Send us your CV
                 and a cover note — we'll keep it on file and reach out when the right opportunity opens.
               </p>
