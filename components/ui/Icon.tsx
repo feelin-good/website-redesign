@@ -6,6 +6,7 @@ import {
   ChevronDown, Menu, X, Phone, Mail, MapPin, Clock,
   Star, Quote, Play, Download, ExternalLink, Users,
   Target, TrendingUp, Award as AwardIcon, Globe, Briefcase,
+  Anchor,
   LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -49,6 +50,7 @@ const iconMap: Record<string, LucideIcon> = {
   'trending-up': TrendingUp,
   globe: Globe,
   briefcase: Briefcase,
+  anchor: Anchor,
 }
 
 interface IconProps {

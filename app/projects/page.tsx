@@ -10,12 +10,11 @@ import { PROJECTS, PROJECT_CATEGORIES } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Pharmaceuticals: 'bg-purple-50 text-purple-700 border-purple-100',
-  Manufacturing:   'bg-blue-50 text-blue-700 border-blue-100',
-  'Data Centers':  'bg-cyan-50 text-cyan-700 border-cyan-100',
-  Healthcare:      'bg-emerald-50 text-emerald-700 border-emerald-100',
-  Infrastructure:  'bg-amber-50 text-amber-700 border-amber-100',
-  Commercial:      'bg-ghost-white text-ink border-alabaster',
+  Cement:  'bg-ghost-white text-granite border-alabaster',
+  Power:   'bg-ghost-white text-granite border-alabaster',
+  Ports:   'bg-ghost-white text-granite border-alabaster',
+  Steel:   'bg-ghost-white text-granite border-alabaster',
+  Mining:  'bg-ghost-white text-granite border-alabaster',
 }
 
 export default function ProjectsPage() {
@@ -38,11 +37,12 @@ export default function ProjectsPage() {
             </span>
             <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
-              500+ Projects. Every One Delivered.
+              125+ Orders Executed.<br />Every One Delivered.
             </h1>
             <p className="text-xl text-granite leading-relaxed max-w-2xl">
-              A portfolio built on technical precision, schedule discipline, and an unwavering
-              commitment to client satisfaction across six major industry verticals.
+              A portfolio of bulk material handling projects built on engineering precision,
+              schedule discipline, and long-term client partnerships across cement, steel, ports,
+              power, and mining industries.
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function ProjectsPage() {
                     {/* Link icon */}
                     <div className="absolute top-4 right-4 w-9 h-9 rounded-xl
                                     bg-white/10 border border-white/20 flex items-center justify-center
-                                    group-hover:bg-ink group-hover:border-orange-500 transition-all">
+                                    group-hover:bg-white group-hover:border-white transition-all">
                       <ArrowUpRight size={15} className="text-white" />
                     </div>
                     {/* Value */}
@@ -109,28 +109,28 @@ export default function ProjectsPage() {
                   </div>
 
                   <div className="p-6">
-                    <h2 className="font-display font-bold text-base text-navy-900 mb-2 leading-snug
-                                   group-hover:text-orange-600 transition-colors">
+                    <h2 className="font-display font-semibold text-base text-ink mb-2 leading-snug
+                                   group-hover:text-obsidian transition-colors">
                       {project.title}
                     </h2>
-                    <p className="text-sm text-navy-600 font-medium mb-3">{project.client}</p>
+                    <p className="text-sm text-granite font-medium mb-3">{project.client}</p>
                     <p className="text-sm text-granite leading-relaxed mb-4 line-clamp-2">
                       {project.description}
                     </p>
 
                     {/* Meta */}
-                    <div className="flex items-center gap-4 text-xs text-slate-400 pt-4
-                                    border-t border-slate-50">
+                    <div className="flex items-center gap-4 text-xs text-granite pt-4
+                                    border-t border-alabaster">
                       <span className="flex items-center gap-1.5">
-                        <MapPin size={11} className="text-orange-400" />
+                        <MapPin size={11} className="text-granite" />
                         {project.location.split(',')[0]}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <Calendar size={11} className="text-orange-400" />
+                        <Calendar size={11} className="text-granite" />
                         {project.year}
                       </span>
                       {project.area && (
-                        <span className="ml-auto font-medium text-navy-600">{project.area}</span>
+                        <span className="ml-auto font-medium text-ink">{project.area}</span>
                       )}
                     </div>
                   </div>

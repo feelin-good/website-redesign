@@ -7,43 +7,43 @@ import {
 const REASONS = [
   {
     icon: <ShieldCheck size={24} />,
-    title: 'Multi-Discipline Under One Roof',
-    description: 'Civil, structural, MEP, process, and project management in a single integrated team — eliminating cross-consultant friction and coordination delays.',
+    title: 'Complete EPC Capability',
+    description: 'Mechanical, structural, electrical, and automation engineering under one roof — from detailed design and equipment procurement through to site erection and commissioning.',
   },
   {
     icon: <TrendingUp size={24} />,
     title: '94% On-Time Delivery',
-    description: 'Rigorous schedule management using Primavera P6 and an early-warning risk framework ensures milestones are met, every time.',
+    description: 'Rigorous project scheduling and proactive site management ensure that client plants start up on time — critical in industries where delays cost millions per day.',
   },
   {
     icon: <Award size={24} />,
-    title: 'Deep Regulatory Expertise',
-    description: 'In-depth knowledge of IS, NBC, USFDA, EU-GMP, NABH, Uptime Institute, and NFPA standards — critical for pharma, healthcare, and data center clients.',
+    title: 'IS, CEMA & DIN Standards',
+    description: 'In-depth knowledge of IS, CEMA, and DIN design standards for bulk material handling, plus CEA and MOEF/CPCB environmental compliance requirements.',
   },
   {
     icon: <Users size={24} />,
-    title: '200+ Engineering Professionals',
-    description: 'A seasoned bench of IIT/NIT-trained engineers, PMPs, LEED APs, and RICS-qualified QS professionals covering every engineering domain.',
+    title: '50+ Engineering Specialists',
+    description: 'A focused team of mechanical, structural, electrical, and automation engineers with deep experience in bulk material handling system design and EPC execution.',
   },
   {
     icon: <Globe size={24} />,
-    title: 'Pan-India Reach',
-    description: 'Offices in Pune, Mumbai, Bengaluru, Hyderabad, and Delhi — with active project presence across 18 states.',
+    title: 'Pan-India Project Presence',
+    description: 'Headquartered in Ghaziabad with active project execution across cement, steel, power, port, and mining sites throughout India.',
   },
   {
     icon: <Zap size={24} />,
-    title: 'BIM & Digital Engineering',
-    description: 'Full BIM Level 2 capability across all disciplines using Revit, STAAD.Pro, E3D, and ETABS for clash-free, coordinated delivery.',
+    title: 'PLC/SCADA Automation',
+    description: 'In-house capability for PLC-based conveyor control, SCADA integration, and stockyard automation — delivering fully automated, remote-monitored systems.',
   },
   {
     icon: <CheckCircle size={24} />,
-    title: 'Triple ISO Certification',
-    description: 'ISO 9001, 14001, and 45001 certification ensures consistent quality, environmental responsibility, and safety across all projects.',
+    title: 'ISO 9001:2015 Certified',
+    description: 'Our quality management system ensures consistent engineering quality, traceable document control, and systematic project review at every stage.',
   },
   {
     icon: <Clock size={24} />,
-    title: 'Fast-Track Capability',
-    description: 'Proven fast-track methodology with parallel engineering workstreams to compress schedules without compromising technical rigour.',
+    title: 'Fast Shutdown Execution',
+    description: 'Experienced in completing brownfield installation and replacement projects within tight plant shutdown windows — minimising production disruption for our clients.',
   },
 ]
 
@@ -66,8 +66,8 @@ export function WhyChooseUs() {
               <div className="bg-ghost-white rounded-card p-7 border border-alabaster shadow-humble">
                 <div className="grid grid-cols-3 gap-6">
                   {[
-                    { value: '92%', label: 'Client Retention Rate' },
-                    { value: '₹50B+', label: 'Project Value Managed' },
+                    { value: '92%',  label: 'Client Retention Rate' },
+                    { value: '125+', label: 'Orders Executed' },
                     { value: '4.9★', label: 'Average Client Rating' },
                   ].map(item => (
                     <div key={item.label} className="text-center">
@@ -80,10 +80,10 @@ export function WhyChooseUs() {
                 </div>
                 <div className="mt-5 pt-5 border-t border-alabaster">
                   <p className="text-sm text-granite italic">
-                    "We don't just complete projects — we build long-term partnerships built on
-                    transparency, technical rigour, and shared success."
+                    "We don't just supply equipment — we engineer complete systems that our
+                    clients can rely on to run at rated capacity, year after year."
                   </p>
-                  <p className="text-sm font-semibold text-ink mt-2">— Arvind Joshi, MD &amp; Founder</p>
+                  <p className="text-sm font-semibold text-ink mt-2">— Kamal Kumar Kandpal, Director</p>
                 </div>
               </div>
             </AnimateOnScroll>

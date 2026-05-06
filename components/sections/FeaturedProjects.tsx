@@ -6,12 +6,11 @@ import { getFeaturedProjects } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Pharmaceuticals: 'bg-purple-50 text-purple-700 border-purple-100',
-  Manufacturing:   'bg-blue-50 text-blue-700 border-blue-100',
-  'Data Centers':  'bg-cyan-50 text-cyan-700 border-cyan-100',
-  Healthcare:      'bg-emerald-50 text-emerald-700 border-emerald-100',
-  Infrastructure:  'bg-amber-50 text-amber-700 border-amber-100',
-  Commercial:      'bg-slate-50 text-slate-700 border-slate-200',
+  Cement:  'bg-ghost-white text-ink border-alabaster',
+  Power:   'bg-ghost-white text-ink border-alabaster',
+  Ports:   'bg-ghost-white text-ink border-alabaster',
+  Steel:   'bg-ghost-white text-ink border-alabaster',
+  Mining:  'bg-ghost-white text-ink border-alabaster',
 }
 
 export function FeaturedProjects() {

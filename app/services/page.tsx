@@ -10,7 +10,7 @@ import { SERVICES } from '@/lib/data/services'
 export const metadata: Metadata = {
   title: 'Engineering Services',
   description:
-    'Comprehensive engineering services: MEP, structural, civil, process engineering, project management, and EPC turnkey — delivered by Lepton Projects.',
+    'Bulk material handling engineering services: belt conveyors, stacker/reclaimers, coal handling plants, wagon tipplers, crushing & screening, and dust suppression — EPC delivered by Lepton Projects.',
 }
 
 export default function ServicesPage() {
@@ -27,11 +27,12 @@ export default function ServicesPage() {
             </span>
             <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
-              End-to-End Engineering, <br />One Trusted Team
+              Bulk Material Handling Engineering, <br />Design to Commissioning
             </h1>
             <p className="text-xl text-granite leading-relaxed max-w-2xl">
-              From concept and detailed design to EPC execution and commissioning — Lepton
-              delivers seamlessly integrated engineering services across six core disciplines.
+              From detailed design and equipment supply to erection and commissioning — Lepton
+              delivers integrated EPC solutions across six core material handling disciplines
+              for India's cement, steel, ports, power, and mining industries.
             </p>
           </div>
         </div>
@@ -97,7 +98,7 @@ export default function ServicesPage() {
                       {/* Benefits + industries */}
                       <div className="md:col-span-1">
                         <p className="text-xs font-semibold uppercase tracking-widest
-                                       text-slate-400 mb-3">
+                                       text-granite mb-3">
                           Client Benefits
                         </p>
                         <ul className="space-y-2 mb-5">
@@ -109,14 +110,14 @@ export default function ServicesPage() {
                           ))}
                         </ul>
                         <p className="text-xs font-semibold uppercase tracking-widest
-                                       text-slate-400 mb-2">
+                                       text-granite mb-2">
                           Key Sectors
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {service.relatedIndustries.map(ind => (
                             <span key={ind}
                                   className="text-2xs font-semibold px-2.5 py-1 rounded-full
-                                             bg-ghost-white text-navy-600 border border-alabaster
+                                             bg-ghost-white text-granite border border-alabaster
                                              capitalize">
                               {ind.replace('-', ' ')}
                             </span>

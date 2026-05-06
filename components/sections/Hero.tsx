@@ -7,9 +7,9 @@ import { COMPANY } from '@/lib/data/company'
 
 const TRUST_BADGES = [
   'ISO 9001:2015 Certified',
-  '20+ Years Experience',
-  '500+ Projects Delivered',
-  'Pan-India Presence',
+  '15+ Years of Delivery',
+  '125+ Orders Executed',
+  'MSME & NSIC Registered',
 ]
 
 export function Hero() {
@@ -116,10 +116,10 @@ export function Hero() {
                 {/* Stats grid */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {[
-                    { label: 'Active Projects',   value: '28', trend: '+3 this month' },
-                    { label: 'On-time Delivery',  value: '94%', trend: 'vs 80% industry avg' },
-                    { label: 'Team Members',       value: '213', trend: 'Across India' },
-                    { label: 'Client Rating',      value: '4.9★', trend: 'From 120+ reviews' },
+                    { label: 'Orders Executed',   value: '125+', trend: 'Since 2008' },
+                    { label: 'On-time Delivery',  value: '94%',  trend: 'Consistent track record' },
+                    { label: 'Industry Sectors',  value: '6',    trend: 'Cement · Steel · Ports · Power' },
+                    { label: 'Client Rating',     value: '4.9★', trend: 'Across all projects' },
                   ].map(stat => (
                     <div key={stat.label}
                          className="bg-ghost-white rounded-[6px] p-4 border border-alabaster">
@@ -135,9 +135,9 @@ export function Hero() {
                 {/* Progress bars */}
                 <div className="space-y-3">
                   {[
-                    { label: 'Pharma',          pct: 82 },
-                    { label: 'Data Centers',    pct: 67 },
-                    { label: 'Manufacturing',   pct: 91 },
+                    { label: 'Cement & Steel',  pct: 88 },
+                    { label: 'Power Plants',    pct: 75 },
+                    { label: 'Ports & Mining',  pct: 65 },
                   ].map(({ label, pct }) => (
                     <div key={label}>
                       <div className="flex justify-between text-xs mb-1">
@@ -162,8 +162,8 @@ export function Hero() {
                   <CheckCircle size={18} className="text-obsidian" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-ink">ISO Certified</p>
-                  <p className="text-2xs text-granite">9001 · 14001 · 45001</p>
+                  <p className="text-xs font-bold text-ink">ISO 9001:2015</p>
+                  <p className="text-2xs text-granite">Quality Certified</p>
                 </div>
               </div>
 
@@ -171,11 +171,11 @@ export function Hero() {
               <div className="absolute -bottom-5 -left-5 bg-ink rounded-[30px] shadow-humble
                               px-4 py-3 flex items-center gap-3">
                 <p className="text-3xl font-display font-semibold text-white leading-none">
-                  20+
+                  15+
                 </p>
                 <div>
                   <p className="text-xs font-medium text-white/90">Years of</p>
-                  <p className="text-xs font-medium text-white/90">Engineering</p>
+                  <p className="text-xs font-medium text-white/90">EPC Delivery</p>
                 </div>
               </div>
             </div>

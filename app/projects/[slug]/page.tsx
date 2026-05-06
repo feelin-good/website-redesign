@@ -38,13 +38,11 @@ export default function ProjectDetailPage({ params }: Props) {
       {/* Hero */}
       <section className="bg-ghost-white pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
         
-        <div className="absolute inset-0 pointer-events-none"
-             style={{ background: 'radial-gradient(circle at 60% 40%, rgba(240,90,40,0.12) 0%, transparent 60%)' }} />
         <div className="container-main relative z-10">
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 text-sm text-granite
-                       hover:text-white transition-colors mb-8"
+                       hover:text-ink transition-colors mb-8"
           >
             <ArrowLeft size={14} /> All Projects
           </Link>
@@ -53,11 +51,11 @@ export default function ProjectDetailPage({ params }: Props) {
             <div className="lg:col-span-8">
               {/* Category badge */}
               <span className="inline-block text-xs font-semibold uppercase tracking-widest
-                               text-electric-orange bg-electric-orange/10 border border-electric-orange/20
+                               text-granite bg-ghost-white border border-alabaster
                                px-3 py-1 rounded-full mb-4">
                 {project.category}
               </span>
-              <h1 className="font-display font-extrabold text-white mb-4"
+              <h1 className="font-display font-semibold text-ink mb-4"
                   style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', lineHeight: 1.1 }}>
                 {project.title}
               </h1>
@@ -66,36 +64,36 @@ export default function ProjectDetailPage({ params }: Props) {
               </p>
               <div className="flex flex-wrap gap-5 text-sm text-granite">
                 <span className="flex items-center gap-1.5">
-                  <Building2 size={14} className="text-electric-orange" />
-                  <strong className="text-white">{project.client}</strong>
+                  <Building2 size={14} className="text-ink" />
+                  <strong className="text-ink">{project.client}</strong>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <MapPin size={14} className="text-electric-orange" /> {project.location}
+                  <MapPin size={14} className="text-granite" /> {project.location}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Calendar size={14} className="text-electric-orange" /> {project.year}
+                  <Calendar size={14} className="text-granite" /> {project.year}
                 </span>
               </div>
             </div>
 
             {/* Right: Project stats */}
             <div className="lg:col-span-4">
-              <div className="bg-white/5 border border-white/10 rounded-card p-6 space-y-4">
+              <div className="bg-canvas border border-alabaster rounded-card shadow-humble p-6 space-y-4">
                 {project.value && (
                   <div>
                     <p className="text-xs text-granite uppercase tracking-widest mb-1">Project Value</p>
-                    <p className="text-2xl font-display font-bold text-electric-orange">{project.value}</p>
+                    <p className="text-2xl font-display font-semibold text-electric-orange">{project.value}</p>
                   </div>
                 )}
                 {project.area && (
                   <div>
                     <p className="text-xs text-granite uppercase tracking-widest mb-1">Project Area</p>
-                    <p className="text-xl font-semibold text-white">{project.area}</p>
+                    <p className="text-xl font-semibold text-ink">{project.area}</p>
                   </div>
                 )}
                 <div>
                   <p className="text-xs text-granite uppercase tracking-widest mb-1">Delivered</p>
-                  <p className="text-xl font-semibold text-white">{project.year}</p>
+                  <p className="text-xl font-semibold text-ink">{project.year}</p>
                 </div>
               </div>
             </div>
@@ -142,7 +140,7 @@ export default function ProjectDetailPage({ params }: Props) {
                                    hover:border-granite/30 hover:bg-ghost-white/30 transition-all group"
                       >
                         <div className="w-9 h-9 bg-ghost-white rounded-lg flex items-center justify-center
-                                        group-hover:bg-ghost-white0 transition-colors shrink-0">
+                                        group-hover:bg-ink transition-colors shrink-0">
                           <span className="text-ink group-hover:text-white transition-colors">
                             <Icon name={s.icon} size={16} />
                           </span>
@@ -171,8 +169,8 @@ export default function ProjectDetailPage({ params }: Props) {
                   <Link
                     href="/request-quote"
                     className="w-full flex items-center justify-center gap-2
-                               bg-ghost-white0 hover:bg-obsidian text-white font-semibold
-                               py-3.5 rounded-xl transition-colors"
+                               bg-white hover:bg-ghost-white text-ink font-semibold
+                               py-3.5 rounded-full transition-colors"
                   >
                     Request Proposal <ArrowRight size={15} />
                   </Link>

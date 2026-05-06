@@ -12,8 +12,8 @@ export function ServicesOverview() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
           <SectionHeader
             tag="What We Do"
-            title="End-to-End Engineering Services"
-            description="From concept and detailed design through to EPC execution and commissioning — one team, one standard of excellence."
+            title="Bulk Material Handling Engineering Services"
+            description="From detailed design and equipment supply through to site erection and commissioning — complete EPC capability for conveyor systems, stackers, coal handling plants, and more."
           />
           <Link
             href="/services"

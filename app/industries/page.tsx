@@ -11,7 +11,7 @@ import { SERVICES } from '@/lib/data/services'
 export const metadata: Metadata = {
   title: 'Industries We Serve',
   description:
-    'Lepton Projects delivers engineering excellence across pharma, manufacturing, data centers, healthcare, power & energy, and commercial real estate sectors in India.',
+    'Lepton Projects delivers bulk material handling EPC solutions for cement, steel, ports, power plants, mining, and fertilizer industries across India.',
 }
 
 export default function IndustriesPage() {
@@ -28,11 +28,12 @@ export default function IndustriesPage() {
             </span>
             <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
-              Deep Domain Expertise Across Critical Sectors
+              Serving India's Core Industries with Proven Material Handling Engineering
             </h1>
             <p className="text-xl text-granite leading-relaxed max-w-2xl">
-              Every industry has its own standards, regulations, and engineering challenges.
-              Lepton brings specialised expertise and a proven delivery track record to each.
+              Every industry has its own throughput demands, material characteristics, and
+              operating environment. Lepton brings sector-specific expertise and a proven
+              track record to each.
             </p>
           </div>
         </div>
@@ -101,9 +102,9 @@ export default function IndustriesPage() {
                                 key={s.slug}
                                 href={`/services/${s.slug}`}
                                 className="flex items-center gap-1.5 text-sm font-medium
-                                           text-navy-700 bg-white border border-alabaster
+                                           text-ink bg-canvas border border-alabaster
                                            px-3.5 py-1.5 rounded-full
-                                           hover:border-orange-300 hover:text-orange-600
+                                           hover:border-granite/40 hover:text-electric-orange
                                            transition-all duration-200"
                               >
                                 <Icon name={s.icon} size={13} />
@@ -117,13 +118,9 @@ export default function IndustriesPage() {
 
                     {/* Visual panel */}
                     <AnimateOnScroll animation={isEven ? 'slide-left' : 'slide-right'}>
-                      <div className="bg-gradient-to-br from-navy-900 to-navy-950
-                                      rounded-3xl p-8 min-h-[400px] flex flex-col justify-between
+                      <div className="bg-obsidian rounded-[40px] p-8 min-h-[400px]
+                                      flex flex-col justify-between
                                       border border-white/5 relative overflow-hidden">
-                        {/* Glow */}
-                        <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full
-                                        bg-orange-500/10 blur-[40px]" />
-
                         {/* Large icon */}
                         <div className="absolute inset-0 flex items-center justify-center opacity-5">
                           <span style={{ fontSize: '12rem', color: 'white' }}>
@@ -133,20 +130,20 @@ export default function IndustriesPage() {
 
                         <div className="relative z-10">
                           <span className="text-xs font-semibold uppercase tracking-widest
-                                           text-slate-400">
+                                           text-white/50">
                             {industry.title}
                           </span>
                         </div>
 
                         <div className="relative z-10 space-y-3">
-                          <p className="text-2xl font-display font-bold text-white">
+                          <p className="text-2xl font-display font-semibold text-white">
                             {industry.shortDescription}
                           </p>
 
                           <Link
                             href="/request-quote"
-                            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600
-                                       text-white font-semibold px-5 py-2.5 rounded-xl
+                            className="inline-flex items-center gap-2 bg-white hover:bg-ghost-white
+                                       text-ink font-semibold px-5 py-2.5 rounded-full
                                        transition-colors text-sm"
                           >
                             Discuss a Project <ArrowRight size={14} />
@@ -168,9 +165,9 @@ export default function IndustriesPage() {
       </section>
 
       <CTABanner
-        variant="gradient"
-        title="Engineering Solutions for Your Industry"
-        description="Whatever your sector, Lepton brings the right expertise, the right standards, and the right team to deliver your engineering project."
+        variant="navy"
+        title="Bulk Material Handling Solutions for Your Industry"
+        description="Whatever your sector, Lepton brings the right expertise, the right equipment selection, and the right team to deliver your project."
       />
     </>
   )

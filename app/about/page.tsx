@@ -10,40 +10,40 @@ import { getLeadership } from '@/lib/data/team'
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'Learn about Lepton Projects Pvt. Ltd. — founded in 2003, we are India\'s trusted engineering consultancy with 200+ professionals and 500+ projects delivered across 18 states.',
+    'Learn about Lepton Projects Pvt. Ltd. — EPC specialists in bulk material handling systems for cement, steel, ports, power, and mining industries since 2008.',
 }
 
 const MILESTONES = [
-  { year: '2003', event: 'Founded in Pune by Arvind Joshi with a vision for multi-discipline engineering excellence' },
-  { year: '2007', event: 'First large-scale pharma facility project; established process engineering practice' },
-  { year: '2010', event: 'ISO 9001 certification; expanded to Mumbai and Bangalore' },
-  { year: '2014', event: '100th project milestone; data center practice established' },
-  { year: '2017', event: 'ISO 14001 and OHSAS 18001 certification; team crosses 100 engineers' },
-  { year: '2019', event: 'Launched BIM Centre of Excellence; Hyderabad and Delhi offices opened' },
-  { year: '2021', event: 'ISO 45001 upgrade; EPC capability formally established' },
-  { year: '2023', event: '500th project milestone; team of 200+ professionals across India' },
+  { year: '2008', event: 'Lepton Projects Pvt. Ltd. incorporated in Ghaziabad, Uttar Pradesh — focused on bulk material handling engineering' },
+  { year: '2010', event: 'First major conveyor system project for a cement plant; established design engineering team' },
+  { year: '2013', event: 'ISO 9001 quality management certification; expanded to stacker/reclaimer systems' },
+  { year: '2015', event: 'MSME and NSIC registration; first coal handling plant EPC project for captive power sector' },
+  { year: '2018', event: '50th order milestone; team expanded with dedicated electrical and automation engineers' },
+  { year: '2020', event: 'First NTPC and central PSU project; strengthened public sector client base' },
+  { year: '2022', event: 'Port sector expansion — first major port conveyor project with Adani Ports' },
+  { year: '2023', event: '125+ orders executed milestone; presence across cement, steel, ports, power, and mining sectors' },
 ]
 
 const VALUES = [
   {
     icon: <Target size={22} />,
     title: 'Engineering Integrity',
-    description: 'We do not compromise on technical quality. Every calculation, drawing, and decision is backed by sound engineering judgement and peer review.',
+    description: 'Every conveyor system, stacker, and coal handling plant we design is backed by sound engineering judgement, peer review, and compliance with IS, CEMA, and DIN standards.',
   },
   {
     icon: <CheckCircle size={22} />,
     title: 'Delivery Accountability',
-    description: 'We treat our project commitments as non-negotiable obligations — owning problems, resolving them fast, and keeping clients informed at every step.',
+    description: 'We treat every project commitment as a non-negotiable obligation — owning challenges, resolving them quickly, and keeping clients informed throughout execution.',
   },
   {
     icon: <Heart size={22} />,
     title: 'Client Partnership',
-    description: 'We build long-term relationships, not transactional engagements. Our clients return because we genuinely invest in their success.',
+    description: 'We build long-term relationships with our clients. Many of our best clients have engaged us across multiple projects and plant expansions over the years.',
   },
   {
     icon: <Eye size={22} />,
-    title: 'Continuous Innovation',
-    description: 'From BIM adoption to digital project management, we continuously invest in tools and methods that improve quality and delivery speed for our clients.',
+    title: 'Operational Reliability',
+    description: 'We design for the real world — harsh outdoor environments, high duty cycles, and demanding throughput targets. Reliability is not optional; it is built in from the start.',
   },
 ]
 
@@ -63,12 +63,12 @@ export default function AboutPage() {
             </span>
             <h1 className="font-display font-semibold text-ink mb-6"
                 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.1 }}>
-              Two Decades of Engineering Excellence in India
+              India's Bulk Material Handling EPC Specialists
             </h1>
             <p className="text-xl text-granite leading-relaxed mb-8 max-w-2xl">
-              Founded in {COMPANY.founded}, Lepton Projects has grown from a small civil engineering
-              consultancy into one of India's most respected multi-discipline engineering firms —
-              trusted by leading corporations, healthcare groups, and government agencies.
+              Founded in {COMPANY.founded} and headquartered in Ghaziabad, Lepton Projects is a
+              multi-disciplinary EPC company specialising in bulk material handling systems for
+              India's cement, steel, ports, power, and mining industries.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {COMPANY.stats.map(stat => (
@@ -96,24 +96,26 @@ export default function AboutPage() {
                 />
                 <div className="prose-lepton mt-6">
                   <p>
-                    Lepton Projects was founded in 2003 in Pune, Maharashtra, with a simple but
-                    ambitious mission: to deliver engineering services that combine global standards
-                    with deep understanding of India's construction and regulatory environment.
+                    Lepton Projects was founded in 2008 in Ghaziabad, Uttar Pradesh, with a clear
+                    focus: to deliver bulk material handling systems that keep India's core industries
+                    running reliably and efficiently.
                   </p>
                   <p>
-                    Starting with civil and structural design for industrial clients, we rapidly
-                    expanded into MEP, process engineering, and project management as our clients
-                    demanded a single, trusted partner across disciplines.
+                    Starting with belt conveyor system projects for cement plants, we steadily
+                    expanded our capabilities into stacker/reclaimer systems, coal handling plants,
+                    wagon tipplers, aggregate crushing plants, and dust management systems —
+                    building a multi-disciplinary EPC capability that covers mechanical, structural,
+                    electrical, and automation engineering under one roof.
                   </p>
                   <p>
-                    Over twenty years, we have delivered 500+ projects ranging from API
-                    manufacturing plants and Tier III data centers to 500-bed hospitals and
-                    state highway packages — building a track record that speaks for itself.
+                    Over 15 years, we have executed 125+ orders spanning greenfield projects,
+                    brownfield expansions, and system upgrades for cement plants, steel mills,
+                    port terminals, thermal power stations, and mining operations across India.
                   </p>
                   <p>
-                    Today, Lepton employs 200+ engineers, designers, and project professionals
-                    across five offices, serving clients in pharma, manufacturing, healthcare,
-                    data centers, infrastructure, and commercial real estate across 18 Indian states.
+                    Today, Lepton Projects is ISO 9001:2015 certified, MSME and NSIC registered,
+                    and trusted by leading organisations including J.K. Lakshmi Cement, NTPC,
+                    Adani Ports, Vedanta Aluminium, ACC, and Steel Authority of India.
                   </p>
                 </div>
               </div>
@@ -125,7 +127,7 @@ export default function AboutPage() {
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b
                                 from-ink via-granite/30 to-transparent" />
                 <div className="space-y-7">
-                  {MILESTONES.map((m, i) => (
+                  {MILESTONES.map((m) => (
                     <div key={m.year} className="relative">
                       <div className="absolute -left-6 top-1 w-3 h-3 rounded-full
                                       bg-ink border-2 border-canvas shadow-md" />
@@ -155,24 +157,21 @@ export default function AboutPage() {
             {[
               {
                 label: 'Mission',
-                text: 'To deliver engineering services of the highest technical standard, enabling our clients to build safer, smarter, and more efficient facilities — on time and within budget.',
-                color: 'border-t-orange-500',
+                text: 'To deliver bulk material handling systems of the highest engineering standard — reliable, low-maintenance, and fit for the demanding environments of India\'s core industries.',
               },
               {
                 label: 'Vision',
-                text: 'To be India\'s most trusted multi-discipline engineering partner — recognised for technical excellence, delivery integrity, and long-term client relationships.',
-                color: 'border-t-navy-500',
+                text: 'To be India\'s most trusted EPC partner for bulk material handling — recognised for engineering depth, delivery integrity, and long-term client relationships.',
               },
               {
                 label: 'Purpose',
-                text: 'To contribute to India\'s infrastructure and manufacturing growth story by raising the bar for engineering quality, sustainability, and professional practice.',
-                color: 'border-t-gold-500',
+                text: 'To keep India\'s cement, steel, ports, power, and mining industries moving by engineering systems that perform reliably, year after year, in the harshest conditions.',
               },
             ].map((item, i) => (
               <AnimateOnScroll key={item.label} animation="fade-up" delay={i * 100}>
-                <div className={`bg-white rounded-2xl border border-alabaster border-t-2 ${item.color}
-                                 p-8 shadow-card h-full`}>
-                  <h3 className="font-display font-bold text-xl text-navy-900 mb-4">
+                <div className="bg-canvas rounded-card border border-alabaster border-t-2 border-t-ink
+                                p-8 shadow-humble h-full">
+                  <h3 className="font-display font-semibold text-xl text-ink mb-4">
                     {item.label}
                   </h3>
                   <p className="text-granite leading-relaxed">{item.text}</p>
@@ -186,11 +185,11 @@ export default function AboutPage() {
             {VALUES.map((value, i) => (
               <AnimateOnScroll key={value.title} animation="fade-up" delay={i * 80}>
                 <div className="text-center p-6">
-                  <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center
-                                  text-orange-500 mx-auto mb-4">
+                  <div className="w-12 h-12 rounded-[6px] bg-ghost-white flex items-center justify-center
+                                  text-ink mx-auto mb-4">
                     {value.icon}
                   </div>
-                  <h3 className="font-semibold text-navy-900 mb-2">{value.title}</h3>
+                  <h3 className="font-semibold text-ink mb-2">{value.title}</h3>
                   <p className="text-sm text-granite leading-relaxed">{value.description}</p>
                 </div>
               </AnimateOnScroll>
@@ -200,37 +199,36 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-canvas">
         <div className="container-main">
           <SectionHeader
             tag="Our People"
             title="Leadership Team"
-            description="Experienced professionals who bring technical depth, commercial discipline, and a genuine passion for engineering excellence."
+            description="Experienced professionals who bring technical depth, delivery discipline, and a genuine passion for engineering."
             align="center"
             className="mb-14 mx-auto"
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {leadership.map((member, i) => (
               <AnimateOnScroll key={member.id} animation="fade-up" delay={i * 80}>
                 <div className="group">
                   {/* Avatar */}
-                  <div className="aspect-square rounded-2xl bg-gradient-to-br from-navy-800 to-navy-900
+                  <div className="aspect-square rounded-card bg-ghost-white border border-alabaster
                                   flex items-center justify-center mb-5
-                                  group-hover:from-navy-700 group-hover:to-navy-800
-                                  transition-all duration-300 overflow-hidden">
-                    <div className="text-5xl font-display font-extrabold text-white/20
-                                    group-hover:text-white/30 transition-colors">
+                                  group-hover:bg-ink transition-all duration-300 overflow-hidden">
+                    <div className="text-6xl font-display font-semibold text-ink/15
+                                    group-hover:text-white/20 transition-colors">
                       {member.name.charAt(0)}
                     </div>
                   </div>
-                  <h3 className="font-display font-bold text-navy-900">{member.name}</h3>
-                  <p className="text-orange-500 text-sm font-medium mb-1">{member.title}</p>
+                  <h3 className="font-display font-semibold text-ink">{member.name}</h3>
+                  <p className="text-electric-orange text-sm font-medium mb-2">{member.title}</p>
                   <div className="flex flex-wrap gap-1 mb-3">
                     {member.qualifications.slice(0, 2).map(q => (
                       <span key={q}
-                            className="text-2xs text-slate-400 bg-ghost-white border border-alabaster
-                                       px-2 py-0.5 rounded-md">
-                        {q.split(',')[0].split('(')[0].trim()}
+                            className="text-xs text-granite bg-ghost-white border border-alabaster
+                                       px-2 py-0.5 rounded-[6px]">
+                        {q}
                       </span>
                     ))}
                   </div>
@@ -246,10 +244,10 @@ export default function AboutPage() {
 
       <CTABanner
         variant="navy"
-        title="Ready to Work With India's Best Engineering Team?"
-        description="Whether you're planning a greenfield facility or expanding an existing plant, our team is ready to deliver engineered solutions that exceed expectations."
-        primaryLabel="Start a Conversation"
-        primaryHref="/contact"
+        title="Ready to Partner with a Bulk Material Handling Specialist?"
+        description="Whether you're planning a new conveyor system, stacker/reclaimer, or complete coal handling plant, our team is ready to deliver engineered solutions that perform."
+        primaryLabel="Request a Proposal"
+        primaryHref="/request-quote"
         secondaryLabel="View Our Projects"
         secondaryHref="/projects"
       />

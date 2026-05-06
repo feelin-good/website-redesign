@@ -48,17 +48,17 @@ export default function ServiceDetailPage({ params }: Props) {
           <Link
             href="/services"
             className="inline-flex items-center gap-2 text-sm text-granite
-                       hover:text-white transition-colors mb-6"
+                       hover:text-ink transition-colors mb-6"
           >
             <ArrowLeft size={14} /> All Services
           </Link>
           <div className="max-w-3xl">
-            <div className="w-14 h-14 bg-ghost-white0 rounded-card flex items-center justify-center mb-6">
+            <div className="w-14 h-14 bg-ink rounded-[6px] flex items-center justify-center mb-6">
               <span className="text-white">
                 <Icon name={service.icon} size={26} />
               </span>
             </div>
-            <h1 className="font-display font-extrabold text-white mb-5"
+            <h1 className="font-display font-semibold text-ink mb-5"
                 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', lineHeight: 1.1 }}>
               {service.title}
             </h1>
@@ -102,7 +102,7 @@ export default function ServiceDetailPage({ params }: Props) {
                     {service.benefits.map((b, i) => (
                       <div key={b}
                            className="flex items-start gap-4 p-5 rounded-xl border border-alabaster
-                                      hover:border-orange-100 hover:bg-ghost-white/30 transition-colors">
+                                      hover:border-granite/20 hover:bg-ghost-white/30 transition-colors">
                         <div className="w-8 h-8 rounded-lg bg-ghost-white flex items-center
                                         justify-center shrink-0 text-sm font-bold text-ink">
                           {String(i + 1).padStart(2, '0')}
@@ -126,12 +126,12 @@ export default function ServiceDetailPage({ params }: Props) {
                         <Link
                           key={ind.id}
                           href={`/industries#${ind.slug}`}
-                          className="flex items-center gap-3 p-4 rounded-xl bg-white border
-                                     border-alabaster hover:border-granite/30 hover:shadow-md
+                          className="flex items-center gap-3 p-4 rounded-[6px] bg-canvas border
+                                     border-alabaster hover:border-granite/30 hover:shadow-humble
                                      transition-all duration-200 group"
                         >
-                          <div className="w-10 h-10 bg-ghost-white rounded-xl flex items-center
-                                          justify-center group-hover:bg-ghost-white0 transition-colors">
+                          <div className="w-10 h-10 bg-ghost-white rounded-[6px] flex items-center
+                                          justify-center group-hover:bg-ink transition-colors">
                             <span className="text-ink group-hover:text-white transition-colors">
                               <Icon name={ind.icon} size={18} />
                             </span>
@@ -164,8 +164,8 @@ export default function ServiceDetailPage({ params }: Props) {
                   <Link
                     href="/request-quote"
                     className="w-full flex items-center justify-center gap-2
-                               bg-ghost-white0 hover:bg-obsidian text-white font-semibold
-                               py-3.5 rounded-xl transition-colors duration-200"
+                               bg-white hover:bg-ghost-white text-ink font-semibold
+                               py-3.5 rounded-full transition-colors duration-200"
                   >
                     Request Proposal <ArrowRight size={15} />
                   </Link>
@@ -173,7 +173,7 @@ export default function ServiceDetailPage({ params }: Props) {
                     href="/contact"
                     className="w-full flex items-center justify-center gap-2
                                border border-white/20 text-white/80 hover:text-white font-medium
-                               py-3 rounded-xl transition-colors mt-2.5 text-sm"
+                               py-3 rounded-full transition-colors mt-2.5 text-sm"
                   >
                     Talk to an Engineer
                   </Link>

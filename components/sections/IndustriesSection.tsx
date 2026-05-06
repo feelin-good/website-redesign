@@ -12,8 +12,8 @@ export function IndustriesSection() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
           <SectionHeader
             tag="Industries We Serve"
-            title="Engineering Solutions Across Critical Sectors"
-            description="Deep domain expertise across six high-impact industries, each with its own regulatory landscape, technical challenges, and quality standards."
+            title="Material Handling Solutions for India's Core Industries"
+            description="From limestone quarries and steel mills to port terminals and thermal power stations — Lepton delivers bulk material handling systems built for each sector's specific demands."
           />
           <Link
             href="/industries"
