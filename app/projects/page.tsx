@@ -2,12 +2,18 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { ArrowUpRight, MapPin, Calendar } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { CTABanner } from '@/components/sections/CTABanner'
 import { PROJECTS, PROJECT_CATEGORIES } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
+
+const AnimeImagePlaceholder = dynamic(
+  () => import('@/components/ui/AnimeImagePlaceholder').then(m => m.AnimeImagePlaceholder),
+  { ssr: false }
+)
 
 const CATEGORY_COLORS: Record<string, string> = {
   Cement:  'bg-ghost-white text-granite border-alabaster',
@@ -79,12 +85,9 @@ export default function ProjectsPage() {
                              shadow-humble hover:shadow-[0_40px_40px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-1
                              overflow-hidden transition-all duration-300"
                 >
-                  {/* Gradient image placeholder */}
-                  <div className="h-44 bg-gradient-to-br from-obsidian to-obsidian relative overflow-hidden">
-                    <div className="absolute inset-0"
-                         style={{
-                           backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(255,64,0,0.15) 0%, transparent 60%)',
-                         }} />
+                  {/* Anime.js technical scan animation */}
+                  <div className="h-44 bg-obsidian relative overflow-hidden">
+                    <AnimeImagePlaceholder variant="scan" className="absolute inset-0 w-full h-full" />
                     {/* Category badge */}
                     <div className="absolute top-4 left-4">
                       <span className={cn(

@@ -1,9 +1,16 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { ArrowRight, MapPin, Calendar, ArrowUpRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { getFeaturedProjects } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
+
+// Load anime.js animation client-side only
+const AnimeImagePlaceholder = dynamic(
+  () => import('@/components/ui/AnimeImagePlaceholder').then(m => m.AnimeImagePlaceholder),
+  { ssr: false }
+)
 
 const CATEGORY_COLORS: Record<string, string> = {
   Cement:  'bg-ghost-white text-ink border-alabaster',
@@ -45,6 +52,11 @@ export function FeaturedProjects() {
                            border border-white/5 hover:border-white/20
                            transition-all duration-400 shadow-humble"
               >
+                {/* Anime.js conveyor belt animation background */}
+                <div className="absolute inset-0 z-0">
+                  <AnimeImagePlaceholder variant="conveyor" className="w-full h-full" />
+                </div>
+
                 <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[420px]">
                   {/* Top badges */}
                   <div className="absolute top-8 left-8 flex items-center gap-2">
