@@ -35,10 +35,9 @@ export function SectionHeader({
       {tag && (
         <AnimateOnScroll animation="fade-up">
           <span className={cn(
-            'inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest mb-3',
-            isDark ? 'text-orange-400' : 'text-orange-500'
+            'inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] mb-3',
+            isDark ? 'text-canvas' : 'text-granite'
           )}>
-            <span className="w-6 h-0.5 bg-current rounded-full" />
             {tag}
           </span>
         </AnimateOnScroll>
@@ -46,11 +45,11 @@ export function SectionHeader({
 
       <AnimateOnScroll animation="fade-up" delay={100}>
         <h2 className={cn(
-          'font-display font-bold leading-tight mb-4',
-          isDark ? 'text-white' : 'text-navy-900',
+          'font-display font-semibold leading-tight mb-4',
+          isDark ? 'text-canvas' : 'text-ink',
           titleClassName
         )}
-          style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)' }}
+          style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', letterSpacing: '-0.03em' }}
         >
           {title}
         </h2>
@@ -59,8 +58,8 @@ export function SectionHeader({
       {description && (
         <AnimateOnScroll animation="fade-up" delay={200}>
           <p className={cn(
-            'text-lg leading-relaxed',
-            isDark ? 'text-slate-300' : 'text-slate-500'
+            'text-base leading-relaxed',
+            isDark ? 'text-canvas/70' : 'text-granite'
           )}>
             {description}
           </p>

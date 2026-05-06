@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="pt-32 pb-20 bg-slate-50 min-h-screen">
+    <div className="pt-32 pb-20 bg-ghost-white min-h-screen">
       <div className="container-main max-w-4xl">
         <h1 className="font-display font-bold text-navy-900 mb-3"
             style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         </h1>
         <p className="text-slate-400 mb-10">Last updated: January 2025</p>
 
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-8 lg:p-12 prose-lepton space-y-8">
+        <div className="bg-white rounded-2xl border border-alabaster shadow-card p-8 lg:p-12 prose-lepton space-y-8">
           <section>
             <h2 className="font-display font-bold text-xl text-navy-900 mb-3">1. Information We Collect</h2>
             <p>We collect information you provide directly to us when you fill in contact forms, request proposals, or communicate with us. This includes your name, email address, phone number, company name, and project details.</p>

@@ -14,7 +14,7 @@ function StarRating({ rating }: { rating: number }) {
         <Star
           key={i}
           size={14}
-          className={i < rating ? 'text-orange-400 fill-orange-400' : 'text-slate-200'}
+          className={i < rating ? 'text-white fill-white' : 'text-white/20'}
         />
       ))}
     </div>
@@ -30,7 +30,7 @@ export function Testimonials() {
   const current = TESTIMONIALS[active]
 
   return (
-    <section className="section-py bg-navy-950">
+    <section className="section-py bg-obsidian">
       <div className="container-main">
         <SectionHeader
           tag="Client Testimonials"
@@ -44,34 +44,34 @@ export function Testimonials() {
         <div className="max-w-4xl mx-auto">
           {/* Main testimonial */}
           <AnimateOnScroll animation="fade-in">
-            <div className="relative bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-12 mb-8">
+            <div className="relative bg-white/5 border border-white/8 rounded-[30px] p-8 lg:p-12 mb-8 shadow-humble">
               {/* Quote icon */}
-              <div className="absolute top-8 right-8 w-14 h-14 rounded-2xl bg-orange-500/10
-                              border border-orange-500/20 flex items-center justify-center">
-                <Quote size={24} className="text-orange-400" />
+              <div className="absolute top-8 right-8 w-14 h-14 rounded-[6px] bg-white/8
+                              border border-white/10 flex items-center justify-center">
+                <Quote size={24} className="text-white/40" />
               </div>
 
               <StarRating rating={current.rating} />
 
-              <blockquote className="text-xl lg:text-2xl font-medium text-white
+              <blockquote className="text-xl lg:text-2xl font-display font-medium text-white
                                      leading-relaxed mt-5 mb-8 pr-16">
                 "{current.quote}"
               </blockquote>
 
               <div className="flex items-center gap-4">
                 {/* Avatar initial */}
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600
+                <div className="w-12 h-12 rounded-full bg-white/10 border border-white/10
                                 flex items-center justify-center text-white font-bold text-lg shrink-0">
                   {current.name.charAt(0)}
                 </div>
                 <div>
                   <p className="font-semibold text-white">{current.name}</p>
-                  <p className="text-sm text-slate-400">{current.title}</p>
-                  <p className="text-sm font-medium text-orange-400">{current.company}</p>
+                  <p className="text-sm text-white/70">{current.title}</p>
+                  <p className="text-sm font-medium text-white/70">{current.company}</p>
                 </div>
                 <div className="ml-auto">
                   <span className="text-xs font-semibold uppercase tracking-widest
-                                   text-slate-400 bg-white/5 border border-white/10
+                                   text-white/50 bg-white/5 border border-white/10
                                    px-3 py-1 rounded-full">
                     {current.industry}
                   </span>
@@ -90,8 +90,8 @@ export function Testimonials() {
                   className={cn(
                     'transition-all duration-200 rounded-full',
                     i === active
-                      ? 'w-8 h-2 bg-orange-500'
-                      : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                      ? 'w-8 h-1.5 bg-white'
+                      : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
                   )}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />
@@ -101,8 +101,8 @@ export function Testimonials() {
             <div className="flex gap-2">
               <button
                 onClick={prev}
-                className="w-10 h-10 rounded-full border border-white/20 hover:border-orange-500
-                           flex items-center justify-center text-white/60 hover:text-orange-400
+                className="w-10 h-10 rounded-full border border-white/15 hover:border-white/40
+                           flex items-center justify-center text-white/50 hover:text-white
                            transition-all duration-200"
                 aria-label="Previous"
               >
@@ -110,8 +110,8 @@ export function Testimonials() {
               </button>
               <button
                 onClick={next}
-                className="w-10 h-10 rounded-full border border-white/20 hover:border-orange-500
-                           flex items-center justify-center text-white/60 hover:text-orange-400
+                className="w-10 h-10 rounded-full border border-white/15 hover:border-white/40
+                           flex items-center justify-center text-white/50 hover:text-white
                            transition-all duration-200"
                 aria-label="Next"
               >
@@ -127,16 +127,16 @@ export function Testimonials() {
                 key={t.id}
                 onClick={() => setActive(i)}
                 className={cn(
-                  'text-left p-4 rounded-2xl border transition-all duration-200',
+                  'text-left p-4 rounded-[30px] border transition-all duration-200',
                   i === active
-                    ? 'border-orange-500/40 bg-orange-500/10'
+                    ? 'border-white/20 bg-white/10'
                     : 'border-white/8 bg-white/3 hover:border-white/20'
                 )}
               >
                 <StarRating rating={t.rating} />
-                <p className="text-xs text-slate-300 mt-2 line-clamp-2">"{t.quote}"</p>
+                <p className="text-xs text-white/70 mt-2 line-clamp-2">"{t.quote}"</p>
                 <p className="text-xs font-semibold text-white mt-2">{t.name}</p>
-                <p className="text-xs text-slate-500">{t.company}</p>
+                <p className="text-xs text-white/60">{t.company}</p>
               </button>
             ))}
           </div>

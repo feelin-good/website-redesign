@@ -79,31 +79,8 @@ export function Header() {
   return (
     <header className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      scrolled
-        ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100'
-        : 'bg-transparent'
+      'bg-white/90 backdrop-blur-sm border-b border-ghost-white shadow-humble'
     )}>
-      {/* Top bar */}
-      <div className={cn(
-        'hidden lg:block border-b transition-all duration-300',
-        scrolled ? 'border-slate-100 bg-navy-950' : 'border-white/10 bg-navy-950/80'
-      )}>
-        <div className="container-main flex items-center justify-between py-1.5">
-          <div className="flex items-center gap-6 text-xs text-slate-300">
-            <a href="tel:+912026120000" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} />
-              +91-20-2612-0000
-            </a>
-            <a href="mailto:info@lepton.co.in" className="hover:text-white transition-colors">
-              info@lepton.co.in
-            </a>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-slate-300">
-            <span>ISO 9001:2015 | ISO 14001:2015 | ISO 45001:2018 Certified</span>
-          </div>
-        </div>
-      </div>
-
       {/* Main nav */}
       <div className="container-main">
         <div className="flex items-center justify-between h-16 lg:h-18">
@@ -112,8 +89,8 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <div className="relative">
               {/* Geometric logo mark */}
-              <div className="w-9 h-9 bg-orange-500 rounded-lg flex items-center justify-center
-                              group-hover:bg-orange-600 transition-colors duration-200">
+              <div className="w-9 h-9 bg-ink rounded-lg flex items-center justify-center
+                              group-hover:bg-obsidian transition-colors duration-200">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M3 15L10 3L17 15H3Z" fill="white" fillOpacity="0.9" />
                   <path d="M7 15L10 9L13 15H7Z" fill="white" fillOpacity="0.4" />
@@ -121,16 +98,10 @@ export function Header() {
               </div>
             </div>
             <div>
-              <span className={cn(
-                'block font-display font-bold text-lg leading-tight transition-colors',
-                scrolled ? 'text-navy-900' : 'text-white'
-              )}>
+              <span className="block font-display font-semibold text-lg leading-tight text-ink transition-colors">
                 Lepton Projects
               </span>
-              <span className={cn(
-                'block text-2xs font-medium uppercase tracking-widest leading-tight transition-colors',
-                scrolled ? 'text-slate-400' : 'text-white/60'
-              )}>
+              <span className="block text-2xs font-medium uppercase tracking-widest leading-tight text-granite">
                 Pvt. Ltd.
               </span>
             </div>
@@ -150,10 +121,8 @@ export function Header() {
                   className={cn(
                     'flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                     isActive(item.href)
-                      ? scrolled ? 'text-navy-900 bg-slate-50' : 'text-white bg-white/10'
-                      : scrolled
-                        ? 'text-slate-600 hover:text-navy-900 hover:bg-slate-50'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'text-ink bg-ghost-white'
+                      : 'text-granite hover:text-ink hover:bg-ghost-white'
                   )}
                 >
                   {item.label}
@@ -175,10 +144,10 @@ export function Header() {
                     onMouseEnter={() => openDropdown(item.type!)}
                     onMouseLeave={() => closeDropdown()}
                   >
-                    <div className="bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 min-w-[340px]">
+                    <div className="bg-white rounded-[30px] shadow-humble border border-ghost-white p-5 min-w-[340px]">
                       {item.type === 'services' && (
                         <>
-                          <p className="text-2xs text-slate-400 uppercase tracking-widest font-semibold mb-3 px-2">
+                          <p className="text-2xs text-granite uppercase tracking-[0.15em] font-medium mb-3 px-2">
                             Our Services
                           </p>
                           <div className="grid grid-cols-1 gap-1">
@@ -186,28 +155,28 @@ export function Header() {
                               <Link
                                 key={service.slug}
                                 href={`/services/${service.slug}`}
-                                className="flex items-start gap-3 px-3 py-2.5 rounded-xl
-                                           hover:bg-orange-50 group/item transition-colors"
+                                className="flex items-start gap-3 px-3 py-2.5 rounded-[6px]
+                                           hover:bg-ghost-white group/item transition-colors"
                               >
-                                <span className="mt-0.5 text-orange-500 group-hover/item:text-orange-600">
+                                <span className="mt-0.5 text-ink group-hover/item:text-obsidian">
                                   {SERVICE_ICONS[service.slug]}
                                 </span>
                                 <div>
-                                  <p className="text-sm font-semibold text-navy-900">
+                                  <p className="text-sm font-semibold text-ink">
                                     {service.title}
                                   </p>
-                                  <p className="text-xs text-slate-400 leading-snug mt-0.5 line-clamp-1">
+                                  <p className="text-xs text-granite leading-snug mt-0.5 line-clamp-1">
                                     {service.shortDescription}
                                   </p>
                                 </div>
                               </Link>
                             ))}
                           </div>
-                          <div className="mt-3 pt-3 border-t border-slate-100">
+                          <div className="mt-3 pt-3 border-t border-ghost-white">
                             <Link
                               href="/services"
                               className="flex items-center justify-center gap-2 text-sm font-semibold
-                                         text-orange-500 hover:text-orange-600 transition-colors py-1"
+                                         text-ink hover:text-granite transition-colors py-1"
                             >
                               View all services <ArrowRight size={14} />
                             </Link>
@@ -216,7 +185,7 @@ export function Header() {
                       )}
                       {item.type === 'industries' && (
                         <>
-                          <p className="text-2xs text-slate-400 uppercase tracking-widest font-semibold mb-3 px-2">
+                          <p className="text-2xs text-granite uppercase tracking-[0.15em] font-medium mb-3 px-2">
                             Industries We Serve
                           </p>
                           <div className="grid grid-cols-2 gap-1">
@@ -224,13 +193,13 @@ export function Header() {
                               <Link
                                 key={ind.slug}
                                 href={`/industries#${ind.slug}`}
-                                className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl
-                                           hover:bg-orange-50 group/item transition-colors"
+                                className="flex items-center gap-2.5 px-3 py-2.5 rounded-[6px]
+                                           hover:bg-ghost-white group/item transition-colors"
                               >
-                                <span className="text-orange-500 group-hover/item:text-orange-600">
+                                <span className="text-ink group-hover/item:text-obsidian">
                                   {INDUSTRY_ICONS[ind.slug]}
                                 </span>
-                                <p className="text-sm font-medium text-navy-900">
+                                <p className="text-sm font-medium text-ink">
                                   {ind.title.split(' &')[0]}
                                 </p>
                               </Link>
@@ -249,7 +218,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Button
               href="/request-quote"
-              variant={scrolled ? 'primary' : 'ghost-white'}
+              variant="primary"
               size="sm"
               icon={<ArrowRight size={14} />}
               className="hidden sm:inline-flex"
@@ -258,10 +227,7 @@ export function Header() {
             </Button>
 
             <button
-              className={cn(
-                'lg:hidden p-2 rounded-lg transition-colors',
-                scrolled ? 'text-navy-900 hover:bg-slate-100' : 'text-white hover:bg-white/10'
-              )}
+              className="lg:hidden p-2 rounded-lg text-ink hover:bg-ghost-white transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -279,7 +245,7 @@ export function Header() {
         {/* Backdrop */}
         <div
           className={cn(
-            'absolute inset-0 bg-navy-950/60 backdrop-blur-sm transition-opacity duration-300',
+            'absolute inset-0 bg-ink/20 backdrop-blur-sm transition-opacity duration-300',
             mobileOpen ? 'opacity-100' : 'opacity-0'
           )}
           onClick={() => setMobileOpen(false)}
@@ -287,24 +253,24 @@ export function Header() {
 
         {/* Drawer */}
         <div className={cn(
-          'absolute top-0 right-0 h-full w-[320px] max-w-full bg-white shadow-2xl',
+          'absolute top-0 right-0 h-full w-[320px] max-w-full bg-canvas shadow-humble',
           'flex flex-col transition-transform duration-300 ease-out',
           mobileOpen ? 'translate-x-0' : 'translate-x-full'
         )}>
           {/* Drawer header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-ghost-white">
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-ink rounded-lg flex items-center justify-center">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                   <path d="M3 15L10 3L17 15H3Z" fill="white" fillOpacity="0.9" />
                   <path d="M7 15L10 9L13 15H7Z" fill="white" fillOpacity="0.4" />
                 </svg>
               </div>
-              <span className="font-display font-bold text-navy-900">Lepton Projects</span>
+              <span className="font-display font-semibold text-ink">Lepton Projects</span>
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-50"
+              className="p-1.5 rounded-lg text-granite hover:text-ink hover:bg-ghost-white"
               aria-label="Close menu"
             >
               <X size={20} />
@@ -318,11 +284,11 @@ export function Header() {
                 <Link
                   href={item.href}
                   className={cn(
-                    'flex items-center px-3 py-3 rounded-xl text-sm font-medium',
+                    'flex items-center px-3 py-3 rounded-[6px] text-sm font-medium',
                     'transition-colors mb-1',
                     isActive(item.href)
-                      ? 'bg-orange-50 text-orange-600'
-                      : 'text-navy-700 hover:bg-slate-50 hover:text-navy-900'
+                      ? 'bg-ghost-white text-ink'
+                      : 'text-granite hover:bg-ghost-white hover:text-ink'
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -332,34 +298,53 @@ export function Header() {
             ))}
 
             {/* Mobile sub-items: services */}
-            <div className="mt-4 pt-4 border-t border-slate-100">
-              <p className="px-3 mb-2 text-2xs text-slate-400 uppercase tracking-widest font-semibold">
+            <div className="mt-4 pt-4 border-t border-ghost-white">
+              <p className="px-3 mb-2 text-2xs text-granite uppercase tracking-[0.15em] font-medium">
                 Services
               </p>
               {SERVICES.map(s => (
                 <Link
                   key={s.slug}
                   href={`/services/${s.slug}`}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-slate-600
-                             hover:text-navy-900 hover:bg-slate-50 transition-colors"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-[6px] text-sm text-granite
+                             hover:text-ink hover:bg-ghost-white transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <span className="text-orange-400">{SERVICE_ICONS[s.slug]}</span>
+                  <span className="text-ink">{SERVICE_ICONS[s.slug]}</span>
                   {s.title}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile sub-items: industries */}
+            <div className="mt-3 pt-3 border-t border-ghost-white">
+              <p className="px-3 mb-2 text-2xs text-granite uppercase tracking-[0.15em] font-medium">
+                Industries
+              </p>
+              {INDUSTRIES.map(ind => (
+                <Link
+                  key={ind.slug}
+                  href={`/industries#${ind.slug}`}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-[6px] text-sm text-granite
+                             hover:text-ink hover:bg-ghost-white transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <span className="text-ink">{INDUSTRY_ICONS[ind.slug]}</span>
+                  {ind.title.split(' &')[0]}
                 </Link>
               ))}
             </div>
           </nav>
 
           {/* CTA */}
-          <div className="px-4 pb-6 pt-4 border-t border-slate-100">
+          <div className="px-4 pb-6 pt-4 border-t border-ghost-white">
             <Button href="/request-quote" variant="primary" className="w-full justify-center">
               Request a Quote
             </Button>
             <a
               href="tel:+912026120000"
-              className="flex items-center justify-center gap-2 mt-3 text-sm text-slate-500
-                         hover:text-navy-900 transition-colors"
+              className="flex items-center justify-center gap-2 mt-3 text-sm text-granite
+                         hover:text-ink transition-colors"
             >
               <Phone size={14} />
               +91-20-2612-0000

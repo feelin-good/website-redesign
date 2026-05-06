@@ -1,22 +1,23 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Manrope } from 'next/font/google'
+import { DM_Sans, Bricolage_Grotesque } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { COMPANY } from '@/lib/data/company'
 
-const inter = Inter({
+const geist = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-geist',
+  weight: ['400', '500', '600'],
   preload: true,
 })
 
-const manrope = Manrope({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-manrope',
-  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-bricolage',
+  weight: ['400', '500', '600', '700'],
   preload: true,
 })
 
@@ -94,8 +95,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0B1D35' },
-    { media: '(prefers-color-scheme: dark)',  color: '#0B1D35' },
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)',  color: '#fafafa' },
   ],
 }
 
@@ -105,11 +106,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${manrope.variable}`}>
+    <html lang="en-IN" className={`${geist.variable} ${bricolage.variable}`}>
       <head>
-        {/* Preconnect to font origins */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Structured data: Organization */}
         <script
@@ -152,7 +150,7 @@ export default function RootLayout({
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100]
-                     bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm"
+                     bg-ink text-white px-4 py-2 rounded-full font-medium text-sm"
         >
           Skip to main content
         </a>

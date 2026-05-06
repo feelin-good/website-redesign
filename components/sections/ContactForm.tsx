@@ -66,19 +66,19 @@ export function ContactForm() {
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mb-5">
-          <CheckCircle size={32} className="text-emerald-500" />
+        <div className="w-16 h-16 bg-ghost-white rounded-full flex items-center justify-center mb-5">
+          <CheckCircle size={32} className="text-ink" />
         </div>
-        <h3 className="font-display font-bold text-xl text-navy-900 mb-2">
+        <h3 className="font-display font-semibold text-xl text-ink mb-2">
           Message Received!
         </h3>
-        <p className="text-slate-500 max-w-sm">
+        <p className="text-granite max-w-sm">
           Thank you, <strong>{form.name.split(' ')[0]}</strong>. Our engineering team will review
           your enquiry and respond within one business day.
         </p>
         <button
           onClick={() => { setForm(INITIAL_STATE); setSubmitted(false) }}
-          className="mt-6 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
+          className="mt-6 text-sm font-semibold text-ink hover:text-granite transition-colors"
         >
           Send another message
         </button>
@@ -87,16 +87,16 @@ export function ContactForm() {
   }
 
   const inputClass = (field: keyof FormState) =>
-    `w-full px-4 py-3 rounded-xl border text-navy-900 placeholder:text-slate-400 text-sm
-     focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent
+    `w-full px-4 py-3 rounded-[6px] border text-ink placeholder:text-granite text-sm
+     focus:outline-none focus:ring-2 focus:ring-ink focus:border-transparent
      transition-all duration-200
-     ${errors[field] ? 'border-red-300 bg-red-50' : 'border-slate-200 bg-white hover:border-slate-300'}`
+     ${errors[field] ? 'border-red-300 bg-red-50' : 'border-alabaster bg-white hover:border-granite/30'}`
 
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div className="grid sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label className="block text-sm font-medium text-ink mb-1.5">
             Full Name <span className="text-red-400">*</span>
           </label>
           <input
@@ -111,7 +111,7 @@ export function ContactForm() {
           {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label className="block text-sm font-medium text-ink mb-1.5">
             Work Email <span className="text-red-400">*</span>
           </label>
           <input
@@ -126,7 +126,7 @@ export function ContactForm() {
           {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">Phone</label>
+          <label className="block text-sm font-medium text-ink mb-1.5">Phone</label>
           <input
             type="tel"
             name="phone"
@@ -138,7 +138,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">Company</label>
+          <label className="block text-sm font-medium text-ink mb-1.5">Company</label>
           <input
             type="text"
             name="company"
@@ -150,7 +150,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label className="block text-sm font-medium text-ink mb-1.5">
             Enquiry Type
           </label>
           <select
@@ -166,7 +166,7 @@ export function ContactForm() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1.5">
+          <label className="block text-sm font-medium text-ink mb-1.5">
             Service of Interest
           </label>
           <select
@@ -184,7 +184,7 @@ export function ContactForm() {
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-slate-700 mb-1.5">
+        <label className="block text-sm font-medium text-ink mb-1.5">
           Project Details <span className="text-red-400">*</span>
         </label>
         <textarea
@@ -199,16 +199,16 @@ export function ContactForm() {
       </div>
 
       <div className="flex items-center justify-between gap-4">
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-granite">
           By submitting, you agree to our{' '}
-          <a href="/privacy" className="underline hover:text-slate-600">Privacy Policy</a>.
+          <a href="/privacy" className="underline hover:text-ink">Privacy Policy</a>.
         </p>
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600
-                     text-white font-semibold px-8 py-3.5 rounded-xl
-                     transition-all duration-200 hover:shadow-lg
+          className="inline-flex items-center gap-2 bg-ink hover:bg-obsidian
+                     text-white font-semibold px-8 py-3.5 rounded-full
+                     transition-all duration-200
                      disabled:opacity-60 disabled:cursor-not-allowed shrink-0"
         >
           {submitting ? (
