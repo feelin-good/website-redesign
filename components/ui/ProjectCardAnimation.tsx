@@ -164,7 +164,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
             </>
           ) : (
             <>
-              <div className="absolute w-28 h-2" style={{ animation: 'rotate-slow-z 5s ease-in-out infinite', transformStyle: 'preserve-3d', originX: 0 }}>
+              <div className="absolute w-28 h-2" style={{ animation: 'rotate-slow-z 5s ease-in-out infinite', transformStyle: 'preserve-3d', transformOrigin: 'left' }}>
                 <div className="w-full h-full bg-gradient-to-r from-granite to-transparent"></div>
               </div>
               <div className="absolute w-10 h-10 rounded-full border border-granite/40" style={{ animation: 'pulse-theme 3s ease-in-out infinite' }}></div>
@@ -213,7 +213,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
             </>
           ) : (
             <>
-              <div className="absolute w-32 h-2" style={{ animation: 'rotate-slow-z 5s ease-in-out infinite', transformStyle: 'preserve-3d', originX: 0 }}>
+              <div className="absolute w-32 h-2" style={{ animation: 'rotate-slow-z 5s ease-in-out infinite', transformStyle: 'preserve-3d', transformOrigin: 'left' }}>
                 <div className="w-full h-full bg-gradient-to-r from-granite to-transparent"></div>
               </div>
             </>
