@@ -44,6 +44,7 @@ export function Header() {
   const [scrolled,     setScrolled]     = useState(false)
   const [mobileOpen,   setMobileOpen]   = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileSection, setMobileSection] = useState<string | null>(null)
   const pathname = usePathname()
   const dropdownTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -57,6 +58,7 @@ export function Header() {
   useEffect(() => {
     setMobileOpen(false)
     setActiveDropdown(null)
+    setMobileSection(null)
   }, [pathname])
 
   useEffect(() => {
@@ -79,29 +81,29 @@ export function Header() {
   return (
     <header className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      'bg-white/90 backdrop-blur-sm border-b border-ghost-white shadow-humble'
+      'bg-white/95 backdrop-blur-md border-b border-ghost-white',
+      scrolled && 'shadow-humble'
     )}>
       {/* Main nav */}
       <div className="container-main">
         <div className="flex items-center justify-between h-16 lg:h-18">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            <div className="relative">
-              {/* Geometric logo mark */}
-              <div className="w-9 h-9 bg-ink rounded-lg flex items-center justify-center
+          {/* Logo - compact on mobile */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 shrink-0 group min-w-0">
+            <div className="relative shrink-0">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 bg-ink rounded-lg flex items-center justify-center
                               group-hover:bg-obsidian transition-colors duration-200">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                   <path d="M3 15L10 3L17 15H3Z" fill="white" fillOpacity="0.9" />
                   <path d="M7 15L10 9L13 15H7Z" fill="white" fillOpacity="0.4" />
                 </svg>
               </div>
             </div>
-            <div>
-              <span className="block font-display font-semibold text-lg leading-tight text-ink transition-colors">
+            <div className="min-w-0">
+              <span className="block font-display font-semibold text-base sm:text-lg leading-tight text-ink truncate">
                 Lepton Projects
               </span>
-              <span className="block text-2xs font-medium uppercase tracking-widest leading-tight text-granite">
+              <span className="hidden sm:block text-2xs font-medium uppercase tracking-widest leading-tight text-granite">
                 Pvt. Ltd.
               </span>
             </div>
@@ -137,7 +139,6 @@ export function Header() {
                   )}
                 </Link>
 
-                {/* Dropdown */}
                 {item.hasDropdown && activeDropdown === item.type && (
                   <div
                     className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
@@ -215,23 +216,24 @@ export function Header() {
           </nav>
 
           {/* CTA + Mobile toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <Button
               href="/request-quote"
               variant="primary"
               size="sm"
               icon={<ArrowRight size={14} />}
-              className="hidden sm:inline-flex"
+              className="hidden md:inline-flex"
             >
               Request a Quote
             </Button>
 
             <button
-              className="lg:hidden p-2 rounded-lg text-ink hover:bg-ghost-white transition-colors"
+              className="lg:hidden p-2 rounded-lg text-ink hover:bg-ghost-white transition-colors -mr-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -239,13 +241,13 @@ export function Header() {
 
       {/* Mobile drawer */}
       <div className={cn(
-        'fixed inset-0 z-40 lg:hidden transition-all duration-300',
+        'fixed inset-0 z-40 lg:hidden',
         mobileOpen ? 'pointer-events-auto' : 'pointer-events-none'
       )}>
         {/* Backdrop */}
         <div
           className={cn(
-            'absolute inset-0 bg-ink/20 backdrop-blur-sm transition-opacity duration-300',
+            'absolute inset-0 bg-ink/40 backdrop-blur-sm transition-opacity duration-300',
             mobileOpen ? 'opacity-100' : 'opacity-0'
           )}
           onClick={() => setMobileOpen(false)}
@@ -253,12 +255,12 @@ export function Header() {
 
         {/* Drawer */}
         <div className={cn(
-          'absolute top-0 right-0 h-full w-[320px] max-w-full bg-canvas shadow-humble',
-          'flex flex-col transition-transform duration-300 ease-out',
+          'absolute top-0 right-0 h-full w-[88vw] max-w-[380px] bg-canvas',
+          'flex flex-col transition-transform duration-300 ease-out shadow-2xl',
           mobileOpen ? 'translate-x-0' : 'translate-x-full'
         )}>
           {/* Drawer header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-ghost-white">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-ghost-white shrink-0">
             <Link href="/" className="flex items-center gap-2.5">
               <div className="w-8 h-8 bg-ink rounded-lg flex items-center justify-center">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
@@ -270,74 +272,101 @@ export function Header() {
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
-              className="p-1.5 rounded-lg text-granite hover:text-ink hover:bg-ghost-white"
+              className="p-2 -mr-2 rounded-lg text-granite hover:text-ink hover:bg-ghost-white transition-colors"
               aria-label="Close menu"
             >
-              <X size={20} />
+              <X size={22} />
             </button>
           </div>
 
           {/* Nav links */}
           <nav className="flex-1 overflow-y-auto px-4 py-4">
-            {NAV_ITEMS.map(item => (
-              <div key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    'flex items-center px-3 py-3 rounded-[6px] text-sm font-medium',
-                    'transition-colors mb-1',
-                    isActive(item.href)
-                      ? 'bg-ghost-white text-ink'
-                      : 'text-granite hover:bg-ghost-white hover:text-ink'
+            {NAV_ITEMS.map(item => {
+              const hasDropdown = item.hasDropdown
+              const isExpanded = mobileSection === item.type
+
+              return (
+                <div key={item.href} className="mb-1">
+                  {hasDropdown ? (
+                    <>
+                      <button
+                        onClick={() => setMobileSection(isExpanded ? null : item.type!)}
+                        className={cn(
+                          'w-full flex items-center justify-between px-3 py-3 rounded-[6px] text-sm font-medium',
+                          'transition-colors',
+                          isActive(item.href) || isExpanded
+                            ? 'bg-ghost-white text-ink'
+                            : 'text-granite hover:bg-ghost-white hover:text-ink'
+                        )}
+                      >
+                        {item.label}
+                        <ChevronDown
+                          size={16}
+                          className={cn(
+                            'transition-transform duration-200',
+                            isExpanded && 'rotate-180'
+                          )}
+                        />
+                      </button>
+                      {isExpanded && (
+                        <div className="pl-3 mt-1 mb-2 space-y-0.5">
+                          {item.type === 'services' && SERVICES.map(s => (
+                            <Link
+                              key={s.slug}
+                              href={`/services/${s.slug}`}
+                              className="flex items-center gap-2.5 px-3 py-2.5 rounded-[6px] text-sm text-granite
+                                         hover:text-ink hover:bg-ghost-white transition-colors"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              <span className="text-ink shrink-0">{SERVICE_ICONS[s.slug]}</span>
+                              <span className="truncate">{s.title}</span>
+                            </Link>
+                          ))}
+                          {item.type === 'industries' && INDUSTRIES.map(ind => (
+                            <Link
+                              key={ind.slug}
+                              href={`/industries#${ind.slug}`}
+                              className="flex items-center gap-2.5 px-3 py-2.5 rounded-[6px] text-sm text-granite
+                                         hover:text-ink hover:bg-ghost-white transition-colors"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              <span className="text-ink shrink-0">{INDUSTRY_ICONS[ind.slug]}</span>
+                              <span className="truncate">{ind.title.split(' &')[0]}</span>
+                            </Link>
+                          ))}
+                          <Link
+                            href={item.href}
+                            className="flex items-center gap-1.5 px-3 py-2 text-xs text-ink font-semibold
+                                       hover:bg-ghost-white rounded-[6px] transition-colors"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            View all <ArrowRight size={12} />
+                          </Link>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        'flex items-center px-3 py-3 rounded-[6px] text-sm font-medium',
+                        'transition-colors',
+                        isActive(item.href)
+                          ? 'bg-ghost-white text-ink'
+                          : 'text-granite hover:bg-ghost-white hover:text-ink'
+                      )}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
                   )}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </div>
-            ))}
-
-            {/* Mobile sub-items: services */}
-            <div className="mt-4 pt-4 border-t border-ghost-white">
-              <p className="px-3 mb-2 text-2xs text-granite uppercase tracking-[0.15em] font-medium">
-                Services
-              </p>
-              {SERVICES.map(s => (
-                <Link
-                  key={s.slug}
-                  href={`/services/${s.slug}`}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-[6px] text-sm text-granite
-                             hover:text-ink hover:bg-ghost-white transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <span className="text-ink">{SERVICE_ICONS[s.slug]}</span>
-                  {s.title}
-                </Link>
-              ))}
-            </div>
-
-            {/* Mobile sub-items: industries */}
-            <div className="mt-3 pt-3 border-t border-ghost-white">
-              <p className="px-3 mb-2 text-2xs text-granite uppercase tracking-[0.15em] font-medium">
-                Industries
-              </p>
-              {INDUSTRIES.map(ind => (
-                <Link
-                  key={ind.slug}
-                  href={`/industries#${ind.slug}`}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-[6px] text-sm text-granite
-                             hover:text-ink hover:bg-ghost-white transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <span className="text-ink">{INDUSTRY_ICONS[ind.slug]}</span>
-                  {ind.title.split(' &')[0]}
-                </Link>
-              ))}
-            </div>
+                </div>
+              )
+            })}
           </nav>
 
           {/* CTA */}
-          <div className="px-4 pb-6 pt-4 border-t border-ghost-white">
+          <div className="px-4 pb-6 pt-4 border-t border-ghost-white shrink-0">
             <Button href="/request-quote" variant="primary" className="w-full justify-center">
               Request a Quote
             </Button>
