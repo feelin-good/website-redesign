@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useId } from 'react'
-import { useInView } from 'react-intersection-observer'
+import { useEffect, useRef, useId, useState } from 'react'
 import { useNetworkSpeed } from '@/hooks/useNetworkSpeed'
 
 export type ProjectAnimationType = 
@@ -41,31 +40,37 @@ const animationStyles = `
 export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimationProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const uid = useId().replace(/:/g, '')
-  const { ref: inViewRef, inView } = useInView({ triggerOnce: false, threshold: 0.1 })
   const speed = useNetworkSpeed()
   const shouldUseAnime = speed === 'fast'
+  const [stylesAdded, setStylesAdded] = useState(false)
 
+  // Add CSS animations immediately
   useEffect(() => {
-    if (!inView || !shouldUseAnime || !containerRef.current) return
+    if (shouldUseAnime || stylesAdded) return
+
+    if (!document.getElementById(`anim-${uid}`)) {
+      const style = document.createElement('style')
+      style.id = `anim-${uid}`
+      style.textContent = animationStyles
+      document.head.appendChild(style)
+      setStylesAdded(true)
+    }
+  }, [uid, shouldUseAnime, stylesAdded])
+
+  // Initialize anime.js animations immediately for fast connections
+  useEffect(() => {
+    if (!shouldUseAnime || !containerRef.current) return
 
     let anims: any[] = []
     let mounted = true
 
-    import('animejs').then(async ({ animate, stagger }) => {
+    import('animejs').then(async ({ animate }) => {
       if (!mounted || !containerRef.current) return
 
       const container = containerRef.current
       const rotators = container.querySelectorAll<HTMLElement>('[data-rotate]')
       const pulses = container.querySelectorAll<HTMLElement>('[data-pulse]')
       const floaters = container.querySelectorAll<HTMLElement>('[data-float]')
-
-      // Theme colors from globals
-      const colors = {
-        ink: '#000000',
-        obsidian: '#1c1c1c',
-        granite: '#6e6e6e',
-        electric: '#ff4000',
-      }
 
       rotators.forEach((el, i) => {
         const axis = el.dataset.rotate
@@ -100,34 +105,22 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
           loop: true,
         }))
       })
-    })
+    }).catch(err => console.error('Failed to load anime.js:', err))
 
     return () => {
       mounted = false
       anims.forEach(a => { try { a.pause() } catch { } })
     }
-  }, [inView, shouldUseAnime])
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container || shouldUseAnime) return
-
-    if (!document.getElementById(`anim-${uid}`)) {
-      const style = document.createElement('style')
-      style.id = `anim-${uid}`
-      style.textContent = animationStyles
-      document.head.appendChild(style)
-    }
-  }, [shouldUseAnime, uid])
+  }, [shouldUseAnime])
 
   const baseClass = `relative w-full h-full [perspective:1000px]`
 
   if (type === 'conveyor') {
     return (
-      <div ref={inViewRef} className={`${baseClass} ${className}`}>
+      <div className={`${baseClass} ${className}`}>
         <div ref={containerRef} className="absolute inset-0 flex items-center justify-center">
           {shouldUseAnime ? (
-            // Anime.js version - complex
+            // Anime.js version - complex multi-element
             <>
               <div data-rotate="y" className="absolute w-full h-16" style={{ transformStyle: 'preserve-3d' }}>
                 <div className="w-full h-1.5 bg-gradient-to-r from-transparent via-granite to-transparent"></div>
@@ -145,10 +138,10 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
           ) : (
             // CSS version - simple
             <>
-              <div className="absolute w-full h-16" style={{ animation: inView ? 'rotate-slow-y 5s linear infinite' : 'none', transformStyle: 'preserve-3d' }}>
+              <div className="absolute w-full h-16" style={{ animation: 'rotate-slow-y 5s linear infinite', transformStyle: 'preserve-3d' }}>
                 <div className="w-full h-1.5 bg-gradient-to-r from-transparent via-granite to-transparent"></div>
               </div>
-              <div className="absolute w-12 h-12 rounded-full border-2 border-granite/50" style={{ animation: inView ? 'rotate-slow-z 4s linear infinite' : 'none', transformStyle: 'preserve-3d' }}></div>
+              <div className="absolute w-12 h-12 rounded-full border-2 border-granite/50" style={{ animation: 'rotate-slow-z 4s linear infinite', transformStyle: 'preserve-3d' }}></div>
             </>
           )}
         </div>
@@ -158,7 +151,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
 
   if (type === 'stacker') {
     return (
-      <div ref={inViewRef} className={`${baseClass} ${className}`}>
+      <div className={`${baseClass} ${className}`}>
         <div ref={containerRef} className="absolute inset-0 flex items-center justify-center">
           {shouldUseAnime ? (
             <>
@@ -171,10 +164,10 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
             </>
           ) : (
             <>
-              <div className="absolute w-28 h-2" style={{ animation: inView ? 'rotate-slow-z 5s ease-in-out infinite' : 'none', transformStyle: 'preserve-3d', originX: 0 }}>
+              <div className="absolute w-28 h-2" style={{ animation: 'rotate-slow-z 5s ease-in-out infinite', transformStyle: 'preserve-3d', originX: 0 }}>
                 <div className="w-full h-full bg-gradient-to-r from-granite to-transparent"></div>
               </div>
-              <div className="absolute w-10 h-10 rounded-full border border-granite/40" style={{ animation: inView ? 'pulse-theme 3s ease-in-out infinite' : 'none' }}></div>
+              <div className="absolute w-10 h-10 rounded-full border border-granite/40" style={{ animation: 'pulse-theme 3s ease-in-out infinite' }}></div>
             </>
           )}
         </div>
@@ -184,7 +177,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
 
   if (type === 'crusher') {
     return (
-      <div ref={inViewRef} className={`${baseClass} ${className}`}>
+      <div className={`${baseClass} ${className}`}>
         <div ref={containerRef} className="absolute inset-0 flex flex-col items-center justify-center gap-3">
           {shouldUseAnime ? (
             <>
@@ -197,7 +190,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
             </>
           ) : (
             <>
-              <div className="w-16 h-16 border-2 border-electric-orange/60 rounded-lg" style={{ animation: inView ? 'rotate-slow-z 3.5s linear infinite' : 'none', transformStyle: 'preserve-3d' }}>
+              <div className="w-16 h-16 border-2 border-electric-orange/60 rounded-lg" style={{ animation: 'rotate-slow-z 3.5s linear infinite', transformStyle: 'preserve-3d' }}>
                 <div className="absolute top-1/2 left-1/2 w-6 h-6 bg-electric-orange/40 rounded -translate-x-1/2 -translate-y-1/2"></div>
               </div>
             </>
@@ -209,7 +202,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
 
   if (type === 'crane') {
     return (
-      <div ref={inViewRef} className={`${baseClass} ${className}`}>
+      <div className={`${baseClass} ${className}`}>
         <div ref={containerRef} className="absolute inset-0 flex items-center justify-center">
           {shouldUseAnime ? (
             <>
@@ -220,7 +213,7 @@ export function ProjectCardAnimation({ type, className = '' }: ProjectCardAnimat
             </>
           ) : (
             <>
-              <div className="absolute w-32 h-2" style={{ animation: inView ? 'rotate-slow-z 5s ease-in-out infinite' : 'none', transformStyle: 'preserve-3d', originX: 0 }}>
+              <div className="absolute w-32 h-2" style={{ animation: 'rotate-slow-z 5s ease-in-out infinite', transformStyle: 'preserve-3d', originX: 0 }}>
                 <div className="w-full h-full bg-gradient-to-r from-granite to-transparent"></div>
               </div>
             </>
