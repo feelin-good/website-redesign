@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { Icon } from '@/components/ui/Icon'
+import { Card3DAnimation } from '@/components/ui/Card3DAnimation'
 import { SERVICES } from '@/lib/data/services'
 
 export function ServicesOverview() {
@@ -33,6 +34,16 @@ export function ServicesOverview() {
                            shadow-humble hover:shadow-[0_40px_40px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-0.5
                            transition-all duration-300 overflow-hidden"
               >
+                {/* 3D Animation Background */}
+                <div className="relative h-32 bg-gradient-to-br from-slate-900/5 to-slate-900/10 overflow-hidden">
+                  <Card3DAnimation 
+                    type={service.slug as any}
+                    className="absolute inset-0"
+                  />
+                  {/* Overlay for better text contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent pointer-events-none"></div>
+                </div>
+
                 <div className="p-7 flex flex-col flex-1">
                   {/* Icon */}
                   <div className="w-12 h-12 rounded-[6px] bg-ghost-white group-hover:bg-ink
