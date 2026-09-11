@@ -59,7 +59,7 @@ export const DIAGRAMS = {
       { at: [500, 262], to: [250, 232], label: 'CLAMP BEAMS', side: 'left' },
       { at: [646, 300], to: [800, 300], label: 'RING GEAR DRIVE', side: 'right' },
       { at: [500, 470], to: [250, 470], label: 'RECEIVING HOPPER', side: 'left' },
-      { at: [700, 542], to: [880, 542], label: 'APRON FEEDER', side: 'right' },
+      { at: [700, 542], to: [812, 508], label: 'APRON FEEDER', side: 'right' },
     ],
     Diagram: WagonTippler,
   },
