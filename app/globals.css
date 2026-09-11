@@ -270,3 +270,148 @@
     overflow: hidden;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Animated technical elevations (components/anime/*)
+ * ------------------------------------------------------------------ */
+@layer components {
+  .machine-diagram {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    background: theme('colors.obsidian');
+  }
+
+  .machine-diagram__backdrop {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 68% 60% at 50% 44%, rgba(255, 255, 255, 0.07), transparent 72%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+    background-size: 100% 100%, 46px 46px, 46px 46px;
+  }
+
+  .machine-diagram__svg {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ---- Drawing line weights ---- */
+  .machine-diagram__svg .ln,
+  .machine-diagram__svg .ln-faint,
+  .machine-diagram__svg .ln-thin,
+  .machine-diagram__svg .ln-dim,
+  .machine-diagram__svg .ac-stroke {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .machine-diagram__svg .ln        { stroke: rgba(255, 255, 255, 0.86); stroke-width: 1.6; }
+  .machine-diagram__svg .ln-faint  { stroke: rgba(255, 255, 255, 0.34); stroke-width: 1; }
+  .machine-diagram__svg .ln-thin   { stroke: rgba(255, 255, 255, 0.52); stroke-width: 1; }
+  .machine-diagram__svg .ln-dim    { stroke: rgba(255, 255, 255, 0.26); stroke-width: 1;
+                                     stroke-dasharray: 5 4; }
+  .machine-diagram__svg .ac-stroke { stroke: theme('colors.electric-orange'); stroke-width: 1.7; }
+  .machine-diagram__svg .ac-fill   { fill: theme('colors.electric-orange'); }
+
+  .machine-diagram__svg .ln-box {
+    fill: rgba(255, 255, 255, 0.05);
+    stroke: rgba(255, 255, 255, 0.86);
+    stroke-width: 1.6;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .machine-diagram__svg .sh-dark {
+    fill: rgba(255, 255, 255, 0.1);
+    stroke: rgba(255, 255, 255, 0.5);
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* ---- Drawing-sheet text ---- */
+  .machine-diagram__svg text {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    letter-spacing: 0.08em;
+  }
+  .machine-diagram__svg .tx-dim   { fill: rgba(255, 255, 255, 0.4); font-size: 12px; }
+  .machine-diagram__svg .tx-sheet { fill: rgba(255, 255, 255, 0.22); font-size: 12px;
+                                    letter-spacing: 0.22em; }
+
+  /* ---- Callouts ---- */
+  .machine-diagram__svg .callout__dot    { fill: theme('colors.electric-orange'); }
+  .machine-diagram__svg .callout__leader {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.4);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .machine-diagram__svg .callout__label {
+    fill: rgba(255, 255, 255, 0.82);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- Corner HUD ---- */
+  /* Chips sit beside the designation, not along the bottom, so they never
+     collide with the drawing's dimension line and title block. */
+  .machine-diagram__hud {
+    position: absolute;
+    inset: 0;
+    padding: clamp(1rem, 2.6vw, 1.75rem);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .machine-diagram__hud-top { display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .machine-diagram__code {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.22em;
+    color: theme('colors.electric-orange');
+  }
+  .machine-diagram__name {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .machine-diagram__specs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.375rem;
+    max-width: 55%;
+  }
+  .machine-diagram__chip {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* Callout text is unreadable once the sheet is card-sized. */
+  @media (max-width: 900px) {
+    .machine-diagram__svg .callout__label,
+    .machine-diagram__svg .tx-sheet,
+    .machine-diagram__svg .tx-dim { display: none; }
+  }
+}

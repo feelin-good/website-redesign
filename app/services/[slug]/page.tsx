@@ -5,6 +5,8 @@ import { CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { Icon } from '@/components/ui/Icon'
 import { CTABanner } from '@/components/sections/CTABanner'
+import { MachineShowcase } from '@/components/sections/MachineShowcase'
+import { diagramForService } from '@/components/anime/machineMap'
 import { SERVICES, getServiceBySlug } from '@/lib/data/services'
 import { INDUSTRIES } from '@/lib/data/industries'
 
@@ -68,6 +70,13 @@ export default function ServiceDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Technical elevation of representative equipment for this service */}
+      <MachineShowcase
+        machine={diagramForService(service.slug)}
+        tag="Representative Equipment"
+        description={`A working elevation of the equipment Lepton engineers under ${service.title.toLowerCase()}.`}
+      />
 
       {/* Main content */}
       <section className="section-py bg-white">

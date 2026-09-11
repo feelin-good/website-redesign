@@ -6,9 +6,11 @@ import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { getFeaturedProjects } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
 
-// Load anime.js animation client-side only
-const AnimeImagePlaceholder = dynamic(
-  () => import('@/components/ui/AnimeImagePlaceholder').then(m => m.AnimeImagePlaceholder),
+import { diagramForProject } from '@/components/anime/machineMap'
+
+// Animated technical elevation — client-side only, drawn on when in view
+const MachineDiagram = dynamic(
+  () => import('@/components/anime/MachineDiagram').then(m => m.MachineDiagram),
   { ssr: false }
 )
 
@@ -52,10 +54,17 @@ export function FeaturedProjects() {
                            border border-white/5 hover:border-white/20
                            transition-all duration-400 shadow-humble"
               >
-                {/* Anime.js conveyor belt animation background */}
+                {/* Elevation of the equipment supplied on this project */}
                 <div className="absolute inset-0 z-0">
-                  <AnimeImagePlaceholder variant="conveyor" className="w-full h-full" />
+                  <MachineDiagram
+                    machine={diagramForProject(project.slug)}
+                    hud={false}
+                    annotations={false}
+                  />
                 </div>
+                {/* Scrim so the overlaid copy stays legible against the drawing */}
+                <div className="absolute inset-0 z-[1] pointer-events-none
+                                bg-gradient-to-t from-obsidian via-obsidian/55 to-transparent" />
 
                 <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[420px]">
                   {/* Top badges */}

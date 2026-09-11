@@ -5,6 +5,8 @@ import { MapPin, Calendar, Building2, ArrowLeft, CheckCircle, ArrowRight } from 
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { Icon } from '@/components/ui/Icon'
 import { CTABanner } from '@/components/sections/CTABanner'
+import { MachineShowcase } from '@/components/sections/MachineShowcase'
+import { diagramForProject } from '@/components/anime/machineMap'
 import { PROJECTS, getProjectBySlug } from '@/lib/data/projects'
 import { SERVICES } from '@/lib/data/services'
 
@@ -100,6 +102,13 @@ export default function ProjectDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Technical elevation of the headline equipment on this project */}
+      <MachineShowcase
+        machine={diagramForProject(project.slug)}
+        tag="Equipment Supplied"
+        description={`The principal equipment configuration delivered for ${project.client} at ${project.location}.`}
+      />
 
       {/* Content */}
       <section className="section-py bg-white">

@@ -8,7 +8,8 @@ a multi-discipline engineering consultancy headquartered in Pune, India.
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS v3 with custom design tokens
-- **Animations:** CSS-based IntersectionObserver animations (no Framer dependency required for SSR)
+- **Animations:** CSS/IntersectionObserver for page transitions; **anime.js v4** for the
+  animated technical equipment elevations
 - **Icons:** Lucide React
 - **Forms:** React Hook Form (optional — currently inline state)
 - **Fonts:** Inter (body) + Manrope (display/headings) via Google Fonts
@@ -41,6 +42,12 @@ components/
   layout/
     Header.tsx               # Sticky nav with dropdown menus + mobile drawer
     Footer.tsx               # Full footer with nav links, contact, certifications
+  anime/
+    MachineDiagram.tsx       # Public entry point — one timeline drives every diagram
+    diagrams.tsx             # Six machine elevations, marked up declaratively
+    technical.tsx            # SVG geometry helpers (truss, tower, spokes, hopper…)
+    registry.ts              # DiagramId -> elevation, specs, callouts
+    machineMap.ts            # project slug / service slug -> DiagramId
   ui/
     AnimateOnScroll.tsx      # IntersectionObserver fade/slide animations
     AnimatedCounter.tsx      # Number counting animation
@@ -115,6 +122,36 @@ npm run lint         # ESLint
 1. Edit `lib/data/industries.ts` — add entry
 2. Add icon lookup to `Icon.tsx`
 3. It auto-appears in: nav dropdown, industries page, industry cards
+
+## Animated Equipment Elevations
+
+Six technical side elevations, drawn as SVG and animated with **anime.js v4**. No WebGL
+and no image assets, so they cost almost nothing and render identically everywhere.
+
+### The declarative convention
+`MachineDiagram.tsx` contains *no per-machine choreography*. It reads data attributes off
+whatever elevation it is given:
+
+| Attribute | Effect |
+|---|---|
+| `data-draw="<order>"` | Stroke draws itself on, low order first |
+| `data-part="dx,dy"`   | Starts offset by (dx,dy) and slides home — the exploded-assembly reveal |
+| `data-spin="<secs>"`  | Rotates forever about its own centre |
+| `data-flow="<secs>"` + `data-fx` / `data-fy` | Material travels one lump-spacing along the belt and repeats. `fx`/`fy` **must match the belt's slope**, or the stream slides off it |
+| `data-pulse`          | Slow opacity breathing |
+
+Adding a machine therefore means writing an elevation in `diagrams.tsx` and registering
+it — never touching the animator.
+
+### anime.js v4, not v3
+The API changed: it is **`ease`, not `easing`** (v4 silently ignores `easing`), `stagger`
+comes from the root export, scroll triggering is `autoplay: onScroll({ … repeat: false })`,
+and stroke drawing is `svg.createDrawable()` animating a `draw: '0 1'` property. Copying a
+v3 snippet will run without erroring and simply not animate.
+
+### Reduced motion
+`prefers-reduced-motion` skips the choreography and sets the finished drawing directly —
+the elevation is still fully legible, just static.
 
 ## SEO Checklist
 - [x] `generateMetadata()` on every page
