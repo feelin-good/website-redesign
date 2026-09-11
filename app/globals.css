@@ -302,38 +302,72 @@
     height: 100%;
   }
 
-  /* ---- Drawing line weights ---- */
-  .machine-diagram__svg .ln,
-  .machine-diagram__svg .ln-faint,
-  .machine-diagram__svg .ln-thin,
-  .machine-diagram__svg .ln-dim,
-  .machine-diagram__svg .ac-stroke {
+  /* ---- Axonometric solids ----
+     Three tones per solid (top / +x side / +z side) is what makes a flat SVG
+     polygon read as a lit volume. Kept deliberately matte and dark so the warm
+     edge light does the describing, as in the reference. */
+  .machine-diagram__svg path,
+  .machine-diagram__svg ellipse,
+  .machine-diagram__svg circle,
+  .machine-diagram__svg rect,
+  .machine-diagram__svg line { vector-effect: non-scaling-stroke; }
+
+  .machine-diagram__svg .fc-body-top    { fill: #46464c; }
+  .machine-diagram__svg .fc-body-right  { fill: #34343a; }
+  .machine-diagram__svg .fc-body-left   { fill: #26262b; }
+
+  .machine-diagram__svg .fc-light-top   { fill: #6a6a72; }
+  .machine-diagram__svg .fc-light-right { fill: #4e4e56; }
+  .machine-diagram__svg .fc-light-left  { fill: #38383e; }
+
+  .machine-diagram__svg .fc-accent-top   { fill: #ff5a22; }
+  .machine-diagram__svg .fc-accent-right { fill: #c8400f; }
+  .machine-diagram__svg .fc-accent-left  { fill: #922d08; }
+
+  /* The rim light. Warm, thin, and only on top edges. */
+  .machine-diagram__svg .edge-lit {
+    fill: none;
+    stroke: #ffb894;
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.92;
+  }
+
+  /* ---- Lattice and linework ---- */
+  .machine-diagram__svg .ln-strut,
+  .machine-diagram__svg .ln-rope,
+  .machine-diagram__svg .ln-rail,
+  .machine-diagram__svg .ln-grid,
+  .machine-diagram__svg .ln-grizzly,
+  .machine-diagram__svg .ln-harrow {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
   }
+  .machine-diagram__svg .ln-strut   { stroke: #9a9aa0; stroke-width: 1.35; }
+  .machine-diagram__svg .ln-rope    { stroke: rgba(255, 255, 255, 0.34); stroke-width: 1; }
+  .machine-diagram__svg .ln-rail    { stroke: #6a6a70; stroke-width: 1.6; }
+  .machine-diagram__svg .ln-grizzly { stroke: #ff5a22; stroke-width: 1.4; }
+  .machine-diagram__svg .ln-harrow  { stroke: #ff5a22; stroke-width: 1.5; }
+  .machine-diagram__svg .ln-grid    { stroke: rgba(255, 255, 255, 0.055); stroke-width: 1; }
 
-  .machine-diagram__svg .ln        { stroke: rgba(255, 255, 255, 0.86); stroke-width: 1.6; }
-  .machine-diagram__svg .ln-faint  { stroke: rgba(255, 255, 255, 0.34); stroke-width: 1; }
-  .machine-diagram__svg .ln-thin   { stroke: rgba(255, 255, 255, 0.52); stroke-width: 1; }
-  .machine-diagram__svg .ln-dim    { stroke: rgba(255, 255, 255, 0.26); stroke-width: 1;
-                                     stroke-dasharray: 5 4; }
-  .machine-diagram__svg .ac-stroke { stroke: theme('colors.electric-orange'); stroke-width: 1.7; }
-  .machine-diagram__svg .ac-fill   { fill: theme('colors.electric-orange'); }
-
-  .machine-diagram__svg .ln-box {
-    fill: rgba(255, 255, 255, 0.05);
-    stroke: rgba(255, 255, 255, 0.86);
-    stroke-width: 1.6;
-    vector-effect: non-scaling-stroke;
+  /* ---- Wheels (drawn in unit-circle space, projected by a matrix) ---- */
+  .machine-diagram__svg .wh-rim {
+    fill: none; stroke: #b4b4ba; stroke-width: 1.5;
   }
-
-  .machine-diagram__svg .sh-dark {
-    fill: rgba(255, 255, 255, 0.1);
-    stroke: rgba(255, 255, 255, 0.5);
-    stroke-width: 1.2;
-    vector-effect: non-scaling-stroke;
+  .machine-diagram__svg .wh-rim-inner {
+    fill: none; stroke: rgba(255, 255, 255, 0.28); stroke-width: 1;
+  }
+  .machine-diagram__svg .wh-hub    { fill: #55555a; }
+  .machine-diagram__svg .wh-spoke  { stroke: rgba(255, 255, 255, 0.42); stroke-width: 1; }
+  .machine-diagram__svg .wh-spoke-accent { stroke: #ff5a22; stroke-width: 1.5; }
+  .machine-diagram__svg .wagon-face {
+    fill: #4e4e56; stroke: #ffb894; stroke-width: 1; stroke-opacity: 0.55;
+  }
+  .machine-diagram__svg .wagon-clamp { fill: #ff5a22; }
+  .machine-diagram__svg .wh-bucket {
+    fill: #ff5a22; stroke: #ffb08a; stroke-width: 0.8;
   }
 
   /* ---- Drawing-sheet text ---- */
@@ -341,21 +375,19 @@
     font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
     letter-spacing: 0.08em;
   }
-  .machine-diagram__svg .tx-dim   { fill: rgba(255, 255, 255, 0.4); font-size: 12px; }
-  .machine-diagram__svg .tx-sheet { fill: rgba(255, 255, 255, 0.22); font-size: 12px;
+  .machine-diagram__svg .tx-sheet { fill: rgba(255, 255, 255, 0.22); font-size: 13px;
                                     letter-spacing: 0.22em; }
 
   /* ---- Callouts ---- */
   .machine-diagram__svg .callout__dot    { fill: theme('colors.electric-orange'); }
   .machine-diagram__svg .callout__leader {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.4);
+    stroke: rgba(255, 255, 255, 0.34);
     stroke-width: 1;
-    vector-effect: non-scaling-stroke;
   }
   .machine-diagram__svg .callout__label {
     fill: rgba(255, 255, 255, 0.82);
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.1em;
   }
 
@@ -411,8 +443,7 @@
   /* Callout text is unreadable once the sheet is card-sized. */
   @media (max-width: 900px) {
     .machine-diagram__svg .callout__label,
-    .machine-diagram__svg .tx-sheet,
-    .machine-diagram__svg .tx-dim { display: none; }
+    .machine-diagram__svg .tx-sheet { display: none; }
   }
 }
 

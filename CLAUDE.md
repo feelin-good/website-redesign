@@ -44,9 +44,9 @@ components/
     Footer.tsx               # Full footer with nav links, contact, certifications
   anime/
     MachineDiagram.tsx       # Public entry point — one timeline drives every diagram
-    diagrams.tsx             # Six machine elevations, marked up declaratively
-    technical.tsx            # SVG geometry helpers (truss, tower, spokes, hopper…)
-    registry.ts              # DiagramId -> elevation, specs, callouts
+    diagrams.tsx             # Six machine assemblies, marked up declaratively
+    iso.tsx                  # Axonometric renderer — Box3D, CylY, WheelPlane, truss3…
+    registry.ts              # DiagramId -> assembly, specs, callouts
     machineMap.ts            # project slug / service slug -> DiagramId
   ui/
     AnimateOnScroll.tsx      # IntersectionObserver fade/slide animations
@@ -123,10 +123,34 @@ npm run lint         # ESLint
 2. Add icon lookup to `Icon.tsx`
 3. It auto-appears in: nav dropdown, industries page, industry cards
 
-## Animated Equipment Elevations
+## Animated Equipment Assemblies
 
-Six technical side elevations, drawn as SVG and animated with **anime.js v4**. No WebGL
-and no image assets, so they cost almost nothing and render identically everywhere.
+Six machines drawn as **axonometric SVG solids** and animated with **anime.js v4**. No
+WebGL and no image assets, so they cost almost nothing and render identically everywhere
+— the anime.js site fakes a comparable lit 3D hero in ~24 KB.
+
+### How the 3D look is faked
+`iso.tsx` projects 3D points with `P(x, y, z)` (+x right-down, +z left-down, +y up) and
+draws each solid as **its three visible faces in three tones** — top, +x side, +z side.
+That tonal split, not the outline, is what makes a flat polygon read as a volume. A warm
+`edge-lit` stroke runs along the top edges only, standing in for a low key light.
+
+Two projection facts the helpers rely on:
+- A circle in the XZ plane projects to an **axis-aligned ellipse** (`rx = r·cos30·√2`,
+  `ry = r·sin30·√2`) — hence `CylY`.
+- A circle in the XY plane projects through a fixed matrix, so `WheelPlane` wraps children
+  in `matrix(...)` and lets them be drawn — and spun — in plain unit-circle coordinates.
+  **Anything that rotates must live inside a `WheelPlane`**: rotating an already-projected
+  `Box3D` with a 2D `rotate()` merely spins the drawing and never re-shades its faces.
+- `P` is linear, so translating in 3D is a constant screen translation — which is why
+  `explode()` can hand anime.js a plain 2D offset.
+
+### Framing
+`MachineDiagram` measures the assembly with `getBBox()` and sets the `viewBox` from it,
+**before** the reveal offsets are applied so exploded parts don't inflate the box. Machines
+differ hugely in footprint, so a single authored viewBox either crops one or strands
+another mid-panel. The ground grid sits outside the measured group so it never drives
+framing.
 
 ### The declarative convention
 `MachineDiagram.tsx` contains *no per-machine choreography*. It reads data attributes off

@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { DIAGRAMS, type DiagramId } from './registry'
-import { VIEWBOX } from './diagrams'
+import { IsoGround } from './diagrams'
 
 interface Props {
   machine: DiagramId
@@ -30,7 +30,31 @@ export function MachineDiagram({
   const spec = DIAGRAMS[machine]
   const hostRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
+  const contentRef = useRef<SVGGElement>(null)
   const [reduced, setReduced] = useState(false)
+  const [viewBox, setViewBox] = useState('-500 -430 1000 620')
+
+  /**
+   * Frame the assembly to its own extents. Machines differ hugely in footprint
+   * — a 2 km conveyor against a baghouse — so a single authored viewBox either
+   * crops one or strands another in the middle of the panel. Measured before
+   * the reveal offsets are applied, so exploded parts don't inflate the box.
+   */
+  useLayoutEffect(() => {
+    const g = contentRef.current
+    if (!g) return
+    let box: DOMRect
+    try {
+      box = g.getBBox()
+    } catch {
+      return // not rendered yet (jsdom, display:none)
+    }
+    if (!box.width || !box.height) return
+    const pad = Math.max(box.width, box.height) * 0.06
+    setViewBox(
+      `${box.x - pad} ${box.y - pad} ${box.width + pad * 2} ${box.height + pad * 2}`
+    )
+  }, [machine, annotations])
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -168,11 +192,15 @@ export function MachineDiagram({
 
       <svg
         ref={svgRef}
-        viewBox={VIEWBOX}
+        viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
         className="machine-diagram__svg"
         aria-hidden="true"
       >
+        {/* Ground sits outside the measured group so it never drives framing. */}
+        <IsoGround />
+
+        <g ref={contentRef}>
         <Diagram />
 
         {annotations &&
@@ -193,6 +221,7 @@ export function MachineDiagram({
               </text>
             </g>
           ))}
+        </g>
       </svg>
 
       {hud && (
