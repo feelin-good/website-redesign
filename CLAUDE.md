@@ -9,6 +9,7 @@ a multi-discipline engineering consultancy headquartered in Pune, India.
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS v3 with custom design tokens
 - **Animations:** CSS-based IntersectionObserver animations (no Framer dependency required for SSR)
+- **3D:** three.js + React Three Fiber + drei — procedural equipment models (no asset files)
 - **Icons:** Lucide React
 - **Forms:** React Hook Form (optional — currently inline state)
 - **Fonts:** Inter (body) + Manrope (display/headings) via Google Fonts
@@ -47,8 +48,23 @@ components/
     Button.tsx               # Multi-variant button (link or button element)
     Icon.tsx                 # Lucide icon lookup by name string
     SectionHeader.tsx        # Reusable section header (tag, title, description)
+  three/
+    MachineViewer.tsx        # Public entry point — lazy mount, WebGL probe, HUD, a11y
+    MachineScene.tsx         # Canvas, lighting, auto-framing, grid, callouts
+    primitives.tsx           # MAT palette + Struts/boxTruss/latticeTower/handrail etc.
+    registry.ts              # MachineId -> model, specs, view direction, annotations
+    machineMap.ts            # project slug / service slug -> MachineId
+    machines/                # One file per machine, each its own dynamic chunk
+      BucketWheelReclaimer.tsx
+      OverlandConveyor.tsx
+      WagonTippler.tsx
+      CrushingPlant.tsx
+      CircularStacker.tsx
+      BaghouseFilter.tsx
+
   sections/
     Hero.tsx                 # Homepage hero with animated stats card
+    MachineShowcase.tsx      # Full-width interactive 3D equipment section
     Stats.tsx                # Company stats with AnimatedCounter
     ServicesOverview.tsx     # 6-card service grid
     WhyChooseUs.tsx          # 8-reason grid + sticky quote panel
@@ -105,11 +121,14 @@ npm run lint         # ESLint
 ### Add a new service:
 1. Edit `lib/data/services.ts` — add entry to `SERVICES` array
 2. Add icon lookup to `components/ui/Icon.tsx`
-3. It will auto-appear in: nav dropdown, services page, service cards
+3. Map it to a 3D model in `components/three/machineMap.ts` (`SERVICE_MACHINE`)
+4. It will auto-appear in: nav dropdown, services page, service cards
 
 ### Add a new project:
 1. Edit `lib/data/projects.ts` — add entry to `PROJECTS` array
-2. It will auto-appear in: projects page, featured projects section (if `featured: true`)
+2. Map it to a 3D model in `components/three/machineMap.ts` (`PROJECT_MACHINE`).
+   Unmapped slugs fall back to the overland conveyor.
+3. It will auto-appear in: projects page, featured projects section (if `featured: true`)
 
 ### Add a new industry:
 1. Edit `lib/data/industries.ts` — add entry
@@ -129,6 +148,38 @@ npm run lint         # ESLint
 - [ ] TODO: Add Google site verification token
 - [ ] TODO: Create public/og-image.png (1200×630)
 - [ ] TODO: Create public/logo.png for JSON-LD
+
+## 3D Equipment Models
+
+Every machine is **built in code** from `components/three/primitives.tsx` — there are
+no `.glb`/`.gltf` assets to load. `Struts` renders whole lattice booms and towers as a
+single `InstancedMesh`, so a boom of several hundred members is one draw call.
+
+### Adding a machine
+1. Create `components/three/machines/<Name>.tsx` exporting `<Name>({ speed }: { speed?: number })`.
+   **`speed === 0` must render a sensible static pose** — that is the reduced-motion path.
+2. Model it about the origin standing on `y = 0`; the registry `offset` drops it onto the
+   ground plane and centres it on the orbit axis (world Y).
+3. Register it in `registry.ts` with a `viewDirection`, `offset`, spec chips and annotations.
+   Annotation anchors are in **model space** (before `offset`).
+
+### Framing
+Cameras are **not** hand-positioned. `AutoFrame` in `MachineScene.tsx` measures the model
+and solves for the distance that contains it — checking 24 azimuths so the auto-orbit never
+clips — which is why the same model frames correctly in a 4:3 card, a wide hero and on a phone.
+Only the *direction* of view is authored.
+
+### Lighting
+`StudioEnvironment` generates an IBL probe from three's `RoomEnvironment` in-process (no HDR
+fetch). Without it, every surface with `metalness > 0` renders near-black. `scene.environmentIntensity`
+is held low so the key light still does the shaping.
+
+### Cost control
+- `MachineViewer` mounts the WebGL context only when the element nears the viewport, and sets
+  `frameloop="never"` when it scrolls away.
+- `quality="card"` drops shadow maps and contact shadows — used for the 6-up projects grid.
+- Models are dynamically imported per machine, so three.js stays out of the initial bundle.
+- Falls back to the CSS blueprint backdrop when WebGL is unavailable.
 
 ## Performance
 - Next.js Image component (lazy loading, AVIF/WebP)

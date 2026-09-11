@@ -270,3 +270,161 @@
     overflow: hidden;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * 3D machine viewer — WebGL equipment models (components/three/*)
+ * ------------------------------------------------------------------ */
+@layer components {
+  .machine-viewer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    background: theme('colors.obsidian');
+  }
+
+  /* Blueprint backdrop. Also the standing fallback if WebGL is unavailable,
+     so the area is never blank. */
+  .machine-viewer__backdrop {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 70% 60% at 50% 42%, rgba(255, 255, 255, 0.07), transparent 70%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 100% 100%, 46px 46px, 46px 46px;
+  }
+
+  .machine-viewer__canvas {
+    position: absolute;
+    inset: 0;
+    animation: machineFadeIn 900ms ease-out both;
+  }
+  .machine-viewer__canvas canvas { outline: none; touch-action: pan-y; }
+
+  /* ---- Corner HUD ---- */
+  .machine-viewer__hud {
+    position: absolute;
+    inset: 0;
+    padding: clamp(1rem, 2.6vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .machine-viewer__hud-top { display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .machine-viewer__code {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.22em;
+    color: theme('colors.electric-orange');
+  }
+
+  .machine-viewer__name {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .machine-viewer__specs { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+
+  .machine-viewer__chip {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 0.25rem 0.6rem;
+    backdrop-filter: blur(6px);
+  }
+
+  .machine-viewer__hint {
+    position: absolute;
+    right: clamp(1rem, 2.6vw, 1.75rem);
+    bottom: clamp(1rem, 2.6vw, 1.75rem);
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* ---- Technical callouts ---- */
+  .machine-callout {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    pointer-events: none;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: calloutIn 700ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  }
+  .machine-callout[data-side='left'] {
+    flex-direction: row-reverse;
+    transform: translate(-100%, -50%);
+  }
+
+  .machine-callout__dot {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: theme('colors.electric-orange');
+    box-shadow: 0 0 0 3px rgba(255, 64, 0, 0.18);
+  }
+
+  .machine-callout__line {
+    flex: none;
+    width: 34px;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      rgba(255, 64, 0, 0.9),
+      rgba(255, 255, 255, 0.32)
+    );
+  }
+  .machine-callout[data-side='left'] .machine-callout__line { transform: scaleX(-1); }
+
+  .machine-callout__label {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.5625rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(18, 18, 18, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem;
+    backdrop-filter: blur(6px);
+  }
+
+  @keyframes machineFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes calloutIn {
+    from { opacity: 0; transform: translateY(-50%) translateX(-6px); }
+    to   { opacity: 1; }
+  }
+
+  /* Callout labels crowd the model on small screens — keep only the markers. */
+  @media (max-width: 640px) {
+    .machine-callout__line,
+    .machine-callout__label { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .machine-viewer__canvas,
+    .machine-callout { animation-duration: 1ms; }
+  }
+}

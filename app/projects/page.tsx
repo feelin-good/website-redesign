@@ -8,10 +8,11 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { CTABanner } from '@/components/sections/CTABanner'
 import { PROJECTS, PROJECT_CATEGORIES } from '@/lib/data/projects'
+import { machineForProject } from '@/components/three/machineMap'
 import { cn } from '@/lib/utils'
 
-const AnimeImagePlaceholder = dynamic(
-  () => import('@/components/ui/AnimeImagePlaceholder').then(m => m.AnimeImagePlaceholder),
+const MachineViewer = dynamic(
+  () => import('@/components/three/MachineViewer').then(m => m.MachineViewer),
   { ssr: false }
 )
 
@@ -85,9 +86,16 @@ export default function ProjectsPage() {
                              shadow-humble hover:shadow-[0_40px_40px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-1
                              overflow-hidden transition-all duration-300"
                 >
-                  {/* Anime.js technical scan animation */}
+                  {/* 3D model of this project's headline equipment */}
                   <div className="h-44 bg-obsidian relative overflow-hidden">
-                    <AnimeImagePlaceholder variant="scan" className="absolute inset-0 w-full h-full" />
+                    <MachineViewer
+                      machine={machineForProject(project.slug)}
+                      hud={false}
+                      annotations={false}
+                      interactive={false}
+                      quality="card"
+                      className="absolute inset-0"
+                    />
                     {/* Category badge */}
                     <div className="absolute top-4 left-4">
                       <span className={cn(
