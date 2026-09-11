@@ -296,6 +296,18 @@
     background-size: 100% 100%, 46px 46px, 46px 46px;
   }
 
+  /* Still captured from the last live render, shown while another viewer holds
+     the WebGL context. Keeps every card populated on browsers (Safari) that
+     cap how many contexts one page may have. */
+  .machine-viewer__still {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: machineFadeIn 400ms ease-out both;
+  }
+
   .machine-viewer__canvas {
     position: absolute;
     inset: 0;

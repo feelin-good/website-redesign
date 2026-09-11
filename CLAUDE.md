@@ -174,6 +174,21 @@ Only the *direction* of view is authored.
 fetch). Without it, every surface with `metalness > 0` renders near-black. `scene.environmentIntensity`
 is held low so the key light still does the shaping.
 
+### Safari and the context budget
+Safari caps how many live WebGL contexts a page may hold and **silently blanks the
+surplus** rather than erroring — a six-up card grid rendered nothing there while Chrome
+was fine. `contextBudget.ts` caps concurrent contexts at 2. Big viewers `hold` a slot;
+card viewers `cycle`: render, capture a still with `toDataURL`, release. That is why
+card canvases set `preserveDrawingBuffer`. **Never mount a `<Canvas>` outside this
+budget** — it reintroduces the blank-card bug.
+
+### Look
+`applyRim` patches every material with a warm fresnel term, so parts read as matte
+volumes with hot silhouette edges rather than flat shapes. `AssembleRig` derives an
+explode axis per top-level group from its position relative to the whole and animates
+the machine together on reveal — no machine authors an explode axis by hand. It stops
+writing once settled so machines that animate their own groups get their positions back.
+
 ### Cost control
 - `MachineViewer` mounts the WebGL context only when the element nears the viewport, and sets
   `frameloop="never"` when it scrolls away.

@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
@@ -109,11 +109,13 @@ function AutoFrame({
   controlsRef,
   direction,
   padding,
+  onFramed,
 }: {
   modelRef: React.RefObject<THREE.Group>
   controlsRef: React.MutableRefObject<any>
   direction: [number, number, number]
   padding: number
+  onFramed: () => void
 }) {
   const camera = useThree(s => s.camera) as THREE.PerspectiveCamera
   const size = useThree(s => s.size)
@@ -171,6 +173,138 @@ function AutoFrame({
       controls.update()
     }
     done.current = true
+    onFramed()
+  })
+
+  return null
+}
+
+/** Fires once, a few frames after the scene settles — the cue to grab a still. */
+function ReadyAfter({ frames, onReady }: { frames: number; onReady: () => void }) {
+  const count = useRef(0)
+  const fired = useRef(false)
+  useFrame(() => {
+    if (fired.current) return
+    if (++count.current < frames) return
+    fired.current = true
+    onReady()
+  })
+  return null
+}
+
+/**
+ * Warm fresnel rim, patched into every material in the model.
+ *
+ * This is what gives the reference its look: parts read as dark matte volumes
+ * whose silhouettes are picked out by a hot edge. Doing it in the shader rather
+ * than with a back light means the highlight tracks the true curvature of each
+ * strut, so a lattice boom reads as hundreds of lit edges instead of a glow.
+ */
+const RIM_COLOR = new THREE.Color('#ff5a22')
+
+function applyRim(root: THREE.Object3D, strength: number) {
+  root.traverse(obj => {
+    const mesh = obj as THREE.Mesh
+    if (!mesh.material) return
+    const list = Array.isArray(mesh.material) ? mesh.material : [mesh.material]
+
+    for (const mat of list) {
+      const std = mat as THREE.MeshStandardMaterial
+      if (std.userData?.rimPatched) continue
+      std.userData = { ...std.userData, rimPatched: true }
+
+      std.onBeforeCompile = shader => {
+        shader.uniforms.uRimColor = { value: RIM_COLOR }
+        shader.uniforms.uRimStrength = { value: strength }
+        shader.uniforms.uRimPower = { value: 5.0 }
+        shader.fragmentShader = shader.fragmentShader
+          .replace(
+            '#include <common>',
+            `#include <common>
+             uniform vec3 uRimColor;
+             uniform float uRimStrength;
+             uniform float uRimPower;`
+          )
+          .replace(
+            '#include <dithering_fragment>',
+            `#include <dithering_fragment>
+             float facing = abs(dot(normalize(vNormal), normalize(vViewPosition)));
+             float rim = pow(1.0 - facing, uRimPower);
+             gl_FragColor.rgb += uRimColor * rim * uRimStrength;`
+          )
+      }
+      std.needsUpdate = true
+    }
+  })
+}
+
+/**
+ * Assembles the machine out of its own exploded parts on reveal. Part
+ * directions are derived from each top-level group's position relative to the
+ * whole, so no machine has to author an explode axis by hand.
+ */
+function AssembleRig({
+  modelRef,
+  duration = 1.7,
+}: {
+  modelRef: React.RefObject<THREE.Group>
+  duration?: number
+}) {
+  const parts = useRef<
+    { obj: THREE.Object3D; base: THREE.Vector3; offset: THREE.Vector3 }[]
+  >([])
+  const ready = useRef(false)
+  const settled = useRef(false)
+  const startedAt = useRef(0)
+
+  useFrame(({ clock }) => {
+    if (settled.current) return
+    const root = modelRef.current
+    if (!root) return
+
+    if (!ready.current) {
+      // modelRef wraps the machine component, which is itself one group.
+      let host: THREE.Object3D = root
+      while (host.children.length === 1 && host.children[0].children.length > 1) {
+        host = host.children[0]
+      }
+      if (host.children.length < 2) return
+
+      const whole = new THREE.Box3().setFromObject(host)
+      if (whole.isEmpty()) return
+      const centre = whole.getCenter(new THREE.Vector3())
+      const spread = whole.getSize(new THREE.Vector3()).length() * 0.16
+
+      parts.current = host.children.map(obj => {
+        const box = new THREE.Box3().setFromObject(obj)
+        const dir = box.isEmpty()
+          ? new THREE.Vector3(0, 1, 0)
+          : box.getCenter(new THREE.Vector3()).sub(centre)
+        if (dir.lengthSq() < 1e-6) dir.set(0, 1, 0)
+        return {
+          obj,
+          base: obj.position.clone(),
+          offset: dir.normalize().multiplyScalar(spread),
+        }
+      })
+      ready.current = true
+      startedAt.current = clock.elapsedTime
+    }
+
+    const p = Math.min(1, (clock.elapsedTime - startedAt.current) / duration)
+    const eased = 1 - Math.pow(1 - p, 4)
+    const amount = 1 - eased
+
+    for (const { obj, base, offset } of parts.current) {
+      obj.position.copy(base).addScaledVector(offset, amount)
+    }
+
+    if (p >= 1) {
+      // Stop writing so machines that animate their own top-level groups
+      // (the vibrating screen, for one) get their positions back.
+      for (const { obj, base } of parts.current) obj.position.copy(base)
+      settled.current = true
+    }
   })
 
   return null
@@ -192,7 +326,7 @@ function StudioEnvironment() {
     scene.environment = target.texture
     // The room is a bright white box; at full strength it washes the models
     // out and flattens the key light, so the IBL is used only as fill.
-    scene.environmentIntensity = 0.38
+    scene.environmentIntensity = 0.26
     return () => {
       scene.environment = null
       target.dispose()
@@ -210,37 +344,52 @@ export function MachineScene({
   showAnnotations,
   interactive,
   quality = 'full',
-  active = true,
+  onReady,
+  onContextLost,
 }: {
   spec: MachineSpec
   speed: number
   showAnnotations: boolean
   interactive: boolean
   quality?: 'full' | 'card'
-  /** false stops the render loop entirely — used when scrolled out of view */
-  active?: boolean
+  /** Called once the model is framed and drawn — cue to capture a still */
+  onReady?: () => void
+  onContextLost?: () => void
 }) {
   const { Component } = spec
   const full = quality === 'full'
   const modelRef = useRef<THREE.Group>(null)
   const controlsRef = useRef<any>(null)
+  const [framed, setFramed] = useState(false)
 
   return (
     <Canvas
-      frameloop={active ? 'always' : 'never'}
       shadows={full}
-      dpr={full ? [1, 1.75] : [1, 1.3]}
-      gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+      dpr={full ? [1, 1.75] : [1, 1.25]}
+      gl={{
+        antialias: true,
+        alpha: true,
+        // Card canvases are read back with toDataURL to produce a still, which
+        // needs the drawing buffer to survive the composite.
+        preserveDrawingBuffer: !full,
+      }}
       camera={{ position: spec.viewDirection, fov: 30, near: 0.5, far: 220 }}
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.toneMappingExposure = 1.15
+
+        const canvas = gl.domElement
+        const lost = (e: Event) => {
+          e.preventDefault()
+          onContextLost?.()
+        }
+        canvas.addEventListener('webglcontextlost', lost)
       }}
     >
       {/* Key light — hard, high, casts the structural shadows */}
       <directionalLight
         position={[18, 26, 14]}
-        intensity={1.7}
+        intensity={1.35}
         castShadow={full}
         shadow-mapSize={[2048, 2048]}
         shadow-camera-left={-26}
@@ -251,10 +400,10 @@ export function MachineScene({
         shadow-bias={-0.0008}
       />
       {/* Cool fill from the opposite side keeps the shadow side readable */}
-      <directionalLight position={[-16, 10, -12]} intensity={0.45} color="#b8c6d6" />
-      {/* Accent rim light picks the silhouette out of the dark ground */}
-      <pointLight position={[-10, 6, 10]} intensity={90} distance={44} color="#ff4000" />
-      <hemisphereLight args={['#ffffff', '#202020', 0.2]} />
+      <directionalLight position={[-16, 10, -12]} intensity={0.38} color="#b8c6d6" />
+      {/* Warm kicker behind the machine, working with the shader rim */}
+      <directionalLight position={[-14, 7, -16]} intensity={0.55} color="#ff6a33" />
+      <hemisphereLight args={['#ffffff', '#141414', 0.16]} />
       <StudioEnvironment />
 
       <Suspense fallback={null}>
@@ -303,7 +452,14 @@ export function MachineScene({
         direction={spec.viewDirection}
         // Callout labels sit outside the model, so leave them room.
         padding={showAnnotations ? 1.16 : 1.04}
+        onFramed={() => {
+          if (modelRef.current) applyRim(modelRef.current, full ? 1.35 : 1.0)
+          setFramed(true)
+        }}
       />
+      {/* Cards are captured as stills, so they skip the reveal and sit assembled. */}
+      {full && <AssembleRig modelRef={modelRef} />}
+      {framed && onReady && <ReadyAfter frames={12} onReady={onReady} />}
       <OrbitControls
         ref={controlsRef}
         enablePan={false}

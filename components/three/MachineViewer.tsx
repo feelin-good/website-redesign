@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { MACHINES, type MachineId } from './registry'
+import { requestSlot, type SlotMode } from './contextBudget'
 
 const MachineScene = dynamic(
   () => import('./MachineScene').then(m => m.MachineScene),
@@ -33,7 +34,7 @@ interface Props {
   hud?: boolean
   /** Allow drag-to-orbit and zoom (off for small cards) */
   interactive?: boolean
-  /** 'card' drops shadows and contact shadows so a grid of viewers stays cheap */
+  /** 'card' drops shadows so a grid of viewers stays cheap */
   quality?: 'full' | 'card'
   className?: string
 }
@@ -48,10 +49,16 @@ export function MachineViewer({
 }: Props) {
   const spec = MACHINES[machine]
   const hostRef = useRef<HTMLDivElement>(null)
-  const [mounted, setMounted] = useState(false)   // in viewport → build the scene
-  const [visible, setVisible] = useState(false)   // in viewport → run the clock
+  const releaseRef = useRef<(() => void) | null>(null)
+
+  const [live, setLive] = useState(false)        // holds a WebGL context now
+  const [nearby, setNearby] = useState(false)    // in/near the viewport
+  const [snapshot, setSnapshot] = useState<string | null>(null)
   const [speed, setSpeed] = useState(1)
   const [supported, setSupported] = useState(true)
+
+  // Big interactive viewers keep their context; cards take a turn and yield.
+  const mode: SlotMode = quality === 'full' ? 'hold' : 'cycle'
 
   // Respect prefers-reduced-motion: keep the model, drop the motion.
   useEffect(() => {
@@ -62,40 +69,97 @@ export function MachineViewer({
     return () => mq.removeEventListener('change', apply)
   }, [])
 
-  useEffect(() => {
-    setSupported(hasWebGL())
-  }, [])
+  useEffect(() => { setSupported(hasWebGL()) }, [])
 
-  // Only build the WebGL context once the card is actually near the viewport,
-  // and pause rendering entirely when it scrolls away.
+  // Track whether the viewer is worth spending a context on.
   useEffect(() => {
     const el = hostRef.current
     if (!el) return
     const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setMounted(true)
-        setVisible(e.isIntersecting)
-      },
-      { rootMargin: '250px 0px', threshold: 0.01 }
+      ([e]) => setNearby(e.isIntersecting),
+      { rootMargin: '300px 0px', threshold: 0.01 }
     )
     io.observe(el)
     return () => io.disconnect()
   }, [])
 
+  const releaseSlot = useCallback(() => {
+    releaseRef.current?.()
+    releaseRef.current = null
+    setLive(false)
+  }, [])
+
+  // Queue for a context whenever we are on screen and don't already have one.
+  // Cards that have already captured a still don't queue again unless hovered.
+  useEffect(() => {
+    if (!supported || !nearby || releaseRef.current) return
+    if (mode === 'cycle' && snapshot) return
+
+    releaseRef.current = requestSlot(mode, () => setLive(true))
+    return () => {
+      releaseRef.current?.()
+      releaseRef.current = null
+    }
+  }, [supported, nearby, mode, snapshot])
+
+  // Give the slot back when we scroll away.
+  useEffect(() => {
+    if (!nearby && releaseRef.current) releaseSlot()
+  }, [nearby, releaseSlot])
+
+  /**
+   * The scene has settled. Keep a still of it so the card still shows its
+   * machine after the context goes to the next viewer in the queue.
+   */
+  const handleReady = useCallback(() => {
+    if (mode !== 'cycle') return
+    const canvas = hostRef.current?.querySelector('canvas') as HTMLCanvasElement | null
+    if (canvas) {
+      try {
+        setSnapshot(canvas.toDataURL('image/png'))
+      } catch {
+        /* Reading back can fail; the live canvas simply stays until revoked. */
+      }
+    }
+    releaseSlot()
+  }, [mode, releaseSlot])
+
+  /** A lost context (tab backgrounded, GPU reset) must not leave a blank hole. */
+  const handleContextLost = useCallback(() => {
+    releaseSlot()
+  }, [releaseSlot])
+
+  // Cards re-acquire a context on hover so they animate under the pointer.
+  const handleEnter = useCallback(() => {
+    if (mode !== 'cycle' || !supported || releaseRef.current) return
+    releaseRef.current = requestSlot(mode, () => setLive(true))
+  }, [mode, supported])
+
   return (
-    <div ref={hostRef} className={`machine-viewer ${className}`}>
-      {/* Blueprint backdrop — also the graceful fallback when WebGL is absent */}
+    <div
+      ref={hostRef}
+      className={`machine-viewer ${className}`}
+      onPointerEnter={handleEnter}
+    >
+      {/* Blueprint backdrop — also the fallback when WebGL is unavailable */}
       <div className="machine-viewer__backdrop" aria-hidden="true" />
 
-      {supported && mounted && (
+      {/* Still from the last render, shown while another viewer has the context */}
+      {snapshot && !live && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img className="machine-viewer__still" src={snapshot} alt="" aria-hidden="true" />
+      )}
+
+      {supported && live && (
         <div className="machine-viewer__canvas">
           <MachineScene
             spec={spec}
-            speed={visible ? speed : 0}
+            speed={speed}
             showAnnotations={annotations}
             interactive={interactive}
             quality={quality}
-            active={visible}
+            onReady={handleReady}
+            onContextLost={handleContextLost}
           />
         </div>
       )}
@@ -119,7 +183,7 @@ export function MachineViewer({
 
       {/* Screen-reader description — the canvas itself is decorative. */}
       <span className="sr-only">
-        Interactive three-dimensional model of a {spec.name} ({spec.specs.join(', ')}).
+        Three-dimensional model of a {spec.name} ({spec.specs.join(', ')}).
       </span>
     </div>
   )
