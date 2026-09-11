@@ -3,40 +3,33 @@ import { Phone, Mail, MapPin, Clock, Linkedin, Youtube, Twitter } from 'lucide-r
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
 import { ContactForm } from '@/components/sections/ContactForm'
+import { Map, MapMarker, MarkerContent, MarkerLabel } from '@/components/ui/map'
 import { COMPANY } from '@/lib/data/company'
+
+const OFFICES = [
+  {
+    city: 'Ghaziabad (HQ)',
+    address: 'Lepton House, NH-9, Loni, Ghaziabad — 201102',
+    phone: '+91-120-2612-0000',
+    email: 'contact@lepton.co.in',
+    longitude: 77.3574,
+    latitude: 28.6275,
+  },
+  {
+    city: 'Delhi',
+    address: '405, Plot A-23, Institutional Area, Phase II, Delhi — 110016',
+    phone: '+91-11-4010-0000',
+    email: 'delhi@lepton.co.in',
+    longitude: 77.2512,
+    latitude: 28.5491,
+  },
+]
 
 export const metadata: Metadata = {
   title: 'Contact Us',
   description:
-    'Get in touch with Lepton Projects Pvt. Ltd. — our engineering team responds within 24 hours. Offices in Pune, Mumbai, Bangalore, Hyderabad, and Delhi.',
+    'Get in touch with Lepton Projects Pvt. Ltd. — our engineering team responds within 24 hours. Offices in Ghaziabad (HQ) and Delhi.',
 }
-
-const OFFICES = [
-  {
-    city: 'Pune (HQ)',
-    address: '4th Floor, Lepton House, Baner Road, Pune — 411045',
-    phone: '+91-20-2612-0000',
-    email: 'pune@lepton.co.in',
-  },
-  {
-    city: 'Mumbai',
-    address: '12th Floor, One BKC, Bandra Kurla Complex, Mumbai — 400051',
-    phone: '+91-22-6120-0000',
-    email: 'mumbai@lepton.co.in',
-  },
-  {
-    city: 'Bengaluru',
-    address: 'Level 6, Prestige Tower, Lavelle Road, Bengaluru — 560001',
-    phone: '+91-80-4120-0000',
-    email: 'bangalore@lepton.co.in',
-  },
-  {
-    city: 'Hyderabad',
-    address: '5th Floor, Cyber Towers, HITEC City, Hyderabad — 500081',
-    phone: '+91-40-4012-0000',
-    email: 'hyderabad@lepton.co.in',
-  },
-]
 
 export default function ContactPage() {
   return (
@@ -149,15 +142,15 @@ export default function ContactPage() {
 
               {/* Response promise */}
               <AnimateOnScroll animation="slide-right" delay={100}>
-                <div className="bg-navy-900 rounded-2xl p-6 border border-navy-800">
+                <div className="bg-obsidian rounded-card p-6 border border-obsidian/50">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest">
+                    <div className="w-2 h-2 bg-electric-orange rounded-full animate-pulse" />
+                    <span className="text-xs font-semibold text-electric-orange uppercase tracking-widest">
                       Response Guarantee
                     </span>
                   </div>
                   <p className="text-white font-semibold mb-2">Within 24 Business Hours</p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-sm text-granite">
                     Every enquiry is reviewed by a senior engineer who will reach out to
                     understand your requirements before proposing next steps.
                   </p>
@@ -168,7 +161,7 @@ export default function ContactPage() {
             {/* Contact form */}
             <div className="lg:col-span-8">
               <AnimateOnScroll animation="slide-left">
-                <div className="bg-white rounded-2xl border border-alabaster shadow-card p-8 lg:p-10">
+                <div className="bg-white rounded-card border border-alabaster shadow-humble p-8 lg:p-10">
                   <SectionHeader
                     tag="Send a Message"
                     title="Tell Us About Your Project"
@@ -188,39 +181,54 @@ export default function ContactPage() {
         <div className="container-main">
           <SectionHeader
             tag="Our Offices"
-            title="Pan-India Engineering Presence"
-            description="Five offices strategically located to serve clients across India's major industrial and commercial hubs."
+            title="Engineering Hubs Across India"
+            description="Strategically located offices to serve clients across India's major industrial and commercial centers."
             align="center"
             className="mb-12 mx-auto"
           />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 gap-8">
             {OFFICES.map((office, i) => (
               <AnimateOnScroll key={office.city} animation="fade-up" delay={i * 80}>
-                <div className="bg-ghost-white rounded-2xl border border-alabaster p-6 h-full
-                                hover:border-orange-200 hover:shadow-md transition-all duration-200">
-                  {/* City header */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-orange-500" />
-                    <h3 className="font-display font-bold text-navy-900">{office.city}</h3>
+                <div className="bg-ghost-white rounded-card border border-alabaster overflow-hidden
+                                hover:border-alabaster hover:shadow-md transition-all duration-200 h-full flex flex-col">
+                  {/* Map */}
+                  <div className="h-48 bg-ghost-white relative">
+                    <Map center={[office.longitude, office.latitude]} zoom={13}>
+                      <MapMarker longitude={office.longitude} latitude={office.latitude}>
+                        <MarkerContent>
+                          <div className="w-8 h-8 bg-electric-orange rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                            L
+                          </div>
+                        </MarkerContent>
+                        <MarkerLabel>{office.city}</MarkerLabel>
+                      </MapMarker>
+                    </Map>
                   </div>
-                  <div className="space-y-2.5">
-                    <div className="flex items-start gap-2">
-                      <MapPin size={13} className="text-orange-400 mt-0.5 shrink-0" />
-                      <p className="text-xs text-granite leading-snug">{office.address}</p>
+                  {/* Info */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-2 h-2 rounded-full bg-electric-orange" />
+                      <h3 className="font-display font-bold text-obsidian">{office.city}</h3>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Phone size={13} className="text-orange-400 shrink-0" />
-                      <a href={`tel:${office.phone}`}
-                         className="text-xs text-granite hover:text-orange-500 transition-colors">
-                        {office.phone}
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Mail size={13} className="text-orange-400 shrink-0" />
-                      <a href={`mailto:${office.email}`}
-                         className="text-xs text-granite hover:text-orange-500 transition-colors">
-                        {office.email}
-                      </a>
+                    <div className="space-y-2.5 flex-1">
+                      <div className="flex items-start gap-2">
+                        <MapPin size={13} className="text-electric-orange mt-0.5 shrink-0" />
+                        <p className="text-xs text-granite leading-snug">{office.address}</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Phone size={13} className="text-electric-orange shrink-0" />
+                        <a href={`tel:${office.phone}`}
+                           className="text-xs text-granite hover:text-electric-orange transition-colors">
+                          {office.phone}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Mail size={13} className="text-electric-orange shrink-0" />
+                        <a href={`mailto:${office.email}`}
+                           className="text-xs text-granite hover:text-electric-orange transition-colors">
+                          {office.email}
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
