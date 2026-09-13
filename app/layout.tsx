@@ -71,16 +71,13 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
     creator: '@leptonprojects',
   },
+  // Staging preview — a project-path robots.txt is not honoured by crawlers,
+  // so the meta tag is what actually keeps this deploy out of search results.
   robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: { index: false, follow: false },
   },
   alternates: {
     canonical: BASE_URL,

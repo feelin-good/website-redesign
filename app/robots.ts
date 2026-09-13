@@ -1,15 +1,13 @@
 import type { MetadataRoute } from 'next'
 
+// Staging deploy: keep the whole preview out of search results.
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/_next/'],
+        disallow: '/',
       },
     ],
-    sitemap: 'https://lepton.co.in/sitemap.xml',
-    host: 'https://lepton.co.in',
   }
 }
