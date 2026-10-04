@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2 · Field unit</title>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;600&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--al:#dcdcd8;--white:#fbfbf9;--ink:#111;--mute:#6b6b66;--red:#d83828;--navy:#383070;--lcd:#14151a;--glow:#ff5a3c}
+*{box-sizing:border-box;margin:0}
+body{background:var(--white);color:var(--ink);font:14px/1.5 'Archivo',sans-serif}
+.mono{font-family:'Martian Mono',monospace;font-size:10.5px;letter-spacing:.02em}
+header{display:flex;align-items:center;gap:18px;padding:18px 28px;border-bottom:1px solid #e6e6e2}
+header img{height:30px}
+header nav{margin-left:auto;display:flex;gap:22px}
+header nav a{color:var(--ink);text-decoration:none}
+.device{margin:40px auto;max-width:1180px;background:var(--al);border-radius:28px;padding:26px;display:grid;grid-template-columns:1.25fr .75fr;gap:22px;box-shadow:inset 0 1px 0 #fff,0 30px 60px -30px rgba(0,0,0,.35)}
+.screen{background:var(--lcd);border-radius:14px;padding:18px;position:relative;overflow:hidden;aspect-ratio:16/10}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;mix-blend-mode:screen;filter:grayscale(1) contrast(1.2)}
+.screen .hud{position:absolute;inset:16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.screen .tph{font:300 64px/1 'Martian Mono';color:var(--glow)}
+.side{display:flex;flex-direction:column;gap:18px}
+h1{font:800 46px/.98 'Archivo';letter-spacing:-.03em}
+h1 span{color:var(--red)}
+.knob{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#cfcfca 60%,#b9b9b4);box-shadow:0 10px 18px -8px rgba(0,0,0,.45),inset 0 -3px 6px rgba(0,0,0,.12);position:relative;align-self:center;transform:rotate(-40deg)}
+.knob:after{content:'';position:absolute;left:50%;top:10px;width:6px;height:28px;margin-left:-3px;border-radius:3px;background:var(--red)}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.key{aspect-ratio:1;border-radius:12px;background:var(--white);box-shadow:0 3px 0 #b5b5b0;display:flex;align-items:flex-end;padding:8px;font:600 10px 'Martian Mono';text-transform:lowercase}
+.key.r{background:var(--red);color:#fff;box-shadow:0 3px 0 #9d2416}.key.n{background:var(--navy);color:#fff;box-shadow:0 3px 0 #211b4a}.key.k{background:#222;color:#fff;box-shadow:0 3px 0 #000}
+.strip{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;border-top:1px solid #c8c8c3;padding-top:18px}
+.strip b{display:block;font:300 34px 'Martian Mono'}
+.pix{grid-column:1/-1;display:flex;gap:28px;align-items:end}
+.pix svg{height:60px;shape-rendering:crispEdges}
+@media(max-width:800px){.device{grid-template-columns:1fr;margin:16px;padding:16px}.strip{grid-template-columns:1fr 1fr}header nav{display:none}}
+</style></head><body>
+<header><img src="/lepton-logo.png" alt="Lepton"><nav class="mono"><a href="#">solutions</a><a href="#">register</a><a href="#">hitechaudit®</a><a href="#">company</a><a href="#">contact</a></nav></header>
+<section class="device">
+ <div class="screen"><img src="/photos/bwr-sail-meghahatuburu.jpg" alt="">
+  <div class="hud mono"><div style="display:flex;justify-content:space-between"><span>plate 01/08 · sail meghahatuburu</span><span>● rec 2019.11</span></div>
+  <div><div class="tph">3000</div><div>tph iron ore · bucket wheel reclaimer · boom 41.25 m</div></div></div></div>
+ <div class="side">
+  <div class="mono" style="color:var(--mute)">lepton projects · field unit lp-08 · since 2008</div>
+  <h1>Built to move <span>bulk.</span></h1>
+  <p>Stackers, reclaimers, feeders and conveyors. Engineered, made in our own works and kept running.</p>
+  <div class="knob" aria-hidden="true"></div>
+  <div class="keys"><div class="key r">send ga</div><div class="key n">register</div><div class="key">audit</div><div class="key k">works</div></div>
+ </div>
+ <div class="strip mono"><div><b>450+</b>projects</div><div><b>82+</b>stackers &amp; reclaimers</div><div><b>260+</b>km of conveyor</div><div><b>38.5</b>km longest system</div></div>
+ <div class="pix" aria-hidden="true">
+  <svg viewBox="0 0 24 12"><path fill="#111" d="M2 10h20v1H2zM4 8h3v2H4zM5 3h1v5H5zM6 3h14v1H6zM18 4h1v2h-1zM17 6h3v1h-3z"/><path fill="#d83828" d="M8 8h9v2H8z"/></svg>
+  <svg viewBox="0 0 24 12"><path fill="#111" d="M1 10h22v1H1zM3 9h18v1H3zM5 7h14v2H5z"/><path fill="#383070" d="M8 4h8v3H8z"/></svg>
+  <svg viewBox="0 0 24 12"><path fill="#111" d="M1 10h22v1H1zM2 9h1v1H2zM4 8h1v2H4zM7 6h1v4H7zM10 4h1v6h-1zM13 2h9v1h-9z"/><path fill="#d83828" d="M5 7h2v1H5zM8 5h2v1H8zM11 3h2v1h-2z"/></svg>
+ </div>
+</section></body></html>

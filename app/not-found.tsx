@@ -2,10 +2,15 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <section style={{ padding: 'clamp(40px, 8vw, 120px) var(--gutter)' }}>
-      <p className="ref">Error · sheet not in register</p>
-      <h1 className="display" style={{ margin: '14px 0 22px' }}>No such <em>drawing.</em></h1>
-      <Link className="stamp ink" href="/">Back to the general arrangement →</Link>
-    </section>
+    <div className="wrap">
+      <section className="chapter">
+        <div className="num" aria-hidden>4<span>04</span></div>
+        <div className="txt">
+          <p className="mono mute">error · no signal</p>
+          <h1 className="h1">Nothing on <em>this channel.</em></h1>
+          <p><Link className="key" href="/">home<span className="led" /></Link></p>
+        </div>
+      </section>
+    </div>
   )
 }

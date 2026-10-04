@@ -43,3 +43,7 @@ next-env.d.ts
 !/design/renders/r4-home-laptop-fold.png
 !/design/renders/r5-company-laptop.png
 .vercel
+/design/te-rams/renders/*
+!/design/te-rams/renders/*-fold.png
+!/design/te-rams/renders/t1-home-laptop.png
+/design/te-rams/renders/warm-*

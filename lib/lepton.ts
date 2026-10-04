@@ -339,3 +339,34 @@ export const PROJECTS: Project[] = [
 PROJECTS.forEach((p, i) => { p.ref = p.no ?? `LP-${String(i + 1).padStart(3, '0')}` })
 
 export const KINDS: Kind[] = ['Stockyard', 'Feeders', 'Conveyors', 'EPCM', 'Revamp', 'HiTechAudit®', 'Erection']
+
+/* ── hero plates shown on the unit's screen ── */
+export interface Plate {
+  src: string
+  alt: string
+  title: string
+  where: string
+  date: string
+  value: string // big LCD readout
+  unit: string
+  notes: string[]
+}
+
+export const PLATES: Plate[] = [
+  { src: '/photos/bwr-sail-meghahatuburu.jpg', alt: "Lepton's yellow bucket wheel reclaimer working an iron ore stockpile at SAIL Meghahatuburu",
+    title: 'bucket wheel reclaimer', where: 'sail meghahatuburu', date: '2019.11', value: '3000', unit: 'tph iron ore', notes: ['boom 41.25 m', 'design, manufacture, e&c'] },
+  { src: '/photos/adani-mundra-bwsr.jpg', alt: 'Blue bucket wheel stacker-reclaimers on the coal yard at Adani West Port, Mundra',
+    title: 'bwsrs & yard conveyors', where: 'l&t · adani west port, mundra', date: '2016.10', value: '6800', unit: 'tph stacking', notes: ['4 bwsr + 2 bwr', 'reclaiming 3500 tph'] },
+  { src: '/photos/jaypee-super-dome.jpg', alt: 'Circular stacker-reclaimer under the ribbed roof of an 82 metre dome, Jaypee Super Cement',
+    title: 'circular dome & stacker-reclaimer', where: 'jaypee super cement, sonebhadra', date: '2012.10', value: '82', unit: 'm dome', notes: ['circular stacker/reclaimer', 'coal feed conveyor'] },
+  { src: '/photos/qcc-stacker-restored.jpg', alt: "Qassim Cement's limestone stacker back at work in its shed after restoration",
+    title: 'limestone stacker restoration', where: 'qassim cement, saudi arabia', date: '2015.10', value: '24', unit: 'days to restore', notes: ['collapsed sep 2015', 'back to 2200 tph'] },
+  { src: '/photos/ultratech-manikgarh.jpg', alt: 'Stacker under erection with orange handrails at UltraTech Manikgarh',
+    title: 'stacker & side scraper reclaimer', where: 'ultratech cement, manikgarh', date: '2023.05', value: '275', unit: 'tph', notes: ['boom 16.1 m', 'followed by an order for 12 more'] },
+  { src: '/photos/acc-jamul-bridge-reclaimer.jpg', alt: 'Limestone bridge reclaimer spanning the stockpile in the shed at ACC Jamul',
+    title: 'bridge reclaimer upgrade', where: 'acc jamul · after hitechaudit®', date: '2017.09', value: '850', unit: 'tph (was 500)', notes: ['new rake car & harrow', 'bridge strengthened'] },
+  { src: '/photos/nalco-apron-feeder.jpg', alt: 'Orange apron feeder with Lepton nameplate at the NALCO receiving hopper',
+    title: 'apron feeders', where: 'nalco · rom receiving hopper', date: '2023.06', value: '1250', unit: 'tph bauxite', notes: ['pan width 1600 mm', '75 kw vfd drive'] },
+  { src: '/photos/himachal-circular-stockyard.jpg', alt: 'Aerial view of the circular stockyard dome and conveyor galleries at Jaypee Himachal Cement',
+    title: 'coal & limestone circular stockyard', where: 'jaypee himachal cement', date: '2010.04', value: '1200', unit: 'tph limestone stacker', notes: ['reclaimer 1000 tph', 'e&c supervision for phb'] },
+]

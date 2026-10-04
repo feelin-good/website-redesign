@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1 · Faceplate</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Narrow:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--body:#e4e3df;--panel:#f6f5f2;--ink:#1d1c1a;--mute:#76746e;--red:#d83828;--navy:#383070}
+*{box-sizing:border-box;margin:0}
+body{background:var(--body);color:var(--ink);font:15px/1.5 'Archivo',sans-serif}
+.unit{max-width:1280px;margin:28px auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:20px;padding:18px 0 22px}
+.top img{height:34px}
+.top nav{margin-left:auto;display:flex;gap:6px}
+.top nav a{font:500 12px 'Archivo';text-transform:lowercase;color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:999px;background:var(--panel)}
+.top nav a.on{background:var(--ink);color:var(--panel)}
+.face{display:grid;grid-template-columns:1.1fr 1fr;gap:12px}
+.panel{background:var(--panel);border-radius:14px;padding:28px}
+h1{font:500 clamp(40px,4.6vw,68px)/1.02 'Archivo';letter-spacing:-.025em;max-width:13ch}
+h1 i{font-style:normal;color:var(--mute)}
+.lede{margin-top:20px;max-width:42ch;color:var(--mute);font-size:16px}
+.power{display:flex;align-items:center;gap:14px;margin-top:36px}
+.power span{width:14px;height:14px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(216,56,40,.15)}
+.power a{font:500 13px 'Archivo';color:var(--ink)}
+.photo{position:relative;padding:0;overflow:hidden;min-height:440px}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.label{position:absolute;left:16px;bottom:16px;background:var(--panel);border-radius:8px;padding:8px 12px;font:500 11px 'Archivo Narrow';letter-spacing:.06em;text-transform:uppercase}
+.row{display:grid;grid-template-columns:repeat(4,1fr) 1.3fr;gap:12px;margin-top:12px}
+.display{background:#2b2a27;color:#f6f5f2;border-radius:14px;padding:20px;box-shadow:inset 0 2px 6px rgba(0,0,0,.4)}
+.display b{display:block;font:500 44px/1 'Archivo';letter-spacing:-.02em}
+.display small{font:500 11px 'Archivo Narrow';letter-spacing:.06em;text-transform:uppercase;color:#a9a7a0}
+.display:first-child b{color:#ff6a4f}
+.grille{background-color:var(--panel);background-image:radial-gradient(circle,#c8c6c0 2.2px,transparent 2.6px);background-size:14px 14px;border-radius:14px}
+.list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.list .panel h3{font:500 20px 'Archivo';margin:10px 0 6px}.list .panel p{color:var(--mute);font-size:14px}
+.n{font:500 11px 'Archivo Narrow';letter-spacing:.08em;color:var(--mute)}
+@media(max-width:800px){.face,.row,.list{grid-template-columns:1fr}.top nav{display:none}.row .grille{height:80px}}
+</style></head><body><div class="unit">
+<div class="top"><img src="/lepton-logo.png" alt="Lepton"><nav><a class="on" href="#">overview</a><a href="#">solutions</a><a href="#">register</a><a href="#">hitechaudit®</a><a href="#">company</a><a href="#">contact</a></nav></div>
+<div class="face">
+ <div class="panel"><div class="n">LP–01 · BULK MATERIAL HANDLING</div>
+  <h1 style="margin-top:18px">Less machine. <i>More tonnes per hour.</i></h1>
+  <p class="lede">Stackers, reclaimers, feeders and conveyors for cement, power, steel, ports and mines. Engineered, built in our own works, and kept running since 2008.</p>
+  <div class="power"><span></span><a href="#">Send us your drawing</a></div></div>
+ <div class="panel photo"><img src="/photos/adani-mundra-bwsr.jpg" alt=""><div class="label">BWSR · Adani West Port, Mundra · 6800 TPH</div></div>
+</div>
+<div class="row">
+ <div class="display"><small>projects</small><b>450+</b></div>
+ <div class="display"><small>stackers & reclaimers</small><b>82+</b></div>
+ <div class="display"><small>conveyor km</small><b>260+</b></div>
+ <div class="display"><small>longest system km</small><b>38.5</b></div>
+ <div class="grille" aria-hidden="true"></div>
+</div>
+<div class="list">
+ <div class="panel"><div class="n">01</div><h3>Stockyard</h3><p>Stackers, bridge, side scraper and portal reclaimers, circular stockyards. Up to 3000 TPH.</p></div>
+ <div class="panel"><div class="n">02</div><h3>Conveying</h3><p>Overland belts with horizontal curves, pipe conveyors, trippers. 260 km and counting.</p></div>
+ <div class="panel"><div class="n">03</div><h3>HiTechAudit®</h3><p>46 audits of machines that stopped meeting their rating, and the fixes that brought them back.</p></div>
+</div></div></body></html>

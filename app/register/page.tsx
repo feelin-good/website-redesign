@@ -6,15 +6,16 @@ export const metadata: Metadata = { title: 'Register', description: 'Stockyard m
 
 export default function RegisterPage() {
   return (
-    <section style={{ padding: 'clamp(28px, 4vw, 56px) var(--gutter)' }} aria-labelledby="h">
-      <p className="ref">DWG LP-002 · Drawing register · Sheet 02 of 05</p>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', flexWrap: 'wrap', gap: 20, margin: '14px 0 6px' }}>
-        <h1 className="display" id="h">The register.</h1>
-        <p className="prose" style={{ maxWidth: '44ch' }}>
-          {PROJECTS.length} entries from more than 450 projects since 2008. Open a row for the scope and the numbers.
-        </p>
-      </div>
+    <div className="wrap">
+      <section className="chapter" aria-labelledby="h">
+        <div className="num" aria-hidden>0<span>2</span></div>
+        <div className="txt">
+          <p className="mono mute">chapter 02 · register</p>
+          <h1 className="h1" id="h">{PROJECTS.length} entries. <em>450+ projects.</em></h1>
+          <p className="lede">A selection from everything delivered since 2008. Press a key to filter, open a row for the scope and the numbers.</p>
+        </div>
+      </section>
       <Register projects={PROJECTS} />
-    </section>
+    </div>
   )
 }

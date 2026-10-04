@@ -1,4 +1,12 @@
-# Lepton Projects website: `concept` branch ("the drawing set")
+# Lepton Projects website: `te-rams` branch ("field unit", Teenage Engineering × Dieter Rams)
+
+Same content and data as `drawing-board`; new design. Concept and direction scores: design/te-rams/directions.md.
+Components: `components/unit.tsx` (header, back panel, Meter, Pix), `device.tsx` (home LCD + working knob), `register.tsx`.
+Everything below about the drawing set describes the `drawing-board` branch this one was forked from.
+
+---
+
+# (from drawing-board)
 
 Next.js 14 (App Router), no Tailwind, no UI libraries. Built with the `concept-first-design` skill.
 Read `design/` first: material.md (facts & sources), concepts.md, directions.md (why A), critique.md.
