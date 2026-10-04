@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B · The route</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,500;112,800;125,900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#383070;--red:#d83828;--yellow:#f2b705;--bg:#fbfaf7;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:#16133a;font:17px/1.55 'Archivo',sans-serif;font-stretch:112%}
+header{display:flex;align-items:center;padding:20px 48px;gap:24px}header img{height:42px}
+header .km{margin-left:auto;font:500 13px var(--mono);color:var(--navy)}
+.route{position:relative;padding-left:150px}
+.route:before{content:'';position:absolute;left:96px;top:0;bottom:0;width:10px;background:var(--navy)}
+.ore{position:absolute;left:97px;width:8px;height:8px;background:var(--red)}
+.hero{padding:40px 48px 80px 0}
+.ch{font:500 13px var(--mono);color:var(--red);letter-spacing:.04em}
+h1{font-weight:900;font-stretch:125%;font-size:clamp(56px,8vw,128px);line-height:.86;letter-spacing:-.03em;text-transform:uppercase;margin:18px 0 26px;color:var(--navy)}
+h1 span{color:var(--red)}
+.hero p{max-width:46ch;font-size:19px}
+.station{position:relative;display:grid;grid-template-columns:1fr 1.2fr;gap:48px;padding:56px 48px 56px 0;border-top:1px solid rgba(56,48,112,.15)}
+.station:before{content:attr(data-tt);position:absolute;left:-104px;top:56px;width:52px;height:52px;border-radius:0;background:var(--yellow);border:3px solid var(--navy);font:800 13px 'Archivo';display:flex;align-items:center;justify-content:center;color:var(--navy)}
+.station h2{font-weight:800;font-size:46px;line-height:1;text-transform:uppercase;color:var(--navy);margin:10px 0 16px}
+.station img{width:100%;display:block}
+.facts{display:flex;gap:28px;margin-top:22px}.facts b{display:block;font-weight:900;font-size:36px;color:var(--navy)}.facts small{font:500 12px var(--mono);text-transform:uppercase}
+@media(max-width:700px){.route{padding-left:64px}.route:before{left:22px;width:6px}.ore{left:22px;width:6px}header{padding:16px 20px}.hero{padding:24px 20px 48px 0}.station{grid-template-columns:1fr;padding:40px 20px 40px 0;gap:20px}.station:before{left:-60px;width:40px;height:40px;font-size:11px}}
+</style></head><body>
+<header><img src="/lepton-logo.png" alt="Lepton Projects, since 2008"><div class="km">CHAINAGE 0+000 → 38+500</div></header>
+<div class="route">
+ <i class="ore" style="top:120px"></i><i class="ore" style="top:300px"></i><i class="ore" style="top:520px"></i><i class="ore" style="top:760px"></i>
+ <section class="hero"><div class="ch">KM 0+000 · SIJIMALI MINE</div>
+  <h1>Mine to plant.<br><span>38.5 km</span> of it.</h1>
+  <p>India's longest pipe conveyor and overland system, for Vedanta, is ours. So are 82 stackers and reclaimers and 260 km of conveyors. Everything that moves bulk material between the ground and the kiln, the boiler or the ship.</p></section>
+ <section class="station" data-tt="TT-1"><div><div class="ch">RECEIVING · WAGON TIPPLERS · APRON FEEDERS</div><h2>Take it off the train.</h2><p>Apron feeders up to 1650 TPH of run-of-mine iron ore with 1830 mm pans for NMDC Donimalai. Wagon tipplers fixed when the OEM couldn't make them tip.</p><div class="facts"><div><b>1650</b><small>TPH · NMDC</small></div><div><b>10+</b><small>Apron feeders</small></div></div></div><img src="/photos/paradeep-apron-feeder.jpg" alt="Apron feeders under test at Lepton's Chopanki works"></section>
+ <section class="station" data-tt="TT-2"><div><div class="ch">KM 12+300 · OVERLAND</div><h2>Carry it across the hills.</h2><p>Overland belt conveyors with horizontal curves, pipe conveyors climbing 32 m, dynamic analysis of every start and stop.</p></div><img src="/photos/jaypee-sidhi-conveyors.jpg" alt="Conveyor system at Jaypee Sidhi cement plant"></section>
+</div></body></html>

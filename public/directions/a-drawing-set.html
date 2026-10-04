@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A · The drawing set</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f3f1ea;--ink:#2c2766;--ink2:#383070;--red:#d83828;--line:rgba(44,39,102,.22);--mono:'IBM Plex Mono',monospace;--cond:'Barlow Condensed',sans-serif}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.55 'IBM Plex Sans',sans-serif}
+.sheet{margin:18px;border:1.5px solid var(--ink);position:relative;min-height:calc(100vh - 36px);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:100% 25%,12.5% 100%}
+.refs{position:absolute;font:500 11px var(--mono);color:var(--ink2)}
+.refs.top{top:-16px;left:0;right:0;display:flex}.refs.top span{flex:1;text-align:center}
+.refs.left{left:-14px;top:0;bottom:0;display:flex;flex-direction:column}.refs.left span{flex:1;display:flex;align-items:center}
+header{display:flex;align-items:center;gap:28px;padding:18px 28px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+header img{height:44px}
+header nav{display:flex;gap:26px;margin-left:auto;font:500 13px var(--mono);text-transform:uppercase;letter-spacing:.06em}
+header nav a{color:var(--ink);text-decoration:none}header nav a b{color:var(--red);font-weight:500}
+.hero{display:grid;grid-template-columns:5fr 7fr;background:var(--paper)}
+.hero .copy{padding:56px 40px 40px;border-right:1.5px solid var(--ink);display:flex;flex-direction:column}
+.dwg{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+h1{font:700 clamp(54px,6.4vw,104px)/.88 var(--cond);text-transform:uppercase;letter-spacing:-.01em;margin:26px 0 22px}
+h1 em{font-style:normal;color:var(--red)}
+.lede{max-width:34ch;font-size:17px}
+.stamp{margin-top:auto;align-self:flex-start;border:2px solid var(--red);color:var(--red);font:600 15px var(--mono);padding:10px 16px;text-transform:uppercase;transform:rotate(-2deg);text-decoration:none}
+.plate{position:relative;padding:28px}
+.plate figure{position:relative}
+.plate img{width:100%;display:block;filter:grayscale(.15) contrast(1.05)}
+.plate figcaption{display:flex;justify-content:space-between;font:500 12px var(--mono);margin-top:10px;text-transform:uppercase}
+.dim{position:absolute;left:8%;right:22%;top:12%;border-top:1.5px solid var(--red);color:var(--red);font:600 13px var(--mono);text-align:center}
+.dim:before,.dim:after{content:'';position:absolute;top:-7px;height:12px;border-left:1.5px solid var(--red)}.dim:before{left:0}.dim:after{right:0}
+.dim span{background:var(--red);color:#fff;padding:2px 8px;position:relative;top:-11px}
+.callout{position:absolute;right:6%;bottom:22%;font:500 12px var(--mono);background:var(--paper);border:1.5px solid var(--ink);padding:8px 10px;max-width:220px}
+.callout:before{content:'';position:absolute;left:-60px;top:50%;width:60px;border-top:1.5px solid var(--ink)}
+.titleblock{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--ink);background:var(--paper)}
+.titleblock div{padding:12px 16px;border-right:1px solid var(--ink)}.titleblock div:last-child{border:0}
+.titleblock small{display:block;font:500 10px var(--mono);text-transform:uppercase;letter-spacing:.1em;opacity:.7}
+.titleblock strong{font:600 28px var(--cond)}
+.register{background:var(--paper);border-top:1.5px solid var(--ink);padding:40px}
+.register h2{font:700 44px var(--cond);text-transform:uppercase}
+table{width:100%;border-collapse:collapse;margin-top:18px;font-size:15px}
+th{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;text-align:left;border-bottom:1.5px solid var(--ink);padding:8px}
+td{border-bottom:1px solid var(--line);padding:12px 8px;vertical-align:top}td:first-child{font:500 13px var(--mono);color:var(--red)}
+td.cap{font:600 22px var(--cond)}
+@media(max-width:700px){.hero{grid-template-columns:1fr}.hero .copy{border-right:0;border-bottom:1.5px solid var(--ink);padding:32px 20px}header nav{display:none}.titleblock{grid-template-columns:1fr 1fr}.register{padding:20px}th:nth-child(3),td:nth-child(3){display:none}.callout{display:none}}
+</style></head><body>
+<div class="sheet">
+<div class="refs top"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+<div class="refs left"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+<header><img src="/lepton-logo.png" alt="Lepton Projects, since 2008"><nav><a href="#"><b>01</b> Solutions</a><a href="#"><b>02</b> Products</a><a href="#"><b>03</b> Register</a><a href="#"><b>04</b> HiTechAudit®</a><a href="#"><b>05</b> Works</a><a href="#"><b>06</b> Contact</a></nav></header>
+<section class="hero">
+ <div class="copy">
+  <div class="dwg">DWG LP-000 · General arrangement · Sheet 1 of 6</div>
+  <h1>Concept to commissioning <em>&amp; beyond.</em></h1>
+  <p class="lede">Bulk material handling systems for cement, power, steel, ports and mines: designed, built in our own works at Alwar, erected, and kept running. 450+ projects since 2008.</p>
+  <a class="stamp" href="#">Send us your GA →</a>
+ </div>
+ <div class="plate"><figure>
+  <img src="/photos/bwr-sail-meghahatuburu.jpg" alt="Bucket wheel reclaimer at SAIL Meghahatuburu iron ore mines">
+  <div class="dim"><span>BOOM 41.25 M</span></div>
+  <div class="callout">BUCKET WHEEL RECLAIMER<br>3000 TPH IRON ORE<br>SAIL · MEGHAHATUBURU</div>
+  <figcaption><span>Plate 01 · Design, manufacture, supply, E&amp;C</span><span>Nov 2019</span></figcaption></figure></div>
+</section>
+<div class="titleblock"><div><small>Stackers &amp; reclaimers</small><strong>82+</strong></div><div><small>Conveyors · km</small><strong>260+</strong></div><div><small>Longest system · km</small><strong>38.5</strong></div><div><small>Repeat orders · JK Lakshmi</small><strong>47</strong></div></div>
+<section class="register"><div class="dwg">Drawing register · selected</div><h2>Equipment register</h2>
+<table><tr><th>Dwg</th><th>Equipment</th><th>Client · site</th><th>Capacity</th><th>Year</th></tr>
+<tr><td>465.1691</td><td>Travelling luffing stacker + bridge reclaimer (6 machines)</td><td>Thyssenkrupp · Tororo Cement, Uganda</td><td class="cap">1100 TPH</td><td>—</td></tr>
+<tr><td>453.1872</td><td>12 stackers / reclaimers</td><td>UltraTech · Kukrudih, Karur, Brunpur</td><td class="cap">1980 TPH</td><td>2025</td></tr>
+<tr><td>LP-OLBC</td><td>Overland + pipe conveyor system, 38.5 km</td><td>Vedanta · Sijimali → Lanjigarh</td><td class="cap">2200 TPH</td><td>—</td></tr>
+</table></section>
+</div></body></html>

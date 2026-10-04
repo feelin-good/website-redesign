@@ -33,3 +33,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design renders: keep only the ones design/*.md refers to
+/design/renders/*
+!/design/renders/dir-*-fold.png
+!/design/renders/r1-home-laptop.png
+!/design/renders/r5-home-laptop.png
+!/design/renders/r5-home-iphone.png
+!/design/renders/r4-home-laptop-fold.png
+!/design/renders/r5-company-laptop.png
+.vercel
