@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/webp'], // AVIF encodes too slowly on a cold cache for the hero plates
     remotePatterns: [
       {
         protocol: 'https',

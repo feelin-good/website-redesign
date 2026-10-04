@@ -63,6 +63,12 @@ export function Device() {
     return (Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180) / Math.PI
   }
 
+  // Only mount plates that are showing or next up; keep them once loaded so revisits are instant.
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0, 1]))
+  useEffect(() => {
+    setSeen((s) => (s.has(i) && s.has((i + 1) % n) ? s : new Set(Array.from(s).concat([i, (i + 1) % n]))))
+  }, [i, n])
+
   const p = PLATES[i]
   const rolled = useRoll(p.value, !reduced)
 
@@ -72,7 +78,7 @@ export function Device() {
         <div className="ph">
           {PLATES.map((pl, k) => (
             <div key={pl.src} className={k === i ? 'on' : undefined} aria-hidden={k !== i}>
-              <Image src={pl.src} alt={pl.alt} fill sizes="(max-width: 1000px) 100vw, 64vw" priority={k === 0} loading={k === 0 ? undefined : 'eager'} />
+              {seen.has(k) && <Image src={pl.src} alt={pl.alt} fill sizes="(max-width: 1000px) 100vw, 64vw" priority={k === 0} />}
             </div>
           ))}
         </div>
