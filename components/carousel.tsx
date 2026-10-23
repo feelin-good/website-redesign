@@ -24,7 +24,7 @@ export function PlateCarousel({ slides }: { slides: Slide[] }) {
   const [i, setI] = useState(0)
   const [paused, setPaused] = useState(false)
   const [reduced, setReduced] = useState(false)
-  const timer = useRef<ReturnType<typeof setTimeout>>()
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
   const n = slides.length
   const go = useCallback((k: number) => setI(((k % n) + n) % n), [n])
 
