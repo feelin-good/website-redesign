@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { ArrowRight, MapPin, Calendar, ArrowUpRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
@@ -7,10 +6,7 @@ import { getFeaturedProjects } from '@/lib/data/projects'
 import { cn } from '@/lib/utils'
 
 // Load anime.js animation client-side only
-const AnimeImagePlaceholder = dynamic(
-  () => import('@/components/ui/AnimeImagePlaceholder').then(m => m.AnimeImagePlaceholder),
-  { ssr: false }
-)
+import { AnimeImagePlaceholder } from '@/components/lazy/AnimeImagePlaceholder'
 
 const CATEGORY_COLORS: Record<string, string> = {
   Cement:  'bg-ghost-white text-ink border-alabaster',
