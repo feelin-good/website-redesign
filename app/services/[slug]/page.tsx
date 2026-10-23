@@ -11,7 +11,7 @@ import { SERVICES, getServiceBySlug } from '@/lib/data/services'
 import { INDUSTRIES } from '@/lib/data/industries'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug)
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
   if (!service) return {}
   return {
     title: service.title,
@@ -31,8 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function ServiceDetailPage({ params }: Props) {
-  const service = getServiceBySlug(params.slug)
+export default async function ServiceDetailPage({ params }: Props) {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
   if (!service) notFound()
 
   const relatedIndustries = INDUSTRIES.filter(ind =>

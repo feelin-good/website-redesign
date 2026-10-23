@@ -111,7 +111,7 @@ function AutoFrame({
   padding,
   onFramed,
 }: {
-  modelRef: React.RefObject<THREE.Group>
+  modelRef: React.RefObject<THREE.Group | null>
   controlsRef: React.MutableRefObject<any>
   direction: [number, number, number]
   padding: number
@@ -247,7 +247,7 @@ function AssembleRig({
   modelRef,
   duration = 1.7,
 }: {
-  modelRef: React.RefObject<THREE.Group>
+  modelRef: React.RefObject<THREE.Group | null>
   duration?: number
 }) {
   const parts = useRef<

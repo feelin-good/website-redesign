@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { ArrowRight, MapPin, Calendar, ArrowUpRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
@@ -9,10 +8,7 @@ import { cn } from '@/lib/utils'
 import { machineForProject } from '@/components/three/machineMap'
 
 // WebGL equipment model — client-side only, mounted when it scrolls into view
-const MachineViewer = dynamic(
-  () => import('@/components/three/MachineViewer').then(m => m.MachineViewer),
-  { ssr: false }
-)
+import { MachineViewer } from '@/components/lazy/MachineViewer'
 
 const CATEGORY_COLORS: Record<string, string> = {
   Cement:  'bg-ghost-white text-ink border-alabaster',

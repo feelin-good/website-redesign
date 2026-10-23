@@ -12,7 +12,7 @@ const CYCLE = 11                          // seconds for a full tip + return
 
 /** Open rail wagon sitting in the cage. The payload mesh is driven by ref so
  *  it can empty out mid-roll without re-rendering the scene graph. */
-function Wagon({ payloadRef }: { payloadRef: React.RefObject<THREE.Mesh> }) {
+function Wagon({ payloadRef }: { payloadRef: React.RefObject<THREE.Mesh | null> }) {
   return (
     <group>
       {/* body */}
@@ -47,7 +47,7 @@ function Wagon({ payloadRef }: { payloadRef: React.RefObject<THREE.Mesh> }) {
 
 /** Material falling out of the wagon into the hopper. Visibility is toggled
  *  by the cage each frame, so it only streams while the wagon is inverted. */
-function Discharge({ groupRef }: { groupRef: React.RefObject<THREE.Group> }) {
+function Discharge({ groupRef }: { groupRef: React.RefObject<THREE.Group | null> }) {
   const ref = useRef<THREE.Group>(null)
   const drops = useMemo(
     () => Array.from({ length: 40 }, () => ({
@@ -86,8 +86,8 @@ function Cage({
   speed, payloadRef, dischargeRef,
 }: {
   speed: number
-  payloadRef: React.RefObject<THREE.Mesh>
-  dischargeRef: React.RefObject<THREE.Group>
+  payloadRef: React.RefObject<THREE.Mesh | null>
+  dischargeRef: React.RefObject<THREE.Group | null>
 }) {
   const ref = useRef<THREE.Group>(null)
 
