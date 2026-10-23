@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { ArrowRight, MapPin, Calendar, ArrowUpRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
@@ -9,10 +8,7 @@ import { cn } from '@/lib/utils'
 import { diagramForProject } from '@/components/anime/machineMap'
 
 // Animated technical elevation — client-side only, drawn on when in view
-const MachineDiagram = dynamic(
-  () => import('@/components/anime/MachineDiagram').then(m => m.MachineDiagram),
-  { ssr: false }
-)
+import { MachineDiagram } from '@/components/lazy/MachineDiagram'
 
 const CATEGORY_COLORS: Record<string, string> = {
   Cement:  'bg-ghost-white text-ink border-alabaster',

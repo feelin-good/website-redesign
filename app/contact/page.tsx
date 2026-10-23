@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { Phone, Mail, MapPin, Clock, Linkedin, Youtube, Twitter } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll'
@@ -13,10 +12,7 @@ export const metadata: Metadata = {
 }
 
 // Loaded client-side only — MapLibre uses browser WebGL APIs
-const OfficeMap = dynamic(
-  () => import('@/components/ui/OfficeMap').then(m => m.OfficeMap),
-  { ssr: false, loading: () => <div className="w-full h-full bg-ghost-white animate-pulse" /> }
-)
+import { OfficeMap } from '@/components/lazy/OfficeMap'
 
 const OFFICES = [
   {
